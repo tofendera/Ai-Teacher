@@ -1,41 +1,27 @@
 <!doctype html>
 <html lang="th">
-
 <head>
-
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff8ed">
 
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1,viewport-fit=cover"
->
-
-<meta
-name="theme-color"
-content="#fff8ed"
->
-
-<title>ชุดการสอน</title>
+<title>ครูผู้ช่วย</title>
 
 <style>
 
 :root{
-
   --bg:#fff8ed;
   --card:#ffffff;
   --ink:#27324a;
   --muted:#6f7890;
-
   --primary:#6c63ff;
   --primary2:#5148e8;
-
+  --yellow:#ffd45c;
   --mint:#dff8ee;
+  --pink:#ffe3ec;
   --blue:#e3f0ff;
   --line:#e9e5dc;
-
-  --shadow:
-    0 12px 30px
-    rgba(49,55,85,.09);
+  --shadow:0 12px 30px rgba(49,55,85,.09);
 }
 
 *{
@@ -47,600 +33,458 @@ html{
 }
 
 body{
-
   margin:0;
-
   background:
     linear-gradient(
       180deg,
-      #fff8ed 0%,
+      #fff8ed 0,
       #f7f5ff 100%
     );
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Noto Sans Thai",
     sans-serif;
-
   color:var(--ink);
 }
 
 button,
 input,
-textarea,
-select{
+select,
+textarea{
   font:inherit;
 }
 
 .container{
-
-  width:min(
-    900px,
-    92%
-  );
-
+  width:min(900px,92%);
   margin:auto;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .header{
-
-  padding:
-    22px 0 10px;
-
+  padding:24px 0 12px;
   display:flex;
-
-  justify-content:
-    space-between;
-
+  justify-content:space-between;
   align-items:center;
 }
 
 .brand{
-
   display:flex;
-
   gap:12px;
-
   align-items:center;
-
   font-weight:800;
-
   font-size:20px;
 }
 
 .logo{
-
   width:46px;
   height:46px;
-
   border-radius:15px;
-
   background:#fff;
-
-  box-shadow:
-    var(--shadow);
-
+  box-shadow:var(--shadow);
   display:grid;
-
   place-items:center;
-
   font-size:25px;
 }
 
 .badge{
-
   font-size:12px;
-
-  background:
-    var(--mint);
-
-  padding:
-    7px 11px;
-
+  background:var(--mint);
+  padding:7px 11px;
   border-radius:999px;
-
   font-weight:700;
 }
 
+/* =========================
+   HERO
+========================= */
+
 .hero{
-
   text-align:center;
-
-  padding:
-    25px 0 18px;
+  padding:30px 0 20px;
 }
 
 .hero h1{
-
-  font-size:
-    clamp(
-      30px,
-      7vw,
-      48px
-    );
-
-  margin:
-    0 0 10px;
-
+  font-size:clamp(30px,7vw,48px);
+  margin:0 0 10px;
   letter-spacing:-1px;
 }
 
 .hero p{
-
-  color:
-    var(--muted);
-
+  color:var(--muted);
   font-size:16px;
-
   margin:0;
 }
 
+/* =========================
+   CARD
+========================= */
+
 .card{
-
-  background:
-    var(--card);
-
-  border:
-    1px solid var(--line);
-
+  background:var(--card);
+  border:1px solid var(--line);
   border-radius:24px;
-
   padding:22px;
-
-  box-shadow:
-    var(--shadow);
-
+  box-shadow:var(--shadow);
   margin:16px 0;
 }
 
 .label{
-
   font-weight:800;
-
   margin-bottom:9px;
-
   display:block;
 }
 
-input[type="text"]{
-
-  width:100%;
-
-  border:
-    2px solid #e8e4f8;
-
-  border-radius:16px;
-
-  padding:
-    14px 16px;
-
-  outline:none;
-
-  background:#fcfbff;
-}
-
-input[type="text"]:focus{
-
-  border-color:
-    var(--primary);
-}
+/* =========================
+   INPUT
+========================= */
 
 .prompt{
-
   width:100%;
-
   min-height:112px;
-
-  border:
-    2px solid #e8e4f8;
-
+  border:2px solid #e8e4f8;
   border-radius:18px;
-
   padding:16px;
-
   resize:vertical;
-
   outline:none;
-
   background:#fcfbff;
 }
 
 .prompt:focus{
-
-  border-color:
-    var(--primary);
+  border-color:var(--primary);
 }
 
 .examples{
-
   display:flex;
-
   gap:8px;
-
   flex-wrap:wrap;
-
   margin-top:10px;
 }
 
 .example{
-
   border:0;
-
   background:#f4f2ff;
-
   color:#5148e8;
-
   border-radius:999px;
-
-  padding:
-    8px 12px;
-
+  padding:8px 12px;
   cursor:pointer;
 }
 
+/* =========================
+   GRID
+========================= */
+
 .grid{
-
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:14px;
 }
 
 .field{
-
   background:#faf9f5;
-
-  border:
-    1px solid var(--line);
-
+  border:1px solid var(--line);
   padding:15px;
-
   border-radius:18px;
 }
 
 select{
-
   width:100%;
-
   border:0;
-
-  background:
-    transparent;
-
+  background:transparent;
   color:var(--ink);
-
   outline:none;
-
   font-weight:700;
 }
 
+/* =========================
+   QUESTION TYPES
+========================= */
+
 .types{
-
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
 .check{
-
   position:relative;
 }
 
 .check input{
-
   position:absolute;
-
   opacity:0;
 }
 
 .check label{
-
   display:block;
-
   padding:14px;
-
-  border:
-    2px solid var(--line);
-
+  border:2px solid var(--line);
   border-radius:16px;
-
   background:#fff;
-
   cursor:pointer;
-
   font-weight:700;
 }
 
-.check input:checked + label{
-
-  border-color:
-    var(--primary);
-
+.check input:checked+label{
+  border-color:var(--primary);
   background:#f0efff;
-
   color:#5148e8;
 }
 
+/* =========================
+   BUTTON
+========================= */
+
 button.primary{
-
   width:100%;
-
   border:0;
-
   border-radius:18px;
-
   padding:17px;
-
   background:
     linear-gradient(
       135deg,
       var(--primary),
       var(--primary2)
     );
-
   color:#fff;
-
   font-weight:800;
-
   font-size:18px;
-
   cursor:pointer;
-
   box-shadow:
     0 9px 18px
     rgba(108,99,255,.25);
+
+  transition:
+    transform .15s ease,
+    opacity .15s ease;
+}
+
+button.primary:active{
+  transform:scale(.98);
 }
 
 button.primary:disabled{
-
   opacity:.6;
-
   cursor:wait;
 }
 
 .note{
-
   text-align:center;
-
   color:var(--muted);
-
   font-size:13px;
-
   margin-top:12px;
 }
 
-.hidden{
+/* =========================
+   LOADING
+========================= */
 
-  display:none!important;
+.hidden{
+  display:none !important;
 }
 
 .loading{
-
   text-align:center;
-
-  padding:35px;
+  padding:35px 20px;
 }
 
-.spinner{
-
-  font-size:38px;
-
+.loading-icon{
+  font-size:46px;
   animation:
-    bounce 1s
-    infinite alternate;
+    loadingBounce
+    1s infinite alternate;
 }
 
-@keyframes bounce{
+@keyframes loadingBounce{
+
+  from{
+    transform:translateY(0);
+  }
 
   to{
-    transform:
-      translateY(-8px);
+    transform:translateY(-10px);
   }
 
 }
 
+.loading h3{
+  margin:12px 0 8px;
+}
+
+.loading p{
+  color:var(--muted);
+  margin:0;
+}
+
+.loading-bar{
+  width:100%;
+  height:8px;
+  background:#eeeaff;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:22px;
+}
+
+.loading-bar-inner{
+  width:40%;
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      #8b85ff
+    );
+  border-radius:999px;
+
+  animation:
+    loadingBar
+    1.4s
+    infinite ease-in-out;
+}
+
+@keyframes loadingBar{
+
+  0%{
+    transform:translateX(-120%);
+  }
+
+  100%{
+    transform:translateX(300%);
+  }
+
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error{
+  background:#ffe7e7;
+  color:#9d2929;
+  padding:14px;
+  border-radius:16px;
+  line-height:1.6;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+/* =========================
+   RESULT
+========================= */
+
 .result-head{
-
   display:flex;
-
-  justify-content:
-    space-between;
-
+  justify-content:space-between;
   gap:12px;
-
   align-items:center;
-
   flex-wrap:wrap;
 }
 
 .result-head h2{
-
   margin:0;
 }
 
 .chips{
-
   display:flex;
-
   gap:7px;
-
   flex-wrap:wrap;
 }
 
 .chip{
-
-  padding:
-    7px 10px;
-
+  padding:7px 10px;
   border-radius:999px;
-
-  background:
-    var(--blue);
-
+  background:var(--blue);
   font-size:12px;
-
   font-weight:800;
 }
 
 .tabs{
-
   display:flex;
-
   gap:8px;
-
   overflow:auto;
-
   padding-bottom:4px;
 }
 
 .tab{
-
   white-space:nowrap;
-
   border:0;
-
   background:#f2f1ee;
-
   border-radius:12px;
-
-  padding:
-    10px 13px;
-
+  padding:10px 13px;
   font-weight:800;
-
   color:var(--muted);
-
   cursor:pointer;
 }
 
 .tab.active{
-
   background:#5148e8;
-
   color:#fff;
 }
 
 .panel{
-
   line-height:1.75;
 }
 
 .panel h3{
-
   margin-top:0;
 }
 
 .item{
-
   padding:14px;
-
-  border:
-    1px solid var(--line);
-
+  border:1px solid var(--line);
   border-radius:16px;
-
   margin:10px 0;
-
   background:#fff;
 }
 
 .qtype{
-
   font-size:11px;
-
   background:#f1f0ff;
-
   color:#5148e8;
-
-  padding:
-    5px 8px;
-
+  padding:5px 8px;
   border-radius:999px;
-
   font-weight:800;
 }
 
+/* =========================
+   ACTIONS
+========================= */
+
 .actions{
-
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
 .secondary{
-
-  border:
-    2px solid #e7e3f6;
-
+  border:2px solid #e7e3f6;
   background:#fff;
-
   color:#5148e8;
-
   border-radius:16px;
-
   padding:13px;
-
   font-weight:800;
-
   cursor:pointer;
 }
 
-.success{
+/* =========================
+   SAVED NOTICE
+========================= */
 
-  background:
-    #e4f8ef;
-
-  color:
-    #176b4c;
-
-  padding:14px;
-
+.saved-notice{
+  background:#e4f7ee;
+  color:#267653;
+  padding:13px 15px;
   border-radius:16px;
-
-  margin-bottom:15px;
-
+  margin-top:15px;
   font-weight:700;
 }
 
-.error{
-
-  background:#ffe7e7;
-
-  color:#9d2929;
-
-  padding:14px;
-
-  border-radius:16px;
-}
-
-.teacher-box{
-
-  margin-bottom:18px;
-}
-
-.saved{
-
-  background:#eef5ff;
-
-  color:#315f9e;
-
-  padding:12px;
-
-  border-radius:14px;
-
-  font-size:14px;
-
-  margin-top:10px;
-}
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:650px){
 
@@ -652,10 +496,6 @@ button.primary:disabled{
     grid-template-columns:1fr;
   }
 
-  .actions{
-    grid-template-columns:1fr;
-  }
-
   .card{
     padding:17px;
   }
@@ -664,69 +504,96 @@ button.primary:disabled{
     padding-top:16px;
   }
 
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+  .header,
+  .hero,
+  #builder,
+  #loading,
+  #error,
+  .actions,
+  .tabs,
+  .saved-notice{
+    display:none !important;
+  }
+
+  .card{
+    box-shadow:none;
+    border:0;
+  }
+
+  .panel{
+    display:block !important;
+  }
+
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header class="header">
 
   <div class="brand">
 
-    <div class="logo">📚</div>
+    <div class="logo">
+      📚
+    </div>
 
-    ชุดการสอน
+    ครูผู้ช่วย
 
   </div>
 
   <div class="badge">
-    V1.8
+    V1.5
   </div>
 
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
   <h1>
-    เตรียมการสอน ✨
+    สอนอะไรวันนี้? ✨
   </h1>
 
   <p>
-    กรอกข้อมูล แล้วให้ระบบจัดทำชุดการสอนให้
+    พิมพ์แค่ประโยคเดียว
+    แล้วให้ระบบช่วยเตรียมชุดการสอน
   </p>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      BUILDER
-===================================================== -->
+========================= -->
 
 <section
-id="builder"
-class="card"
+  id="builder"
+  class="card"
 >
-
-  <div class="teacher-box">
-
-    <label class="label">
-      👨‍🏫 ชื่อครูผู้สอน
-    </label>
-
-    <input
-      id="teacherName"
-      type="text"
-      placeholder="เช่น ครูสมปอง เข้ามา"
-    >
-
-  </div>
-
 
   <label class="label">
     👋 วันนี้คุณอยากสอนอะไร?
@@ -738,38 +605,25 @@ class="card"
     placeholder="เช่น เศษส่วน ป.4 1 ชั่วโมง"
   ></textarea>
 
-
   <div class="examples">
 
     <button
       class="example"
-      onclick="
-        fillExample(
-          'เศษส่วน ป.4 1 ชั่วโมง'
-        )
-      "
+      onclick="fillExample('เศษส่วน ป.4 1 ชั่วโมง')"
     >
       🧮 เศษส่วน ป.4
     </button>
 
     <button
       class="example"
-      onclick="
-        fillExample(
-          'ระบบสุริยะ ป.5 1 ชั่วโมง'
-        )
-      "
+      onclick="fillExample('ระบบสุริยะ ป.5 1 ชั่วโมง')"
     >
       🌎 ระบบสุริยะ ป.5
     </button>
 
     <button
       class="example"
-      onclick="
-        fillExample(
-          'Animals ป.3 30 นาที'
-        )
-      "
+      onclick="fillExample('Animals ป.3 30 นาที')"
     >
       🇬🇧 Animals ป.3
     </button>
@@ -778,6 +632,10 @@ class="card"
 
 </section>
 
+
+<!-- =========================
+     OPTIONS
+========================= -->
 
 <section class="card">
 
@@ -881,9 +739,7 @@ class="card"
           checked
         >
 
-        <label
-          for="multiple_choice"
-        >
+        <label for="multiple_choice">
           ☑️ ปรนัย
         </label>
 
@@ -897,9 +753,7 @@ class="card"
           id="fill_blank"
         >
 
-        <label
-          for="fill_blank"
-        >
+        <label for="fill_blank">
           ✏️ เติมคำ
         </label>
 
@@ -913,9 +767,7 @@ class="card"
           id="calculation"
         >
 
-        <label
-          for="calculation"
-        >
+        <label for="calculation">
           🔢 คำนวณ
         </label>
 
@@ -929,9 +781,7 @@ class="card"
           id="application"
         >
 
-        <label
-          for="application"
-        >
+        <label for="application">
           💡 ประยุกต์ใช้
         </label>
 
@@ -953,9 +803,7 @@ class="card"
     </button>
 
     <div class="note">
-
-      แผนการสอน + ใบงาน + แบบทดสอบ + เฉลย
-
+      แผนการสอน + ใบงาน + เฉลย + แบบทดสอบ
     </div>
 
   </div>
@@ -963,16 +811,16 @@ class="card"
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      LOADING
-===================================================== -->
+========================= -->
 
 <section
-id="loading"
-class="card loading hidden"
+  id="loading"
+  class="card loading hidden"
 >
 
-  <div class="spinner">
+  <div class="loading-icon">
     ✨
   </div>
 
@@ -980,24 +828,27 @@ class="card loading hidden"
     กำลังเตรียมชุดการสอน...
   </h3>
 
-  <p
-    style="
-      color:#6f7890
-    "
-  >
-    ระบบกำลังจัดเรียงเนื้อหา
+  <p>
+    ระบบกำลังสร้างเนื้อหา
+    ใบงาน และแบบทดสอบ
   </p>
+
+  <div class="loading-bar">
+
+    <div class="loading-bar-inner"></div>
+
+  </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      ERROR
-===================================================== -->
+========================= -->
 
 <section
-id="error"
-class="card hidden"
+  id="error"
+  class="card hidden"
 >
 
   <div
@@ -1008,13 +859,13 @@ class="card hidden"
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      RESULT
-===================================================== -->
+========================= -->
 
 <section
-id="result"
-class="card hidden"
+  id="result"
+  class="card hidden"
 >
 
   <div class="result-head">
@@ -1028,9 +879,7 @@ class="card hidden"
       <div
         id="summary"
         class="chips"
-        style="
-          margin-top:8px
-        "
+        style="margin-top:8px"
       ></div>
 
     </div>
@@ -1039,21 +888,16 @@ class="card hidden"
 
 
   <div
-    id="savedMessage"
-    class="success"
-    style="
-      margin-top:15px
-    "
+    id="savedNotice"
+    class="saved-notice hidden"
   >
-    💾 ชุดการสอนถูกบันทึกไว้ในเครื่องแล้ว
+    💾 ชุดการสอนนี้ถูกบันทึกไว้ในเครื่องแล้ว
   </div>
 
 
   <div
     class="tabs"
-    style="
-      margin-top:18px
-    "
+    style="margin-top:18px"
   >
 
     <button
@@ -1092,15 +936,18 @@ class="card hidden"
     class="panel"
   ></div>
 
+
   <div
     id="worksheet"
     class="panel hidden"
   ></div>
 
+
   <div
     id="quiz"
     class="panel hidden"
   ></div>
+
 
   <div
     id="answer"
@@ -1110,9 +957,7 @@ class="card hidden"
 
   <div
     class="actions"
-    style="
-      margin-top:18px
-    "
+    style="margin-top:18px"
   >
 
     <button
@@ -1138,8 +983,16 @@ class="card hidden"
 
 <script>
 
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 let currentData = null;
 
+
+/* =========================================================
+   QUESTION TYPE NAMES
+========================================================= */
 
 const typeNames = {
 
@@ -1158,70 +1011,79 @@ const typeNames = {
 };
 
 
-/* ========================================================
-   LOCAL STORAGE
-======================================================== */
+/* =========================================================
+   EXAMPLE
+========================================================= */
 
-const STORAGE_KEY =
-  "teacher_pack_current_v18";
+function fillExample(value){
 
-
-function saveCurrentData(){
-
-  if(!currentData){
-    return;
-  }
-
-  try{
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(
-        currentData
-      )
-    );
-
-  }catch(e){
-
-    console.log(
-      "localStorage error",
-      e
-    );
-
-  }
+  document
+    .getElementById("prompt")
+    .value = value;
 
 }
 
 
-function loadCurrentData(){
+/* =========================================================
+   TABS
+========================================================= */
 
-  try{
+document
+  .querySelectorAll(".tab")
+  .forEach(button => {
 
-    const raw =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
+    button.addEventListener(
+      "click",
+      () => {
 
-    if(!raw){
-      return null;
-    }
+        document
+          .querySelectorAll(".tab")
+          .forEach(
+            item =>
+              item.classList.remove(
+                "active"
+              )
+          );
 
-    return JSON.parse(
-      raw
+
+        document
+          .querySelectorAll(".panel")
+          .forEach(
+            panel =>
+              panel.classList.add(
+                "hidden"
+              )
+          );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        const target =
+          document.getElementById(
+            button.dataset.tab
+          );
+
+
+        if(target){
+
+          target.classList.remove(
+            "hidden"
+          );
+
+        }
+
+      }
     );
 
-  }catch(e){
-
-    return null;
-
-  }
-
-}
+  });
 
 
-/* ========================================================
-   ESCAPE
-======================================================== */
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
 function esc(value){
 
@@ -1229,198 +1091,446 @@ function esc(value){
     value ?? ""
   ).replace(
     /[&<>"']/g,
-    function(m){
+    char => ({
 
-      return {
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
 
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-
-      }[m];
-
-    }
+    }[char])
   );
 
 }
 
 
-/* ========================================================
-   EXAMPLE
-======================================================== */
+/* =========================================================
+   ERROR TO TEXT
+========================================================= */
 
-function fillExample(value){
+function getErrorMessage(error){
 
-  document.getElementById(
-    "prompt"
-  ).value = value;
+  if(
+    typeof error === "string"
+  ){
 
-}
+    return error;
 
-
-/* ========================================================
-   TABS
-======================================================== */
-
-document
-.querySelectorAll(".tab")
-.forEach(
-  function(btn){
-
-    btn.addEventListener(
-      "click",
-      function(){
-
-        document
-        .querySelectorAll(".tab")
-        .forEach(
-          function(b){
-
-            b.classList.remove(
-              "active"
-            );
-
-          }
-        );
+  }
 
 
-        document
-        .querySelectorAll(".panel")
-        .forEach(
-          function(panel){
+  if(
+    error instanceof Error
+  ){
 
-            panel.classList.add(
-              "hidden"
-            );
-
-          }
-        );
-
-
-        btn.classList.add(
-          "active"
-        );
-
-
-        document
-        .getElementById(
-          btn.dataset.tab
-        )
-        .classList.remove(
-          "hidden"
-        );
-
-      }
+    return (
+      error.message ||
+      "เกิดข้อผิดพลาด"
     );
 
   }
-);
 
 
-/* ========================================================
-   LOADING
-======================================================== */
+  if(
+    error &&
+    typeof error === "object"
+  ){
 
-function setLoading(
-  value
-){
+    if(
+      error.detail !== undefined
+    ){
 
-  document
-  .getElementById(
-    "loading"
-  )
-  .classList.toggle(
-    "hidden",
-    !value
+      const detail =
+        error.detail;
+
+
+      if(
+        typeof detail === "string"
+      ){
+
+        return detail;
+
+      }
+
+
+      if(
+        detail &&
+        typeof detail === "object"
+      ){
+
+        if(
+          detail.message
+        ){
+
+          return String(
+            detail.message
+          );
+
+        }
+
+
+        if(
+          detail.error
+        ){
+
+          return String(
+            detail.error
+          );
+
+        }
+
+
+        try{
+
+          return JSON.stringify(
+            detail,
+            null,
+            2
+          );
+
+        }catch(e){}
+
+      }
+
+    }
+
+
+    if(
+      error.message !== undefined
+    ){
+
+      if(
+        typeof error.message === "string"
+      ){
+
+        return error.message;
+
+      }
+
+
+      try{
+
+        return JSON.stringify(
+          error.message,
+          null,
+          2
+        );
+
+      }catch(e){}
+
+    }
+
+
+    try{
+
+      return JSON.stringify(
+        error,
+        null,
+        2
+      );
+
+    }catch(e){
+
+      return "เกิดข้อผิดพลาด";
+
+    }
+
+  }
+
+
+  return String(
+    error ||
+    "เกิดข้อผิดพลาด"
   );
-
-
-  document
-  .getElementById(
-    "generateBtn"
-  )
-  .disabled = value;
 
 }
 
 
-/* ========================================================
-   ERROR
-======================================================== */
+/* =========================================================
+   SHOW ERROR
+========================================================= */
 
-function showError(
-  message
-){
+function showError(error){
 
-  document
-  .getElementById(
-    "error"
-  )
-  .classList.remove(
+  const box =
+    document.getElementById(
+      "error"
+    );
+
+
+  const text =
+    document.getElementById(
+      "errorText"
+    );
+
+
+  text.textContent =
+    getErrorMessage(
+      error
+    );
+
+
+  box.classList.remove(
     "hidden"
   );
 
 
-  document
-  .getElementById(
-    "errorText"
-  )
-  .textContent =
-    message;
+  /*
+   * เลื่อนไปให้เห็น Error
+   */
+
+  setTimeout(
+    () => {
+
+      box.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
+    },
+    50
+  );
 
 }
 
 
-/* ========================================================
-   GENERATE
-======================================================== */
+/* =========================================================
+   CLEAR ERROR
+========================================================= */
 
-async function generate(){
+function clearError(){
 
-  const prompt =
-    document
-    .getElementById(
-      "prompt"
-    )
-    .value
-    .trim();
+  document
+    .getElementById("error")
+    .classList.add("hidden");
 
 
-  const teacherName =
-    document
-    .getElementById(
-      "teacherName"
-    )
-    .value
-    .trim();
+  document
+    .getElementById("errorText")
+    .textContent = "";
+
+}
 
 
-  const selected =
-    [
-      ...document
-      .querySelectorAll(
-        ".check input:checked"
-      )
-    ]
-    .map(
-      function(x){
-        return x.id;
-      }
+/* =========================================================
+   LOADING
+========================================================= */
+
+function setLoading(isLoading){
+
+  const loading =
+    document.getElementById(
+      "loading"
     );
 
 
-  if(!teacherName){
-
-    showError(
-      "กรุณากรอกชื่อครูผู้สอนก่อนครับ"
+  const button =
+    document.getElementById(
+      "generateBtn"
     );
+
+
+  loading.classList.toggle(
+    "hidden",
+    !isLoading
+  );
+
+
+  button.disabled =
+    isLoading;
+
+
+  if(isLoading){
+
+    /*
+     * สำคัญ:
+     * เลื่อนหน้าจอลงมาที่ Loading
+     * หลังจากเปิด Loading แล้ว
+     */
+
+    setTimeout(
+      () => {
+
+        loading.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+      },
+      80
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE CURRENT DATA
+========================================================= */
+
+function saveCurrentData(){
+
+  if(!currentData){
 
     return;
 
   }
 
+
+  try{
+
+    localStorage.setItem(
+      "ai_teacher_current_data",
+      JSON.stringify(
+        currentData
+      )
+    );
+
+
+    localStorage.setItem(
+      "ai_teacher_saved_at",
+      new Date().toISOString()
+    );
+
+
+  }catch(error){
+
+    console.warn(
+      "ไม่สามารถบันทึกข้อมูล:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD SAVED DATA
+========================================================= */
+
+function loadSavedData(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        "ai_teacher_current_data"
+      );
+
+
+    if(!raw){
+
+      return;
+
+    }
+
+
+    const data =
+      JSON.parse(raw);
+
+
+    if(
+      !data ||
+      typeof data !== "object"
+    ){
+
+      return;
+
+    }
+
+
+    currentData =
+      data;
+
+
+    render(
+      currentData,
+      false
+    );
+
+
+    const savedNotice =
+      document.getElementById(
+        "savedNotice"
+      );
+
+
+    savedNotice.classList.remove(
+      "hidden"
+    );
+
+
+  }catch(error){
+
+    console.warn(
+      "โหลดชุดการสอนไม่สำเร็จ:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CLEAR SAVED DATA
+========================================================= */
+
+function clearSavedData(){
+
+  try{
+
+    localStorage.removeItem(
+      "ai_teacher_current_data"
+    );
+
+    localStorage.removeItem(
+      "ai_teacher_saved_at"
+    );
+
+  }catch(error){
+
+    console.warn(
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   GENERATE
+========================================================= */
+
+async function generate(){
+
+  const prompt =
+    document
+      .getElementById(
+        "prompt"
+      )
+      .value
+      .trim();
+
+
+  const selected =
+    [
+      ...document.querySelectorAll(
+        ".check input:checked"
+      )
+    ].map(
+      input =>
+        input.id
+    );
+
+
+  /*
+   * ตรวจหัวข้อ
+   */
 
   if(!prompt){
 
@@ -1433,6 +1543,10 @@ async function generate(){
   }
 
 
+  /*
+   * ตรวจประเภทข้อสอบ
+   */
+
   if(!selected.length){
 
     showError(
@@ -1444,18 +1558,31 @@ async function generate(){
   }
 
 
+  /*
+   * ล้าง Error เดิม
+   */
+
+  clearError();
+
+
+  /*
+   * ซ่อนผลเก่า
+   */
+
   document
-  .getElementById(
-    "error"
-  )
-  .classList.add(
-    "hidden"
-  );
+    .getElementById(
+      "result"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 
-  setLoading(
-    true
-  );
+  /*
+   * เริ่ม Loading
+   */
+
+  setLoading(true);
 
 
   try{
@@ -1472,731 +1599,626 @@ async function generate(){
               "application/json"
           },
 
-          body:
-            JSON.stringify({
+          body:JSON.stringify({
 
-              prompt:
-                prompt,
+            prompt:
 
-              teacher_name:
-                teacherName,
+              prompt,
 
-              question_count:
-                Number(
-                  document
+            question_count:
+
+              Number(
+                document
                   .getElementById(
                     "count"
                   )
                   .value
-                ),
+              ),
 
-              question_types:
-                selected,
+            question_types:
 
-              difficulty:
-                document
+              selected,
+
+            difficulty:
+
+              document
                 .getElementById(
                   "difficulty"
                 )
                 .value
 
-            })
+          })
 
         }
       );
 
 
-    const data =
-      await response.json();
+    /*
+     * อ่าน Response
+     */
+
+    let data = null;
 
 
-    if(!response.ok){
+    try{
+
+      data =
+        await response.json();
+
+    }catch(error){
 
       throw new Error(
-        data.detail ||
-        "เกิดข้อผิดพลาด"
+        "เซิร์ฟเวอร์ส่งข้อมูลกลับมาไม่ถูกต้อง"
       );
 
     }
 
 
+    /*
+     * HTTP Error
+     */
+
+    if(!response.ok){
+
+      throw new Error(
+        getErrorMessage(
+          data
+        )
+      );
+
+    }
+
+
+    /*
+     * ตรวจว่ามีข้อมูลหรือไม่
+     */
+
+    if(
+      !data ||
+      typeof data !== "object"
+    ){
+
+      throw new Error(
+        "ระบบไม่ได้ส่งข้อมูลชุดการสอนกลับมา"
+      );
+
+    }
+
+
+    /*
+     * เก็บข้อมูล
+     */
+
     currentData =
       data;
 
 
+    /*
+     * บันทึกทันที
+     */
+
     saveCurrentData();
 
 
+    /*
+     * ล้าง Error เก่า
+     */
+
+    clearError();
+
+
+    /*
+     * แสดงผล
+     */
+
     render(
-      currentData
+      currentData,
+      true
     );
 
 
   }catch(error){
 
-    showError(
-      error.message ||
-      "เกิดข้อผิดพลาด"
+    console.error(
+      "Generate Error:",
+      error
     );
+
+
+    showError(
+      error
+    );
+
 
   }finally{
 
-    setLoading(
-      false
-    );
+    setLoading(false);
 
   }
 
 }
 
 
-/* ========================================================
+/* =========================================================
    RENDER
-======================================================== */
+========================================================= */
 
-function render(data){
+function render(
+  data,
+  scrollToResult = true
+){
 
-  if(!data){
+  if(
+    !data ||
+    !data.summary
+  ){
+
+    showError(
+      "ข้อมูลชุดการสอนไม่สมบูรณ์"
+    );
+
     return;
+
   }
 
 
-  document
-  .getElementById(
-    "error"
-  )
-  .classList.add(
-    "hidden"
-  );
+  clearError();
 
 
-  document
-  .getElementById(
-    "result"
-  )
-  .classList.remove(
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+
+  result.classList.remove(
     "hidden"
   );
 
 
   const summary =
-    data.summary || {};
+    data.summary;
 
 
-  document
-  .getElementById(
+  /*
+   * SUMMARY
+   */
+
+  document.getElementById(
     "summary"
-  )
-  .innerHTML =
+  ).innerHTML = `
 
-    `<span class="chip">
-      👨‍🏫 ${esc(
-        data.teacher_name
-      )}
+    <span class="chip">
+      🎒 ${esc(summary.grade)}
     </span>
 
     <span class="chip">
-      🎒 ${esc(
-        summary.grade
-      )}
+      📖 ${esc(summary.subject)}
     </span>
 
     <span class="chip">
-      📖 ${esc(
-        summary.subject
-      )}
+      ✏️ ${esc(summary.topic)}
     </span>
 
     <span class="chip">
-      ✏️ ${esc(
-        summary.topic
-      )}
+      ⏱️ ${esc(summary.duration)}
     </span>
 
-    <span class="chip">
-      ⏱️ ${esc(
-        summary.duration
-      )}
-    </span>`;
+  `;
 
 
-  renderLesson(
-    data
-  );
+  /*
+   * LESSON
+   */
 
-
-  renderWorksheet(
-    data
-  );
-
-
-  renderQuiz(
-    data
-  );
-
-
-  renderAnswer(
-    data
-  );
-
-
-  window.scrollTo(
-    {
-      top:
-        document
-        .getElementById(
-          "result"
-        )
-        .offsetTop - 15,
-
-      behavior:
-        "smooth"
-    }
-  );
-
-}
-
-
-/* ========================================================
-   LESSON
-======================================================== */
-
-function renderLesson(data){
-
-  const lesson =
+  const lessonPlan =
     data.lesson_plan || {};
 
 
   const objectives =
     Array.isArray(
-      lesson.objective
+      lessonPlan.objective
     )
-    ? lesson.objective
-    : [];
+      ? lessonPlan.objective
+      : [];
 
 
   const steps =
     Array.isArray(
-      lesson.steps
+      lessonPlan.steps
     )
-    ? lesson.steps
-    : [];
+      ? lessonPlan.steps
+      : [];
 
 
-  let html = "";
+  document.getElementById(
+    "lesson"
+  ).innerHTML = `
 
+    <h3>
+      จุดประสงค์การเรียนรู้
+    </h3>
 
-  html +=
-    `<h3>
-      1. จุดประสงค์การเรียนรู้
-    </h3>`;
+    <ul>
 
-
-  html +=
-    `<ul>`;
-
-  objectives.forEach(
-    function(item){
-
-      html +=
-        `<li>
-          ${esc(item)}
-        </li>`;
-
-    }
-  );
-
-  html +=
-    `</ul>`;
-
-
-  html +=
-    `<h3>
-      2. เนื้อหาที่ใช้สอน
-    </h3>`;
-
-
-  html +=
-    `<div class="item">
-      ${formatText(
-        lesson.content
-      )}
-    </div>`;
-
-
-  if(
-    Array.isArray(
-      lesson.important_points
-    )
-    &&
-    lesson.important_points.length
-  ){
-
-    html +=
-      `<h3>
-        สาระสำคัญ
-      </h3>`;
-
-    lesson
-    .important_points
-    .forEach(
-      function(item){
-
-        html +=
-          `<div class="item">
-            ${esc(item)}
-          </div>`;
-
+      ${
+        objectives
+          .map(
+            item =>
+              `<li>${esc(item)}</li>`
+          )
+          .join("")
       }
-    );
 
-  }
-
-
-  if(
-    Array.isArray(
-      lesson.examples
-    )
-    &&
-    lesson.examples.length
-  ){
-
-    html +=
-      `<h3>
-        ตัวอย่างสำหรับใช้สอน
-      </h3>`;
-
-    lesson
-    .examples
-    .forEach(
-      function(item){
-
-        html +=
-          `<div class="item">
-            ${esc(item)}
-          </div>`;
-
-      }
-    );
-
-  }
+    </ul>
 
 
-  html +=
-    `<h3>
-      3. ขั้นตอนการจัดการเรียนรู้
-    </h3>`;
+    <h3>
+      ขั้นตอนการสอน
+    </h3>
 
+    ${
+      steps
+        .map(
+          item => `
 
-  steps.forEach(
-    function(step,index){
+            <div class="item">
 
-      html +=
-        `<div class="item">
+              <b>
+                ${esc(item.time)}
+                ·
+                ${esc(item.title)}
+              </b>
 
-          <b>
-            ${index + 1}.
-            ${esc(
-              step.time
-            )}
-            ·
-            ${esc(
-              step.title
-            )}
-          </b>
+              <div>
+                ${esc(item.detail)}
+              </div>
 
-          <div
-            style="
-              margin-top:7px
-            "
-          >
-            ${formatText(
-              step.detail
-            )}
-          </div>
+            </div>
 
-        </div>`;
-
+          `
+        )
+        .join("")
     }
-  );
 
 
-  html +=
-    `<h3>
-      4. การประเมินผล
+    <h3>
+      การประเมินผล
     </h3>
 
     <div class="item">
-      ${formatText(
-        lesson.assessment
+
+      ${esc(
+        lessonPlan.assessment ||
+        ""
       )}
-    </div>`;
+
+    </div>
+
+  `;
 
 
-  document
-  .getElementById(
-    "lesson"
-  )
-  .innerHTML =
-    html;
-
-}
-
-
-/* ========================================================
-   TEXT FORMAT
-======================================================== */
-
-function formatText(
-  value
-){
-
-  if(!value){
-    return "";
-  }
-
-
-  return esc(
-    value
-  )
-  .replace(
-    /\n/g,
-    "<br>"
-  );
-
-}
-
-
-/* ========================================================
-   WORKSHEET
-======================================================== */
-
-function renderWorksheet(data){
+  /*
+   * WORKSHEET
+   */
 
   const worksheet =
     Array.isArray(
       data.worksheet
     )
-    ? data.worksheet
-    : [];
+      ? data.worksheet
+      : [];
 
 
-  let html =
-    `<h3>
+  document.getElementById(
+    "worksheet"
+  ).innerHTML = `
+
+    <h3>
       ใบงาน
     </h3>
 
-    <div class="item">
+    ${
+      worksheet
+        .map(
+          item => `
 
-      <b>
-        ชื่อ-สกุล
-      </b>
+            <div class="item">
 
-      ________________________________
+              <b>
+                ${esc(item.no)}.
+                ${esc(item.question)}
+              </b>
 
-      <br><br>
+              <div
+                style="
+                  margin-top:10px
+                "
+              >
+                คำตอบ:
+                ____________________
+              </div>
 
-      <b>
-        ชั้น
-      </b>
+            </div>
 
-      __________
-
-      <b>
-        เลขที่
-      </b>
-
-      __________
-
-      <b>
-        วันที่
-      </b>
-
-      __________
-
-    </div>`;
-
-
-  worksheet.forEach(
-    function(item,index){
-
-      const no =
-        item.no ||
-        index + 1;
-
-
-      html +=
-        `<div class="item">
-
-          <b>
-            ข้อ ${esc(no)}
-          </b>
-
-          &nbsp;
-
-          ${esc(
-            item.question
-          )}
-
-          <div
-            style="
-              margin-top:12px
-            "
-          >
-            คำตอบ
-            ..............................................................
-          </div>
-
-        </div>`;
-
-    }
-  );
-
-
-  document
-  .getElementById(
-    "worksheet"
-  )
-  .innerHTML =
-    html;
-
-}
-
-
-/* ========================================================
-   QUIZ
-======================================================== */
-
-function renderQuiz(data){
-
-  const quiz =
-    Array.isArray(
-      data.quiz
-    )
-    ? data.quiz
-    : [];
-
-
-  let html =
-    `<h3>
-      แบบทดสอบ ${quiz.length} ข้อ
-    </h3>`;
-
-
-  quiz.forEach(
-    function(item,index){
-
-      const no =
-        item.no ||
-        index + 1;
-
-
-      html +=
-        `<div class="item">
-
-          <span class="qtype">
-
-            ${esc(
-              typeNames[
-                item.type
-              ] ||
-              item.type ||
-              ""
-            )}
-
-          </span>
-
-          <div
-            style="
-              margin-top:8px
-            "
-          >
-
-            <b>
-              ข้อ ${esc(no)}
-            </b>
-
-            &nbsp;
-
-            ${esc(
-              item.question
-            )}
-
-          </div>`;
-
-
-      if(
-        Array.isArray(
-          item.options
+          `
         )
-        &&
-        item.options.length
-      ){
-
-        html +=
-          `<ol
-            type="A"
-          >`;
-
-
-        item.options
-        .forEach(
-          function(option){
-
-            html +=
-              `<li>
-                ${esc(option)}
-              </li>`;
-
-          }
-        );
-
-
-        html +=
-          `</ol>`;
-
-      }
-
-
-      html +=
-        `</div>`;
-
+        .join("")
     }
-  );
+
+  `;
 
 
-  document
-  .getElementById(
-    "quiz"
-  )
-  .innerHTML =
-    html;
-
-}
-
-
-/* ========================================================
-   ANSWER
-======================================================== */
-
-function renderAnswer(data){
-
-  const worksheet =
-    Array.isArray(
-      data.worksheet
-    )
-    ? data.worksheet
-    : [];
-
+  /*
+   * QUIZ
+   */
 
   const quiz =
     Array.isArray(
       data.quiz
     )
-    ? data.quiz
-    : [];
+      ? data.quiz
+      : [];
 
 
-  let html =
-    `<h3>
+  document.getElementById(
+    "quiz"
+  ).innerHTML = `
+
+    <h3>
+      แบบทดสอบ
+      ${quiz.length}
+      ข้อ
+    </h3>
+
+    ${
+      quiz
+        .map(
+          item => `
+
+            <div class="item">
+
+              <span class="qtype">
+
+                ${esc(
+                  typeNames[
+                    item.type
+                  ] ||
+                  item.type ||
+                  "ข้อสอบ"
+                )}
+
+              </span>
+
+
+              <div
+                style="
+                  margin-top:8px
+                "
+              >
+
+                <b>
+
+                  ${esc(item.no)}.
+                  ${esc(item.question)}
+
+                </b>
+
+              </div>
+
+
+              ${
+                Array.isArray(
+                  item.options
+                ) &&
+                item.options.length
+                  ? `
+
+                    <ol type="A">
+
+                      ${
+                        item.options
+                          .map(
+                            option =>
+                              `<li>${esc(option)}</li>`
+                          )
+                          .join("")
+                      }
+
+                    </ol>
+
+                  `
+                  : ""
+              }
+
+            </div>
+
+          `
+        )
+        .join("")
+    }
+
+  `;
+
+
+  /*
+   * ANSWER
+   */
+
+  document.getElementById(
+    "answer"
+  ).innerHTML = `
+
+    <h3>
+      เฉลย
+    </h3>
+
+
+    <h4>
       เฉลยใบงาน
-    </h3>`;
+    </h4>
 
+    ${
+      worksheet
+        .map(
+          item => `
 
-  worksheet.forEach(
-    function(item,index){
+            <div class="item">
 
-      html +=
-        `<div class="item">
+              <b>
+                ใบงานข้อ
+                ${esc(item.no)}
+              </b>
 
-          <b>
-            ข้อ ${
-              esc(
-                item.no ||
-                index + 1
-              )
-            }
-          </b>
+              —
 
-          <div
-            style="
-              margin-top:6px
-            "
-          >
-            ${esc(
-              item.answer
-            )}
-          </div>
+              ${esc(item.answer)}
 
-        </div>`;
+            </div>
 
+          `
+        )
+        .join("")
     }
-  );
 
 
-  html +=
-    `<h3>
+    <h4>
       เฉลยแบบทดสอบ
-    </h3>`;
+    </h4>
 
+    ${
+      quiz
+        .map(
+          item => `
 
-  quiz.forEach(
-    function(item,index){
+            <div class="item">
 
-      html +=
-        `<div class="item">
+              <b>
+                ข้อ
+                ${esc(item.no)}
+              </b>
 
-          <b>
-            ข้อ ${
-              esc(
-                item.no ||
-                index + 1
-              )
-            }
-          </b>
+              —
 
-          —
-          ${esc(
-            item.answer
-          )}
+              ${esc(item.answer)}
 
-          <div
-            style="
-              color:#6f7890;
-              margin-top:5px
-            "
-          >
-            ${esc(
-              item.explanation
-            )}
-          </div>
+              <div
+                style="
+                  color:#6f7890;
+                  margin-top:4px
+                "
+              >
 
-        </div>`;
+                ${esc(
+                  item.explanation
+                )}
 
+              </div>
+
+            </div>
+
+          `
+        )
+        .join("")
     }
+
+  `;
+
+
+  /*
+   * ตั้ง Tab กลับไปที่แผนการสอน
+   */
+
+  document
+    .querySelectorAll(
+      ".tab"
+    )
+    .forEach(
+      item =>
+        item.classList.remove(
+          "active"
+        )
+    );
+
+
+  document
+    .querySelectorAll(
+      ".panel"
+    )
+    .forEach(
+      item =>
+        item.classList.add(
+          "hidden"
+        )
+    );
+
+
+  const lessonTab =
+    document.querySelector(
+      '[data-tab="lesson"]'
+    );
+
+
+  lessonTab.classList.add(
+    "active"
   );
 
 
   document
-  .getElementById(
-    "answer"
-  )
-  .innerHTML =
-    html;
+    .getElementById(
+      "lesson"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+
+  /*
+   * แสดงสถานะบันทึก
+   */
+
+  document
+    .getElementById(
+      "savedNotice"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+
+  /*
+   * เลื่อนไปที่ผลลัพธ์
+   */
+
+  if(scrollToResult){
+
+    setTimeout(
+      () => {
+
+        result.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      },
+      150
+    );
+
+  }
 
 }
 
 
-/* ========================================================
+/* =========================================================
    DOWNLOAD PDF
-======================================================== */
+========================================================= */
 
 async function downloadPDF(){
 
   if(!currentData){
 
     showError(
-      "ยังไม่มีชุดการสอน"
+      "ยังไม่มีชุดการสอนสำหรับสร้าง PDF"
     );
 
     return;
@@ -2204,26 +2226,14 @@ async function downloadPDF(){
   }
 
 
-  const button =
-    document
-    .querySelector(
-      ".actions .secondary"
-    );
-
-
-  const original =
-    button.textContent;
-
-
-  button.disabled =
-    true;
-
-
-  button.textContent =
-    "⏳ กำลังสร้าง PDF...";
+  clearError();
 
 
   try{
+
+    /*
+     * ส่งข้อมูลชุดปัจจุบันไป Backend
+     */
 
     const response =
       await fetch(
@@ -2237,165 +2247,195 @@ async function downloadPDF(){
               "application/json"
           },
 
-          body:
-            JSON.stringify({
-
-              data:
-                currentData
-
-            })
+          body:JSON.stringify(
+            currentData
+          )
 
         }
       );
 
 
+    /*
+     * กรณี Error
+     */
+
     if(!response.ok){
 
-      let message =
-        "สร้าง PDF ไม่สำเร็จ";
+      let data = null;
+
 
       try{
 
-        const error =
+        data =
           await response.json();
 
-        message =
-          error.detail ||
-          message;
+      }catch(error){
 
-      }catch(e){}
+        throw new Error(
+          "สร้าง PDF ไม่สำเร็จ"
+        );
+
+      }
+
 
       throw new Error(
-        message
+        getErrorMessage(
+          data
+        )
       );
 
     }
 
 
+    /*
+     * รับ PDF
+     */
+
     const blob =
       await response.blob();
 
 
+    /*
+     * ตรวจ Blob
+     */
+
+    if(
+      !blob ||
+      blob.size === 0
+    ){
+
+      throw new Error(
+        "ไฟล์ PDF ที่สร้างมีขนาดเป็น 0"
+      );
+
+    }
+
+
+    /*
+     * สร้าง URL
+     */
+
     const url =
-      window.URL.createObjectURL(
+      URL.createObjectURL(
         blob
       );
 
 
-    const a =
+    /*
+     * ดาวน์โหลด
+     */
+
+    const link =
       document.createElement(
         "a"
       );
 
 
-    a.href =
+    link.href =
       url;
 
-    a.download =
-      "teacher-pack.pdf";
+
+    link.download =
+      "ชุดการสอน.pdf";
 
 
     document.body.appendChild(
-      a
+      link
     );
 
 
-    a.click();
+    link.click();
 
 
-    a.remove();
+    link.remove();
 
 
-    window.URL.revokeObjectURL(
-      url
+    /*
+     * คืน URL
+     */
+
+    setTimeout(
+      () => {
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+      1000
     );
+
+
+    /*
+     * สำคัญ:
+     * ไม่ล้าง currentData
+     * ไม่ล้าง localStorage
+     */
+
+    saveCurrentData();
 
 
   }catch(error){
 
-    showError(
-      error.message ||
-      "สร้าง PDF ไม่สำเร็จ"
+    console.error(
+      "PDF Error:",
+      error
     );
 
-  }finally{
 
-    button.disabled =
-      false;
-
-    button.textContent =
-      original;
+    showError(
+      error
+    );
 
   }
 
 }
 
 
-/* ========================================================
+/* =========================================================
    NEW PACK
-======================================================== */
+========================================================= */
 
 function newPack(){
 
-  currentData =
-    null;
-
-
-  localStorage.removeItem(
-    STORAGE_KEY
-  );
-
+  /*
+   * ไม่ลบข้อมูลใน localStorage
+   * จนกว่าผู้ใช้จะสร้างชุดใหม่สำเร็จ
+   */
 
   document
-  .getElementById(
-    "result"
-  )
-  .classList.add(
-    "hidden"
-  );
+    .getElementById(
+      "result"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 
-  document
-  .getElementById(
-    "error"
-  )
-  .classList.add(
-    "hidden"
-  );
+  clearError();
 
 
-  window.scrollTo(
-    {
-      top:0,
-      behavior:"smooth"
-    }
-  );
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
 
-/* ========================================================
-   RESTORE
-======================================================== */
+/* =========================================================
+   PAGE LOAD
+========================================================= */
 
 window.addEventListener(
   "DOMContentLoaded",
-  function(){
+  () => {
 
-    const saved =
-      loadCurrentData();
+    /*
+     * พยายามกู้ชุดล่าสุด
+     */
 
-
-    if(saved){
-
-      currentData =
-        saved;
-
-      render(
-        saved
-      );
-
-    }
+    loadSavedData();
 
   }
 );
@@ -2403,5 +2443,4 @@ window.addEventListener(
 </script>
 
 </body>
-
 </html>
