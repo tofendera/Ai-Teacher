@@ -17,7 +17,12 @@ content="#fff8ed"
 
 <title>จัดทำชุดการสอน</title>
 
+
 <style>
+
+/* ======================================================
+   ROOT
+====================================================== */
 
 :root{
 
@@ -38,9 +43,15 @@ content="#fff8ed"
 
 }
 
+
+/* ======================================================
+   BASIC
+====================================================== */
+
 *{
 box-sizing:border-box
 }
+
 
 body{
 
@@ -61,14 +72,30 @@ sans-serif;
 
 color:var(--ink);
 
+font-size:17px;
+
 }
 
+
+button,
+input,
+textarea,
+select{
+
+font-family:inherit;
+
+}
+
+
+/* ======================================================
+   CONTAINER — ขยายกลับมาใหญ่
+====================================================== */
 
 .container{
 
 width:min(
-900px,
-92%
+1120px,
+94%
 );
 
 margin:auto;
@@ -79,7 +106,7 @@ margin:auto;
 .header{
 
 padding:
-22px 0 10px;
+24px 0 12px;
 
 display:flex;
 
@@ -93,7 +120,7 @@ align-items:center;
 
 .brand{
 
-font-size:21px;
+font-size:24px;
 
 font-weight:800;
 
@@ -102,13 +129,13 @@ font-weight:800;
 
 .badge{
 
-font-size:12px;
+font-size:13px;
 
 background:
 var(--mint);
 
 padding:
-7px 11px;
+8px 12px;
 
 border-radius:
 999px;
@@ -118,12 +145,16 @@ font-weight:700;
 }
 
 
+/* ======================================================
+   HERO
+====================================================== */
+
 .hero{
 
 text-align:center;
 
 padding:
-28px 0 18px;
+34px 0 24px;
 
 }
 
@@ -132,13 +163,13 @@ padding:
 
 font-size:
 clamp(
-30px,
-7vw,
-46px
+34px,
+6vw,
+50px
 );
 
 margin:
-0 0 8px;
+0 0 10px;
 
 }
 
@@ -150,8 +181,16 @@ var(--muted);
 
 margin:0;
 
+font-size:17px;
+
+line-height:1.7;
+
 }
 
+
+/* ======================================================
+   CARD — ใหญ่ขึ้น
+====================================================== */
 
 .card{
 
@@ -160,10 +199,9 @@ background:#fff;
 border:
 1px solid var(--line);
 
-border-radius:
-24px;
+border-radius:26px;
 
-padding:20px;
+padding:28px;
 
 box-shadow:
 0 12px 30px
@@ -175,10 +213,14 @@ rgba(
 );
 
 margin:
-16px 0;
+18px 0;
 
 }
 
+
+/* ======================================================
+   LABEL
+====================================================== */
 
 .label{
 
@@ -186,24 +228,29 @@ font-weight:800;
 
 display:block;
 
-margin-bottom:9px;
+margin-bottom:10px;
+
+font-size:17px;
 
 }
 
+
+/* ======================================================
+   PROMPT
+====================================================== */
 
 .prompt{
 
 width:100%;
 
-min-height:110px;
+min-height:135px;
 
 border:
 2px solid #e8e4f8;
 
-border-radius:
-18px;
+border-radius:20px;
 
-padding:15px;
+padding:17px;
 
 resize:vertical;
 
@@ -211,17 +258,33 @@ outline:0;
 
 background:#fcfbff;
 
+font-size:18px;
+
+line-height:1.6;
+
 }
 
+
+.prompt:focus{
+
+border-color:
+var(--primary);
+
+}
+
+
+/* ======================================================
+   GRID
+====================================================== */
 
 .grid{
 
 display:grid;
 
 grid-template-columns:
-1fr 1fr;
+repeat(2,1fr);
 
-gap:13px;
+gap:16px;
 
 }
 
@@ -234,10 +297,9 @@ background:
 border:
 1px solid var(--line);
 
-padding:14px;
+padding:17px;
 
-border-radius:
-18px;
+border-radius:20px;
 
 }
 
@@ -259,18 +321,24 @@ font-weight:700;
 color:
 var(--ink);
 
+font-size:17px;
+
 }
 
+
+/* ======================================================
+   EXAMPLES
+====================================================== */
 
 .examples{
 
 display:flex;
 
-gap:8px;
+gap:9px;
 
 flex-wrap:wrap;
 
-margin-top:9px;
+margin-top:11px;
 
 }
 
@@ -289,19 +357,25 @@ border-radius:
 999px;
 
 padding:
-8px 12px;
+9px 14px;
+
+font-size:15px;
 
 }
 
+
+/* ======================================================
+   TYPES
+====================================================== */
 
 .types{
 
 display:grid;
 
 grid-template-columns:
-1fr 1fr;
+repeat(2,1fr);
 
-gap:10px;
+gap:12px;
 
 }
 
@@ -319,17 +393,18 @@ opacity:0;
 
 display:block;
 
-padding:14px;
+padding:16px;
 
 border:
 2px solid var(--line);
 
-border-radius:
-16px;
+border-radius:18px;
 
 font-weight:700;
 
 cursor:pointer;
+
+font-size:16px;
 
 }
 
@@ -348,16 +423,19 @@ color:
 }
 
 
+/* ======================================================
+   PRIMARY BUTTON
+====================================================== */
+
 .primary{
 
 width:100%;
 
 border:0;
 
-border-radius:
-18px;
+border-radius:20px;
 
-padding:17px;
+padding:19px;
 
 background:
 linear-gradient(
@@ -370,7 +448,7 @@ color:#fff;
 
 font-weight:800;
 
-font-size:18px;
+font-size:19px;
 
 box-shadow:
 0 9px 18px
@@ -381,6 +459,8 @@ rgba(
 .25
 );
 
+cursor:pointer;
+
 }
 
 
@@ -388,12 +468,18 @@ rgba(
 
 opacity:.6;
 
+cursor:default;
+
 }
 
 
+/* ======================================================
+   LOADING
+====================================================== */
+
 .hidden{
 
-display:none;
+display:none !important;
 
 }
 
@@ -402,14 +488,14 @@ display:none;
 
 text-align:center;
 
-padding:34px;
+padding:45px;
 
 }
 
 
 .spinner{
 
-font-size:38px;
+font-size:42px;
 
 animation:
 bounce 1s infinite alternate;
@@ -429,6 +515,10 @@ translateY(-8px);
 }
 
 
+/* ======================================================
+   ERROR
+====================================================== */
+
 .error{
 
 background:
@@ -437,13 +527,14 @@ var(--danger);
 color:
 #9d2929;
 
-padding:14px;
+padding:16px;
 
-border-radius:
-16px;
+border-radius:18px;
 
 white-space:
 pre-wrap;
+
+line-height:1.6;
 
 }
 
@@ -456,13 +547,16 @@ var(--mint);
 color:
 #28704e;
 
-padding:13px;
+padding:14px;
 
-border-radius:
-16px;
+border-radius:18px;
 
 }
 
+
+/* ======================================================
+   RESULT
+====================================================== */
 
 .result-head{
 
@@ -471,7 +565,7 @@ display:flex;
 justify-content:
 space-between;
 
-gap:12px;
+gap:15px;
 
 align-items:center;
 
@@ -482,6 +576,8 @@ align-items:center;
 
 margin:0;
 
+font-size:25px;
+
 }
 
 
@@ -489,11 +585,11 @@ margin:0;
 
 display:flex;
 
-gap:7px;
+gap:8px;
 
 flex-wrap:wrap;
 
-margin-top:8px;
+margin-top:10px;
 
 }
 
@@ -501,7 +597,7 @@ margin-top:8px;
 .chip{
 
 padding:
-7px 10px;
+8px 11px;
 
 border-radius:
 999px;
@@ -509,24 +605,28 @@ border-radius:
 background:
 var(--blue);
 
-font-size:12px;
+font-size:13px;
 
 font-weight:800;
 
 }
 
 
+/* ======================================================
+   TABS
+====================================================== */
+
 .tabs{
 
 display:flex;
 
-gap:8px;
+gap:9px;
 
 overflow:auto;
 
-padding-bottom:5px;
+padding-bottom:6px;
 
-margin-top:17px;
+margin-top:20px;
 
 }
 
@@ -540,16 +640,19 @@ border:0;
 background:
 #f2f1ee;
 
-border-radius:
-12px;
+border-radius:14px;
 
 padding:
-10px 13px;
+12px 16px;
 
 font-weight:800;
 
+font-size:15px;
+
 color:
 var(--muted);
+
+cursor:pointer;
 
 }
 
@@ -564,36 +667,102 @@ color:#fff;
 }
 
 
+/* ======================================================
+   PANEL
+====================================================== */
+
 .panel{
 
-line-height:1.75;
+line-height:1.8;
+
+font-size:17px;
+
+padding-top:12px;
 
 }
 
 
 .panel h3{
 
-margin-top:0;
+margin-top:30px;
+
+margin-bottom:14px;
+
+font-size:23px;
+
+font-weight:800;
 
 }
 
 
+.panel h3:first-child{
+
+margin-top:10px;
+
+}
+
+
+/* ======================================================
+   PARAGRAPH
+====================================================== */
+
+.paragraph{
+
+margin:
+0 0 15px;
+
+line-height:1.85;
+
+}
+
+
+/* ======================================================
+   ITEM
+====================================================== */
+
 .item{
 
-padding:14px;
+padding:16px;
 
 border:
 1px solid var(--line);
 
-border-radius:
-16px;
+border-radius:18px;
 
-margin:10px 0;
+margin:11px 0;
 
 background:#fff;
 
+line-height:1.8;
+
 }
 
+
+.lesson-body{
+
+font-size:17px;
+
+line-height:1.9;
+
+margin:
+0 0 17px;
+
+}
+
+
+.lesson-bullet{
+
+margin:
+8px 0;
+
+line-height:1.8;
+
+}
+
+
+/* ======================================================
+   ACTION
+====================================================== */
 
 .actions{
 
@@ -602,7 +771,7 @@ display:grid;
 grid-template-columns:
 1fr 1fr;
 
-gap:10px;
+gap:12px;
 
 }
 
@@ -617,26 +786,33 @@ background:#fff;
 color:
 #5148e8;
 
-border-radius:
-16px;
+border-radius:17px;
 
-padding:13px;
+padding:14px;
 
 font-weight:800;
 
+font-size:16px;
+
+cursor:pointer;
+
 }
 
+
+/* ======================================================
+   PDF
+====================================================== */
 
 .pdfs{
 
 display:grid;
 
 grid-template-columns:
-1fr 1fr;
+repeat(2,1fr);
 
-gap:9px;
+gap:11px;
 
-margin-top:12px;
+margin-top:15px;
 
 }
 
@@ -657,20 +833,69 @@ background:#fff;
 color:
 #5148e8;
 
-border-radius:
-14px;
+border-radius:16px;
 
-padding:11px;
+padding:13px;
 
 font-weight:800;
+
+font-size:15px;
 
 }
 
 
-@media(max-width:650px){
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media(max-width:750px){
+
+.container{
+
+width:94%;
+
+}
+
 
 .grid,
-.types,
+.types{
+
+grid-template-columns:
+1fr;
+
+}
+
+
+.card{
+
+padding:20px;
+
+border-radius:22px;
+
+}
+
+
+.hero{
+
+padding-top:25px;
+
+}
+
+
+.hero h1{
+
+font-size:35px;
+
+}
+
+
+.prompt{
+
+font-size:17px;
+
+}
+
+
 .pdfs{
 
 grid-template-columns:
@@ -678,9 +903,64 @@ grid-template-columns:
 
 }
 
+
+.panel{
+
+font-size:16px;
+
+}
+
+}
+
+
+@media(max-width:480px){
+
+.header{
+
+padding-top:18px;
+
+}
+
+
+.brand{
+
+font-size:21px;
+
+}
+
+
+.badge{
+
+font-size:11px;
+
+}
+
+
 .card{
 
 padding:17px;
+
+}
+
+
+.hero h1{
+
+font-size:31px;
+
+}
+
+
+.hero p{
+
+font-size:15px;
+
+}
+
+
+.actions{
+
+grid-template-columns:
+1fr;
 
 }
 
@@ -698,6 +978,10 @@ padding:17px;
 <div class="container">
 
 
+<!-- =====================================================
+HEADER
+===================================================== -->
+
 <header class="header">
 
 <div class="brand">
@@ -706,14 +990,19 @@ padding:17px;
 
 </div>
 
+
 <div class="badge">
 
-V1.5
+V1.8
 
 </div>
 
 </header>
 
+
+<!-- =====================================================
+HERO
+===================================================== -->
 
 <section class="hero">
 
@@ -722,6 +1011,7 @@ V1.5
 สอนอะไรวันนี้? ✨
 
 </h1>
+
 
 <p>
 
@@ -890,16 +1180,13 @@ selected
 
 </select>
 
-
 </div>
 
 
 </div>
 
 
-<div
-style="margin-top:18px"
->
+<div style="margin-top:22px">
 
 
 <label class="label">
@@ -1002,9 +1289,7 @@ for="application"
 </div>
 
 
-<div
-style="margin-top:18px"
->
+<div style="margin-top:22px">
 
 
 <button
@@ -1019,12 +1304,12 @@ onclick="generate()"
 
 
 <div
-class="note"
 style="
 text-align:center;
 color:#6f7890;
-font-size:13px;
-margin-top:12px
+font-size:14px;
+margin-top:13px;
+line-height:1.6
 "
 >
 
@@ -1109,7 +1394,6 @@ class="card hidden"
 
 <div>
 
-
 <h2>
 
 🎉 ชุดการสอนพร้อมแล้ว
@@ -1132,7 +1416,7 @@ class="chips"
 <div
 id="saved"
 class="saved hidden"
-style="margin-top:12px"
+style="margin-top:14px"
 >
 
 💾 ชุดการสอนนี้ถูกบันทึกไว้ในเครื่องแล้ว
@@ -1140,7 +1424,9 @@ style="margin-top:12px"
 </div>
 
 
-<!-- TABS -->
+<!-- =====================================================
+TABS
+===================================================== -->
 
 <div class="tabs">
 
@@ -1188,7 +1474,9 @@ data-tab="answer"
 </div>
 
 
-<!-- PANELS -->
+<!-- =====================================================
+PANELS
+===================================================== -->
 
 <div
 id="lesson"
@@ -1214,7 +1502,9 @@ class="panel hidden"
 ></div>
 
 
-<!-- PDF -->
+<!-- =====================================================
+PDF
+===================================================== -->
 
 <div
 id="pdfs"
@@ -1222,11 +1512,13 @@ class="pdfs"
 ></div>
 
 
-<!-- ACTION -->
+<!-- =====================================================
+ACTION
+===================================================== -->
 
 <div
 class="actions"
-style="margin-top:18px"
+style="margin-top:20px"
 >
 
 
@@ -1301,7 +1593,9 @@ m => ({
 
 function showError(text){
 
-$("error").classList.remove(
+$("error")
+.classList
+.remove(
 "hidden"
 );
 
@@ -1309,7 +1603,9 @@ $("error").classList.remove(
 $("errorText").textContent =
 typeof text === "object"
 ? JSON.stringify(
-text
+text,
+null,
+2
 )
 : text;
 
@@ -1329,10 +1625,6 @@ $("loading")
 $("generateBtn")
 .disabled = value;
 
-
-// ======================================================
-// SCROLL TO LOADING
-// ======================================================
 
 if(value){
 
@@ -1414,7 +1706,7 @@ try{
 
 localStorage.setItem(
 
-"ai_teacher_v15_data",
+"ai_teacher_v18_data",
 
 JSON.stringify(data)
 
@@ -1432,7 +1724,7 @@ try{
 
 const x =
 localStorage.getItem(
-"ai_teacher_v15_data"
+"ai_teacher_v18_data"
 );
 
 
@@ -1671,11 +1963,26 @@ $("summary")
 </span>
 
 
+${
+summary.teacher &&
+summary.teacher !== "ไม่ระบุ"
+?
+
+`
+
 <span class="chip">
 
 👨‍🏫 ${esc(summary.teacher)}
 
 </span>
+
+`
+
+:
+
+""
+
+}
 
 `;
 
@@ -1688,105 +1995,100 @@ const lesson =
 data.lesson_plan || {};
 
 
-$("lesson")
-.innerHTML = `
-
-<h3>
-
-1. จุดประสงค์การเรียนรู้
-
-</h3>
-
-
-${
+const objectives =
 (lesson.objective || [])
 .map(
 x => `
-<div class="item">
+
+<div class="lesson-bullet">
 
 - ${esc(x)}
 
 </div>
+
 `
 )
-.join("")
-}
+.join("");
 
 
-<h3>
-
-2. เนื้อหาที่ใช้สอน
-
-</h3>
-
-
-${
+const content =
 (lesson.content || [])
 .map(
 x => `
-<div class="item">
+
+<p class="lesson-body">
 
 ${esc(x)}
 
-</div>
+</p>
+
 `
 )
-.join("")
-}
+.join("");
 
 
-<h3>
-
-สาระสำคัญ
-
-</h3>
-
-
-${
+const keyPoints =
 (lesson.key_points || [])
 .map(
 x => `
-<div class="item">
+
+<p class="lesson-body">
 
 ${esc(x)}
 
-</div>
+</p>
+
 `
 )
-.join("")
-}
+.join("");
 
 
-<h3>
-
-ตัวอย่างสำหรับใช้สอน
-
-</h3>
-
-
-${
+const examples =
 (lesson.examples || [])
 .map(
-x => `
+x => {
+
+if(
+typeof x === "object" &&
+x !== null
+){
+
+return `
+
 <div class="item">
+
+<b>
+${esc(x.title || "")}
+</b>
+
+<p class="paragraph">
+
+${esc(x.explanation || "")}
+
+</p>
+
+</div>
+
+`;
+
+}
+
+return `
+
+<p class="lesson-body">
 
 ${esc(x)}
 
-</div>
-`
-)
-.join("")
+</p>
+
+`;
+
 }
+)
+.join("");
 
 
-<h3>
-
-3. ขั้นตอนการจัดการเรียนรู้
-
-</h3>
-
-
-${
+const steps =
 (lesson.steps || [])
 .map(
 x => `
@@ -1796,24 +2098,85 @@ x => `
 <b>
 
 ${esc(x.time)}
-·
+${x.time ? " · " : ""}
 ${esc(x.title)}
 
 </b>
 
 
-<div>
+<p class="paragraph">
 
 ${esc(x.detail)}
 
-</div>
+</p>
 
 </div>
 
 `
 )
-.join("")
+.join("");
+
+
+$("lesson")
+.innerHTML = `
+
+<h3>
+
+1. จุดประสงค์การเรียนรู้
+
+</h3>
+
+${objectives}
+
+
+<h3>
+
+2. เนื้อหาที่ใช้สอน
+
+</h3>
+
+${content}
+
+
+<h3>
+
+สาระสำคัญ
+
+</h3>
+
+${keyPoints}
+
+
+${
+examples
+?
+
+`
+
+<h3>
+
+ตัวอย่างสำหรับใช้สอน
+
+</h3>
+
+${examples}
+
+`
+
+:
+
+""
+
 }
+
+
+<h3>
+
+3. ขั้นตอนการจัดการเรียนรู้
+
+</h3>
+
+${steps}
 
 
 <h3>
@@ -1823,11 +2186,11 @@ ${esc(x.detail)}
 </h3>
 
 
-<div class="item">
+<p class="lesson-body">
 
-${esc(lesson.assessment)}
+${esc(lesson.assessment || "")}
 
-</div>
+</p>
 
 `;
 
@@ -1854,12 +2217,18 @@ ${
 <div class="item">
 
 
-<b>
+<div
+style="
+font-size:18px;
+line-height:1.8;
+font-weight:700;
+"
+>
 
 ${i + 1}.
 ${esc(x.question)}
 
-</b>
+</div>
 
 
 ${
@@ -1868,7 +2237,11 @@ ${
 (o,j) => `
 
 <div
-style="margin-left:18px"
+style="
+margin-left:20px;
+margin-top:5px;
+line-height:1.7;
+"
 >
 
 ${
@@ -1891,7 +2264,10 @@ ${esc(o)}
 
 
 <div
-style="margin-top:8px"
+style="
+margin-top:12px;
+line-height:1.8;
+"
 >
 
 คำตอบ
@@ -1934,12 +2310,18 @@ ${
 <div class="item">
 
 
-<b>
+<div
+style="
+font-size:18px;
+line-height:1.8;
+font-weight:700;
+"
+>
 
 ${i + 1}.
 ${esc(x.question)}
 
-</b>
+</div>
 
 
 ${
@@ -1948,7 +2330,11 @@ ${
 (o,j) => `
 
 <div
-style="margin-left:18px"
+style="
+margin-left:20px;
+margin-top:5px;
+line-height:1.7;
+"
 >
 
 ${
@@ -2041,7 +2427,11 @@ ${esc(x.answer)}
 
 
 <div
-style="color:#6f7890"
+style="
+color:#6f7890;
+margin-top:7px;
+line-height:1.7;
+"
 >
 
 ${esc(x.explanation)}
