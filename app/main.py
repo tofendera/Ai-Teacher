@@ -31,20 +31,24 @@ from reportlab.pdfbase.ttfonts import TTFont
 # PATH
 # =========================================================
 
-# main.py อยู่ใน:
-# Ai-Teacher/app/main.py
+# main.py อยู่ที่:
+# /app/main.py
 #
-# ดังนั้น parent.parent = Ai-Teacher
+# Font อยู่ที่:
+# /NotoSansThai-Regular.ttf
+#
+# static อยู่ที่:
+# /static/index.html
 
-PROJECT_DIR = Path(__file__).resolve().parent.parent
+APP_DIR = Path(__file__).resolve().parent
 
-STATIC_DIR = PROJECT_DIR / "static"
+BASE_DIR = APP_DIR.parent
+
+STATIC_DIR = BASE_DIR / "static"
 
 INDEX_FILE = STATIC_DIR / "index.html"
 
-FONT_DIR = PROJECT_DIR / "fonts"
-
-THAI_FONT_FILE = FONT_DIR / "NotoSansThai-Regular.ttf"
+THAI_FONT_FILE = BASE_DIR / "NotoSansThai-Regular.ttf"
 
 
 # =========================================================
@@ -58,7 +62,7 @@ app = FastAPI(
 
 
 # =========================================================
-# STATIC FILES
+# STATIC
 # =========================================================
 
 if STATIC_DIR.exists():
@@ -82,9 +86,6 @@ MODEL = "gpt-5-mini"
 # =========================================================
 # QUESTION TYPE NAMES
 # =========================================================
-
-# ต้องประกาศด้านนอก generate()
-# เพราะ build_pdf() ก็ต้องใช้งานด้วย
 
 TYPE_NAMES = {
 
@@ -129,18 +130,15 @@ class GenerateRequest(BaseModel):
 # =========================================================
 
 SYSTEM_PROMPT = """
-
 คุณคือ AI ครูผู้ช่วยสำหรับครูไทย
 
-หน้าที่ของคุณคือเปลี่ยนคำสั่งสั้น ๆ
-ของครู เช่น
+หน้าที่คือเปลี่ยนคำสั่งสั้น ๆ ของครู เช่น
 
 "เศษส่วน ป.4 1 ชั่วโมง"
 
-ให้กลายเป็น Teacher Pack พร้อมใช้
+ให้เป็น Teacher Pack พร้อมใช้งาน
 
-
-Teacher Pack ประกอบด้วย:
+Teacher Pack ต้องประกอบด้วย:
 
 1. ข้อมูลสรุปบทเรียน
 2. จุดประสงค์การเรียนรู้
@@ -153,7 +151,6 @@ Teacher Pack ประกอบด้วย:
 9. แบบทดสอบ
 10. เฉลยแบบทดสอบ
 
-
 กติกา:
 
 - ใช้ภาษาไทยเป็นหลัก
@@ -163,25 +160,14 @@ Teacher Pack ประกอบด้วย:
 - วิเคราะห์เวลาเรียน
 - เนื้อหาต้องเหมาะกับวัย
 - เนื้อหาต้องเหมาะกับระดับชั้น
-
-- หากข้อมูลบางส่วนไม่ชัด
-  ให้ใช้บริบทที่สมเหตุสมผล
-
-- ห้ามอ้างหลักสูตรเฉพาะ
-  ถ้าไม่แน่ใจ
-
+- หากข้อมูลบางส่วนไม่ชัด ให้ใช้บริบทที่สมเหตุสมผล
+- ห้ามอ้างหลักสูตรเฉพาะถ้าไม่แน่ใจ
 - ห้ามสร้างข้อมูลมั่ว
-
 - ตรวจสอบความถูกต้องก่อนส่ง
 
-
-ส่วนเนื้อหาที่ใช้สอน:
-
-ต้องเขียนให้ครูสามารถนำไปอธิบาย
-กับนักเรียนได้จริง
+เนื้อหาที่ใช้สอนต้องเขียนให้ครูสามารถนำไปอธิบายกับนักเรียนได้จริง
 
 ควรประกอบด้วย:
-
 - บทนำ
 - แนวคิดสำคัญ
 - คำอธิบาย
@@ -190,59 +176,42 @@ Teacher Pack ประกอบด้วย:
 - คำถามชวนคิด
 - เคล็ดลับสำหรับครู
 
+ใบงาน:
+- เป็นแบบฝึกฝนสำหรับนักเรียน
+- สอดคล้องกับหัวข้อ
+- มีเฉลยทุกข้อ
 
-ส่วนใบงาน:
-
-ใบงานคือแบบฝึกฝน
-สำหรับให้นักเรียนฝึกทักษะ
-
-ไม่จำเป็นต้องมีรูปแบบเดียวกับแบบทดสอบ
-
-แต่ต้องสอดคล้องกับหัวข้อ
-
-
-ส่วนแบบทดสอบ:
-
-ต้องสร้างเฉพาะประเภทที่ผู้ใช้เลือก
+แบบทดสอบ:
 
 ประเภทที่รองรับ:
-
 multiple_choice
 fill_blank
 calculation
 application
 
-
 ปรนัย:
-
 - 4 ตัวเลือก
 - มีคำตอบถูกเพียงหนึ่งข้อ
 
-
 เติมคำ:
-
 - มีคำตอบชัดเจน
 
-
 คำนวณ:
-
 - ตรวจตัวเลข
 - ตรวจหน่วย
 - ตรวจคำตอบ
 
-
 ประยุกต์ใช้:
-
 - เป็นสถานการณ์ที่เหมาะกับวัย
 - ต้องสัมพันธ์กับเนื้อหา
 
+สำคัญมาก:
 
-ห้ามสร้างประเภทข้อสอบ
-ที่ผู้ใช้ไม่ได้เลือก
+สร้างเฉพาะประเภทข้อสอบที่ผู้ใช้เลือก
 
+ห้ามสร้างประเภทที่ผู้ใช้ไม่ได้เลือก
 
 ตอบเป็น JSON ตาม Schema เท่านั้น
-
 """
 
 
@@ -257,10 +226,6 @@ SCHEMA = {
     "additionalProperties": False,
 
     "properties": {
-
-        # -------------------------------------------------
-        # SUMMARY
-        # -------------------------------------------------
 
         "summary": {
 
@@ -294,11 +259,6 @@ SCHEMA = {
                 "duration"
             ]
         },
-
-
-        # -------------------------------------------------
-        # LESSON PLAN
-        # -------------------------------------------------
 
         "lesson_plan": {
 
@@ -361,11 +321,6 @@ SCHEMA = {
                 "assessment"
             ]
         },
-
-
-        # -------------------------------------------------
-        # TEACHING CONTENT
-        # -------------------------------------------------
 
         "teaching_content": {
 
@@ -444,11 +399,6 @@ SCHEMA = {
             ]
         },
 
-
-        # -------------------------------------------------
-        # WORKSHEET
-        # -------------------------------------------------
-
         "worksheet": {
 
             "type": "array",
@@ -481,11 +431,6 @@ SCHEMA = {
                 ]
             }
         },
-
-
-        # -------------------------------------------------
-        # QUIZ
-        # -------------------------------------------------
 
         "quiz": {
 
@@ -552,7 +497,7 @@ SCHEMA = {
 
 
 # =========================================================
-# HOME PAGE
+# HOME
 # =========================================================
 
 @app.get("/")
@@ -572,7 +517,7 @@ def home():
 
 
 # =========================================================
-# HEALTH CHECK
+# HEALTH
 # =========================================================
 
 @app.get("/health")
@@ -586,20 +531,20 @@ def health():
 
         "version": "1.2.0",
 
-        "model": MODEL
+        "model": MODEL,
+
+        "font_exists": THAI_FONT_FILE.exists(),
+
+        "font_path": str(THAI_FONT_FILE)
     }
 
 
 # =========================================================
-# GENERATE TEACHER PACK
+# GENERATE
 # =========================================================
 
 @app.post("/api/generate")
 def generate(req: GenerateRequest):
-
-    # -----------------------------------------------------
-    # API KEY
-    # -----------------------------------------------------
 
     api_key = os.getenv(
         "OPENAI_API_KEY"
@@ -611,15 +556,10 @@ def generate(req: GenerateRequest):
             status_code=500,
             detail=(
                 "ยังไม่ได้ตั้งค่า "
-                "OPENAI_API_KEY "
-                "ใน Render"
+                "OPENAI_API_KEY ใน Render"
             )
         )
 
-
-    # -----------------------------------------------------
-    # ALLOWED TYPES
-    # -----------------------------------------------------
 
     allowed_types = {
 
@@ -633,18 +573,11 @@ def generate(req: GenerateRequest):
     }
 
 
-    # -----------------------------------------------------
-    # CHECK TYPES
-    # -----------------------------------------------------
-
     if not req.question_types:
 
         raise HTTPException(
             status_code=400,
-            detail=(
-                "กรุณาเลือกรูปแบบข้อสอบ "
-                "อย่างน้อย 1 แบบ"
-            )
+            detail="กรุณาเลือกรูปแบบข้อสอบอย่างน้อย 1 แบบ"
         )
 
 
@@ -669,10 +602,6 @@ def generate(req: GenerateRequest):
         )
 
 
-    # -----------------------------------------------------
-    # TYPE NAMES
-    # -----------------------------------------------------
-
     selected_types = ", ".join(
 
         TYPE_NAMES[t]
@@ -681,49 +610,41 @@ def generate(req: GenerateRequest):
     )
 
 
-    # -----------------------------------------------------
-    # USER PROMPT
-    # -----------------------------------------------------
-
     user_prompt = f"""
 
 คำสั่งจากครู:
 
 {req.prompt}
 
-
 จำนวนข้อสอบ:
 
 {req.question_count} ข้อ
-
 
 รูปแบบข้อสอบที่เลือก:
 
 {selected_types}
 
+รหัสประเภทข้อสอบที่อนุญาต:
+
+{", ".join(req.question_types)}
 
 ระดับความยาก:
 
 {req.difficulty}
 
-
-ข้อกำหนดเพิ่มเติม:
+ข้อกำหนด:
 
 - สร้าง Teacher Pack ครบชุด
 - สร้างเนื้อหาที่ครูใช้สอนจริง
 - สร้างตัวอย่างประกอบการสอน
 - สร้างใบงานประมาณ 10-20 ข้อ
 - สร้างแบบทดสอบจำนวน {req.question_count} ข้อ
-- แบบทดสอบต้องใช้เฉพาะประเภทที่เลือก
+- ใช้เฉพาะประเภทข้อสอบที่เลือก
 - ห้ามสร้างประเภทที่ไม่ได้เลือก
 - ตรวจสอบเฉลยทุกข้อ
 - ตรวจสอบความสอดคล้องระหว่างคำถามและคำตอบ
 """
 
-
-    # -----------------------------------------------------
-    # OPENAI
-    # -----------------------------------------------------
 
     try:
 
@@ -741,24 +662,15 @@ def generate(req: GenerateRequest):
             input=user_prompt,
 
             text={
-
                 "format": {
-
                     "type": "json_schema",
-
                     "name": "teacher_pack",
-
                     "strict": True,
-
                     "schema": SCHEMA
                 }
             }
         )
 
-
-        # -------------------------------------------------
-        # OUTPUT
-        # -------------------------------------------------
 
         output_text = response.output_text
 
@@ -781,22 +693,15 @@ def generate(req: GenerateRequest):
     except json.JSONDecodeError:
 
         raise HTTPException(
-
             status_code=500,
-
-            detail=(
-                "AI ส่งข้อมูลกลับมา "
-                "ไม่ใช่ JSON ที่ถูกต้อง"
-            )
+            detail="AI ส่งข้อมูลกลับมาไม่ใช่ JSON ที่ถูกต้อง"
         )
 
 
     except Exception as e:
 
         raise HTTPException(
-
             status_code=500,
-
             detail=(
                 "สร้างชุดการสอนไม่สำเร็จ: "
                 + str(e)
@@ -810,68 +715,47 @@ def generate(req: GenerateRequest):
 
 def register_thai_font():
 
-    """
-    โหลดฟอนต์ภาษาไทยจากโปรเจกต์โดยตรง
+    # =====================================================
+    # ตำแหน่ง Font:
+    #
+    # /NotoSansThai-Regular.ttf
+    #
+    # main.py:
+    #
+    # /app/main.py
+    # =====================================================
 
-    โครงสร้างที่ต้องมี:
+    font_file = (
+        Path(__file__).resolve().parent.parent
+        / "NotoSansThai-Regular.ttf"
+    )
 
-    Ai-Teacher/
-        app/
-            main.py
-        fonts/
-            NotoSansThai-Regular.ttf
-    """
 
-    # -----------------------------------------------------
-    # CHECK FONT DIRECTORY
-    # -----------------------------------------------------
+    if not font_file.exists():
 
-    if not FONT_DIR.exists():
-
-        raise RuntimeError(
-            "ไม่พบโฟลเดอร์ fonts: "
-            + str(FONT_DIR)
+        raise FileNotFoundError(
+            "ไม่พบไฟล์ Font: "
+            + str(font_file)
         )
 
 
-    # -----------------------------------------------------
-    # CHECK FONT FILE
-    # -----------------------------------------------------
+    # ใช้ Font เดียวทั้ง Regular และ Bold
+    # เพื่อไม่ต้องมี NotoSansThai-Bold.ttf
 
-    if not THAI_FONT_FILE.exists():
+    if "Thai" not in pdfmetrics.getRegisteredFontNames():
 
-        raise RuntimeError(
-            "ไม่พบไฟล์ฟอนต์ภาษาไทย: "
-            + str(THAI_FONT_FILE)
-        )
-
-
-    # -----------------------------------------------------
-    # REGISTER FONT
-    # -----------------------------------------------------
-
-    try:
-
-        # ป้องกัน register ซ้ำ
-        if "Thai" not in pdfmetrics.getRegisteredFontNames():
-
-            pdfmetrics.registerFont(
-                TTFont(
-                    "Thai",
-                    str(THAI_FONT_FILE)
-                )
+        pdfmetrics.registerFont(
+            TTFont(
+                "Thai",
+                str(font_file)
             )
-
-
-        return "Thai"
-
-
-    except Exception as e:
-
-        raise RuntimeError(
-            "โหลดฟอนต์ภาษาไทยไม่สำเร็จ: "
-            + str(e)
         )
+
+
+    return (
+        "Thai",
+        "Thai"
+    )
 
 
 # =========================================================
@@ -889,7 +773,6 @@ def esc(text):
         .replace("<", "&lt;")
 
         .replace(">", "&gt;")
-
     )
 
 
@@ -902,23 +785,11 @@ def build_pdf(
     section="all"
 ):
 
-    # -----------------------------------------------------
-    # REGISTER THAI FONT
-    # -----------------------------------------------------
+    regular, bold = register_thai_font()
 
-    thai_font = register_thai_font()
-
-
-    # -----------------------------------------------------
-    # BUFFER
-    # -----------------------------------------------------
 
     buffer = BytesIO()
 
-
-    # -----------------------------------------------------
-    # DOCUMENT
-    # -----------------------------------------------------
 
     doc = SimpleDocTemplate(
 
@@ -938,10 +809,6 @@ def build_pdf(
     )
 
 
-    # -----------------------------------------------------
-    # STYLES
-    # -----------------------------------------------------
-
     styles = getSampleStyleSheet()
 
 
@@ -951,11 +818,11 @@ def build_pdf(
 
         parent=styles["Title"],
 
-        fontName=thai_font,
+        fontName=bold,
 
         fontSize=20,
 
-        leading=26,
+        leading=25,
 
         alignment=TA_CENTER,
 
@@ -969,11 +836,11 @@ def build_pdf(
 
         parent=styles["Heading1"],
 
-        fontName=thai_font,
+        fontName=bold,
 
         fontSize=15,
 
-        leading=21,
+        leading=20,
 
         spaceBefore=10,
 
@@ -987,11 +854,11 @@ def build_pdf(
 
         parent=styles["Heading2"],
 
-        fontName=thai_font,
+        fontName=bold,
 
         fontSize=12,
 
-        leading=18,
+        leading=17,
 
         spaceBefore=8,
 
@@ -1005,11 +872,11 @@ def build_pdf(
 
         parent=styles["BodyText"],
 
-        fontName=thai_font,
+        fontName=regular,
 
         fontSize=10.5,
 
-        leading=18,
+        leading=17,
 
         spaceAfter=5
     )
@@ -1020,8 +887,6 @@ def build_pdf(
         "SmallThai",
 
         parent=body,
-
-        fontName=thai_font,
 
         fontSize=9,
 
@@ -1035,23 +900,16 @@ def build_pdf(
 
         parent=body,
 
-        fontName=thai_font,
+        fontName=bold,
 
         spaceAfter=3
     )
 
 
-    # -----------------------------------------------------
-    # STORY
-    # -----------------------------------------------------
-
     story = []
 
 
-    summary = data.get(
-        "summary",
-        {}
-    )
+    summary = data["summary"]
 
 
     # =====================================================
@@ -1059,64 +917,50 @@ def build_pdf(
     # =====================================================
 
     story.append(
-
         Paragraph(
             "AI ครูผู้ช่วย",
             title_style
         )
-
     )
 
 
     story.append(
-
         Paragraph(
             "ชุดการสอนพร้อมใช้",
             h2
         )
-
     )
 
 
     story.append(
-
         Paragraph(
-
             f"<b>วิชา:</b> "
-            f"{esc(summary.get('subject'))}"
+            f"{esc(summary['subject'])}"
             f"&nbsp;&nbsp;&nbsp;"
             f"<b>ชั้น:</b> "
-            f"{esc(summary.get('grade'))}",
-
+            f"{esc(summary['grade'])}",
             body
         )
-
     )
 
 
     story.append(
-
         Paragraph(
-
             f"<b>เรื่อง:</b> "
-            f"{esc(summary.get('topic'))}"
+            f"{esc(summary['topic'])}"
             f"&nbsp;&nbsp;&nbsp;"
             f"<b>เวลา:</b> "
-            f"{esc(summary.get('duration'))}",
-
+            f"{esc(summary['duration'])}",
             body
         )
-
     )
 
 
     story.append(
-
         Spacer(
             1,
             5 * mm
         )
-
     )
 
 
@@ -1131,213 +975,154 @@ def build_pdf(
         content = data["teaching_content"]
 
 
-        # -------------------------------------------------
-        # OBJECTIVE
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "1. จุดประสงค์การเรียนรู้",
                 h1
             )
-
         )
 
 
         for item in lesson["objective"]:
 
             story.append(
-
                 Paragraph(
                     "• " + esc(item),
                     body
                 )
-
             )
 
 
-        # -------------------------------------------------
-        # TEACHING CONTENT
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "2. เนื้อหาที่ใช้สอน",
                 h1
             )
-
         )
 
 
         story.append(
-
             Paragraph(
                 esc(content["intro"]),
                 body
             )
-
         )
 
 
-        # -------------------------------------------------
-        # CONCEPTS
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "สาระสำคัญ",
                 h2
             )
-
         )
 
 
         for item in content["concepts"]:
 
             story.append(
-
                 Paragraph(
                     "• " + esc(item),
                     body
                 )
-
             )
 
 
-        # -------------------------------------------------
-        # EXAMPLES
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "ตัวอย่างสำหรับใช้สอน",
                 h2
             )
-
         )
 
 
         for example in content["examples"]:
 
             story.append(
-
                 KeepTogether([
 
                     Paragraph(
-
                         esc(
                             example["title"]
                         ),
-
                         question_style
                     ),
 
                     Paragraph(
-
                         esc(
                             example["explanation"]
                         ),
-
                         body
                     )
-
                 ])
-
             )
 
 
-        # -------------------------------------------------
-        # THINKING QUESTIONS
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "คำถามชวนคิด",
                 h2
             )
-
         )
 
 
-        for item in content["thinking_questions"]:
+        for item in content[
+            "thinking_questions"
+        ]:
 
             story.append(
-
                 Paragraph(
                     "• " + esc(item),
                     body
                 )
-
             )
 
 
-        # -------------------------------------------------
-        # LESSON STEPS
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "3. ขั้นตอนการจัดการเรียนรู้",
                 h1
             )
-
         )
 
 
-        rows = [
+        rows = [[
 
-            [
+            Paragraph(
+                "<b>เวลา</b>",
+                small
+            ),
 
-                Paragraph(
-                    "<b>เวลา</b>",
-                    small
-                ),
+            Paragraph(
+                "<b>กิจกรรม</b>",
+                small
+            ),
 
-                Paragraph(
-                    "<b>กิจกรรม</b>",
-                    small
-                ),
-
-                Paragraph(
-                    "<b>รายละเอียด</b>",
-                    small
-                )
-
-            ]
-
-        ]
+            Paragraph(
+                "<b>รายละเอียด</b>",
+                small
+            )
+        ]]
 
 
         for step in lesson["steps"]:
 
-            rows.append(
+            rows.append([
 
-                [
+                Paragraph(
+                    esc(step["time"]),
+                    small
+                ),
 
-                    Paragraph(
-                        esc(step["time"]),
-                        small
-                    ),
+                Paragraph(
+                    esc(step["title"]),
+                    small
+                ),
 
-                    Paragraph(
-                        esc(step["title"]),
-                        small
-                    ),
-
-                    Paragraph(
-                        esc(step["detail"]),
-                        small
-                    )
-
-                ]
-
-            )
+                Paragraph(
+                    esc(step["detail"]),
+                    small
+                )
+            ])
 
 
         table = Table(
@@ -1345,13 +1130,9 @@ def build_pdf(
             rows,
 
             colWidths=[
-
                 24 * mm,
-
                 40 * mm,
-
                 112 * mm
-
             ],
 
             repeatRows=1
@@ -1363,150 +1144,96 @@ def build_pdf(
             TableStyle([
 
                 (
-
                     "BACKGROUND",
-
                     (0, 0),
-
                     (-1, 0),
-
-                    colors.HexColor(
-                        "#eeeaff"
-                    )
-
+                    colors.HexColor("#eeeaff")
                 ),
 
                 (
-
                     "GRID",
-
                     (0, 0),
-
                     (-1, -1),
-
                     0.4,
-
-                    colors.HexColor(
-                        "#d9d4e8"
-                    )
-
+                    colors.HexColor("#d9d4e8")
                 ),
 
                 (
-
                     "VALIGN",
-
                     (0, 0),
-
                     (-1, -1),
-
                     "TOP"
-
                 ),
 
                 (
-
                     "LEFTPADDING",
-
                     (0, 0),
-
                     (-1, -1),
-
                     5
-
                 ),
 
                 (
-
                     "RIGHTPADDING",
-
                     (0, 0),
-
                     (-1, -1),
-
                     5
-
                 ),
 
                 (
-
                     "TOPPADDING",
-
                     (0, 0),
-
                     (-1, -1),
-
                     5
-
                 ),
 
                 (
-
                     "BOTTOMPADDING",
-
                     (0, 0),
-
                     (-1, -1),
-
                     5
-
                 )
-
             ])
-
         )
 
 
         story.append(table)
 
 
-        # -------------------------------------------------
-        # TEACHER TIPS
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "4. เคล็ดลับสำหรับครู",
                 h1
             )
-
         )
 
 
-        for item in content["teacher_tips"]:
+        for item in content[
+            "teacher_tips"
+        ]:
 
             story.append(
-
                 Paragraph(
                     "• " + esc(item),
                     body
                 )
-
             )
 
 
-        # -------------------------------------------------
-        # ASSESSMENT
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "5. การประเมินผล",
                 h1
             )
-
         )
 
 
         story.append(
-
             Paragraph(
-                esc(lesson["assessment"]),
+                esc(
+                    lesson["assessment"]
+                ),
                 body
             )
-
         )
 
 
@@ -1520,48 +1247,36 @@ def build_pdf(
 
 
         story.append(
-
             Paragraph(
                 "ใบงาน",
                 title_style
             )
-
         )
 
 
         story.append(
-
             Paragraph(
-
                 f"<b>เรื่อง:</b> "
-                f"{esc(summary.get('topic'))}",
-
+                f"{esc(summary['topic'])}",
                 body
             )
-
         )
 
 
         story.append(
-
             Paragraph(
-
                 "ชื่อ................................................ "
                 "ชั้น........ เลขที่........",
-
                 body
             )
-
         )
 
 
         story.append(
-
             Spacer(
                 1,
                 4 * mm
             )
-
         )
 
 
@@ -1572,18 +1287,14 @@ def build_pdf(
                 KeepTogether([
 
                     Paragraph(
-
                         f"{item['no']}. "
                         f"{esc(item['question'])}",
-
                         body
                     ),
 
                     Paragraph(
-
                         "คำตอบ: "
                         "................................................................................",
-
                         body
                     ),
 
@@ -1591,9 +1302,7 @@ def build_pdf(
                         1,
                         2 * mm
                     )
-
                 ])
-
             )
 
 
@@ -1607,50 +1316,36 @@ def build_pdf(
 
 
         story.append(
-
             Paragraph(
                 "แบบทดสอบ",
                 title_style
             )
-
         )
 
 
         story.append(
-
             Paragraph(
-
                 f"<b>เรื่อง:</b> "
-                f"{esc(summary.get('topic'))}",
-
+                f"{esc(summary['topic'])}",
                 body
             )
-
         )
 
 
         story.append(
-
             Paragraph(
-
                 "ชื่อ................................................ "
                 "ชั้น........ เลขที่........",
-
                 body
             )
-
         )
 
 
         story.append(
-
             Paragraph(
-
                 "คำชี้แจง: ทำแบบทดสอบตามคำสั่งของแต่ละข้อ",
-
                 body
             )
-
         )
 
 
@@ -1659,65 +1354,48 @@ def build_pdf(
             block = [
 
                 Paragraph(
-
                     f"ข้อ {item['no']} "
                     f"[{esc(TYPE_NAMES.get(item['type'], item['type']))}]",
-
                     question_style
                 ),
 
                 Paragraph(
-
                     esc(item["question"]),
-
                     body
                 )
-
             ]
 
 
-            # -------------------------------------------------
-            # OPTIONS
-            # -------------------------------------------------
+            options = item.get("options") or []
 
-            if item.get("options"):
 
-                for i, option in enumerate(
-                    item["options"]
-                ):
+            if options:
+
+                for i, option in enumerate(options):
 
                     letter = chr(
                         65 + i
                     )
 
-
                     block.append(
-
                         Paragraph(
-
                             f"{letter}. "
                             f"{esc(option)}",
-
                             body
                         )
-
                     )
 
 
             block.append(
-
                 Spacer(
                     1,
                     2 * mm
                 )
-
             )
 
 
             story.append(
-
                 KeepTogether(block)
-
             )
 
 
@@ -1731,55 +1409,37 @@ def build_pdf(
 
 
         story.append(
-
             Paragraph(
                 "เฉลย",
                 title_style
             )
-
         )
 
 
-        # -------------------------------------------------
-        # WORKSHEET ANSWERS
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "เฉลยใบงาน",
                 h1
             )
-
         )
 
 
         for item in data["worksheet"]:
 
             story.append(
-
                 Paragraph(
-
                     f"{item['no']}. "
                     f"{esc(item['answer'])}",
-
                     body
                 )
-
             )
 
 
-        # -------------------------------------------------
-        # QUIZ ANSWERS
-        # -------------------------------------------------
-
         story.append(
-
             Paragraph(
                 "เฉลยแบบทดสอบ",
                 h1
             )
-
         )
 
 
@@ -1790,24 +1450,18 @@ def build_pdf(
                 KeepTogether([
 
                     Paragraph(
-
                         f"ข้อ {item['no']} — "
                         f"{esc(item['answer'])}",
-
                         question_style
                     ),
 
                     Paragraph(
-
                         esc(
                             item["explanation"]
                         ),
-
                         small
                     )
-
                 ])
-
             )
 
 
@@ -1860,15 +1514,13 @@ def build_pdf(
 
 
         canvas.setFont(
-            thai_font,
+            regular,
             8
         )
 
 
         canvas.setFillColor(
-            colors.HexColor(
-                "#777777"
-            )
+            colors.HexColor("#777777")
         )
 
 
@@ -1879,16 +1531,11 @@ def build_pdf(
             9 * mm,
 
             f"AI ครูผู้ช่วย • หน้า {doc.page}"
-
         )
 
 
         canvas.restoreState()
 
-
-    # =====================================================
-    # BUILD
-    # =====================================================
 
     doc.build(
 
@@ -1897,7 +1544,6 @@ def build_pdf(
         onFirstPage=footer,
 
         onLaterPages=footer
-
     )
 
 
@@ -1907,21 +1553,14 @@ def build_pdf(
 
 
 # =========================================================
-# PDF ENDPOINT
+# PDF
 # =========================================================
 
 @app.post("/api/pdf")
 def create_pdf(
-
     data: dict,
-
     section: str = "all"
-
 ):
-
-    # -----------------------------------------------------
-    # ALLOWED SECTIONS
-    # -----------------------------------------------------
 
     allowed_sections = {
 
@@ -1934,40 +1573,27 @@ def create_pdf(
         "quiz",
 
         "answers"
-
     }
 
 
     if section not in allowed_sections:
 
         raise HTTPException(
-
             status_code=400,
-
             detail="section ไม่ถูกต้อง"
-
         )
 
-
-    # -----------------------------------------------------
-    # BUILD PDF
-    # -----------------------------------------------------
 
     try:
 
         pdf_file = build_pdf(
-
             data,
-
             section
-
         )
 
 
         filename = (
-
             f"ai-teacher-{section}.pdf"
-
         )
 
 
@@ -1980,11 +1606,21 @@ def create_pdf(
             headers={
 
                 "Content-Disposition":
-
                 f'attachment; filename="{filename}"'
-
             }
+        )
 
+
+    except FileNotFoundError as e:
+
+        raise HTTPException(
+
+            status_code=500,
+
+            detail=(
+                "สร้าง PDF ไม่สำเร็จ: "
+                + str(e)
+            )
         )
 
 
@@ -1995,11 +1631,7 @@ def create_pdf(
             status_code=500,
 
             detail=(
-
                 "สร้าง PDF ไม่สำเร็จ: "
-
                 + str(e)
-
             )
-
         )
