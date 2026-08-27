@@ -7,7 +7,7 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from openai import OpenAI
 
 from reportlab.lib.pagesizes import A4
@@ -45,7 +45,7 @@ FONT_BOLD = BASE_DIR / "THSarabunBold.ttf"
 
 app = FastAPI(
     title="Ai-Teacher",
-    version="1.5"
+    version="1.8"
 )
 
 
@@ -93,15 +93,27 @@ except Exception as e:
 
 class GenerateRequest(BaseModel):
 
-    prompt: str
+    prompt: str = Field(
+        min_length=2,
+        max_length=500
+    )
 
-    teacher_name: str = ""
+    teacher_name: str = Field(
+        default="",
+        max_length=100
+    )
 
-    question_count: int = 10
+    question_count: int = Field(
+        default=10,
+        ge=5,
+        le=30
+    )
 
-    question_types: list[str] = [
-        "multiple_choice"
-    ]
+    question_types: list[str] = Field(
+        default_factory=lambda: [
+            "multiple_choice"
+        ]
+    )
 
     difficulty: str = "mixed"
 
@@ -116,6 +128,20 @@ def clean_text(value: Any) -> str:
         return ""
 
     return str(value).strip()
+
+
+def normalize_list(value):
+
+    if value is None:
+        return []
+
+    if isinstance(value, list):
+        return value
+
+    if isinstance(value, str):
+        return [value]
+
+    return [str(value)]
 
 
 def get_openai():
@@ -165,11 +191,26 @@ def normalize_data(
     )
 
 
+    # =====================================================
+    # LESSON
+    # =====================================================
+
     lesson = data.get("lesson_plan") or {}
 
-    lesson["objective"] = (
+    lesson["objective"] = normalize_list(
         lesson.get("objective")
-        or []
+    )
+
+    lesson["content"] = normalize_list(
+        lesson.get("content")
+    )
+
+    lesson["key_points"] = normalize_list(
+        lesson.get("key_points")
+    )
+
+    lesson["examples"] = normalize_list(
+        lesson.get("examples")
     )
 
     lesson["steps"] = (
@@ -182,14 +223,11 @@ def normalize_data(
     )
 
 
+    # =====================================================
+    # WORKSHEET
+    # =====================================================
+
     worksheet = data.get("worksheet") or []
-
-    quiz = data.get("quiz") or []
-
-
-    # -----------------------------------------------------
-    # WORKSHEET NUMBER
-    # -----------------------------------------------------
 
     for i, q in enumerate(
         worksheet,
@@ -212,9 +250,11 @@ def normalize_data(
         )
 
 
-    # -----------------------------------------------------
-    # QUIZ NUMBER
-    # -----------------------------------------------------
+    # =====================================================
+    # QUIZ
+    # =====================================================
+
+    quiz = data.get("quiz") or []
 
     for i, q in enumerate(
         quiz,
@@ -320,6 +360,67 @@ def safe_para(
     )
 
 
+def add_paragraphs(
+    story,
+    values,
+    style
+):
+
+    values = normalize_list(values)
+
+    for value in values:
+
+        if isinstance(value, dict):
+
+            title = clean_text(
+                value.get("title")
+            )
+
+            explanation = clean_text(
+                value.get("explanation")
+            )
+
+            if title:
+
+                story.append(
+                    safe_para(
+                        title,
+                        style
+                    )
+                )
+
+            if explanation:
+
+                story.append(
+                    safe_para(
+                        explanation,
+                        style
+                    )
+                )
+
+        else:
+
+            text = clean_text(value)
+
+            if text:
+
+                # รองรับข้อความที่มีหลายย่อหน้า
+                paragraphs = [
+                    x.strip()
+                    for x in text.split("\n\n")
+                    if x.strip()
+                ]
+
+                for paragraph in paragraphs:
+
+                    story.append(
+                        safe_para(
+                            paragraph,
+                            style
+                        )
+                    )
+
+
 # =========================================================
 # LESSON PDF
 # =========================================================
@@ -371,18 +472,18 @@ def build_lesson_pdf(
 
     title = pstyle(
         "T",
-        25,
-        30,
+        27,
+        32,
         True,
         TA_CENTER,
-        space_after=2
+        space_after=3
     )
 
 
     subtitle = pstyle(
         "ST",
-        18,
-        23,
+        19,
+        24,
         False,
         TA_CENTER,
         space_after=13
@@ -395,47 +496,47 @@ def build_lesson_pdf(
         21,
         False,
         TA_CENTER,
-        space_after=15
+        space_after=16
     )
 
 
     h1 = pstyle(
         "H1",
-        19,
-        24,
+        20,
+        26,
         True,
         TA_LEFT,
-        space_before=7,
-        space_after=8
+        space_before=10,
+        space_after=9
     )
 
 
     h2 = pstyle(
         "H2",
-        17,
-        22,
+        18,
+        24,
         True,
         TA_LEFT,
-        space_before=6,
+        space_before=9,
         space_after=7
     )
 
 
     body = pstyle(
         "B",
-        16,
-        23,
+        17,
+        25,
         False,
         TA_LEFT,
-        first=9,
-        space_after=7
+        first=10,
+        space_after=9
     )
 
 
     bullet = pstyle(
         "BL",
-        16,
-        23,
+        17,
+        25,
         False,
         TA_LEFT,
         first=0,
@@ -446,9 +547,9 @@ def build_lesson_pdf(
     story = []
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # HEADER
-    # -----------------------------------------------------
+    # =====================================================
 
     story.append(
         safe_para(
@@ -479,16 +580,8 @@ def build_lesson_pdf(
     )
 
 
-    story.append(
-        Spacer(
-            1,
-            4 * mm
-        )
-    )
-
-
     # =====================================================
-    # 1. OBJECTIVE
+    # 1 OBJECTIVE
     # =====================================================
 
     story.append(
@@ -506,22 +599,14 @@ def build_lesson_pdf(
 
         story.append(
             safe_para(
-                f"- {x}",
+                f"- {clean_text(x)}",
                 bullet
             )
         )
 
 
-    story.append(
-        Spacer(
-            1,
-            5 * mm
-        )
-    )
-
-
     # =====================================================
-    # 2. CONTENT
+    # 2 CONTENT
     # =====================================================
 
     story.append(
@@ -532,29 +617,11 @@ def build_lesson_pdf(
     )
 
 
-    content = (
-        lesson.get("content")
-        or lesson.get("material")
-        or []
+    add_paragraphs(
+        story,
+        lesson.get("content"),
+        body
     )
-
-
-    if isinstance(
-        content,
-        str
-    ):
-
-        content = [content]
-
-
-    for x in content:
-
-        story.append(
-            safe_para(
-                x,
-                body
-            )
-        )
 
 
     # =====================================================
@@ -569,38 +636,20 @@ def build_lesson_pdf(
     )
 
 
-    key = (
-        lesson.get("key_points")
-        or lesson.get("important")
-        or []
+    add_paragraphs(
+        story,
+        lesson.get("key_points"),
+        body
     )
-
-
-    if isinstance(
-        key,
-        str
-    ):
-
-        key = [key]
-
-
-    for x in key:
-
-        story.append(
-            safe_para(
-                x,
-                body
-            )
-        )
 
 
     # =====================================================
     # EXAMPLES
     # =====================================================
 
-    examples = (
-        lesson.get("examples")
-        or []
+    examples = lesson.get(
+        "examples",
+        []
     )
 
 
@@ -614,26 +663,15 @@ def build_lesson_pdf(
         )
 
 
-        if isinstance(
+        add_paragraphs(
+            story,
             examples,
-            str
-        ):
-
-            examples = [examples]
-
-
-        for x in examples:
-
-            story.append(
-                safe_para(
-                    x,
-                    body
-                )
-            )
+            body
+        )
 
 
     # =====================================================
-    # STEPS
+    # 3 LESSON STEPS
     # =====================================================
 
     story.append(
@@ -670,16 +708,15 @@ def build_lesson_pdf(
         )
 
 
-        story.append(
-            safe_para(
-                detail,
-                body
-            )
+        add_paragraphs(
+            story,
+            [detail],
+            body
         )
 
 
     # =====================================================
-    # ASSESSMENT
+    # 4 ASSESSMENT
     # =====================================================
 
     story.append(
@@ -690,14 +727,10 @@ def build_lesson_pdf(
     )
 
 
-    story.append(
-        safe_para(
-            lesson.get(
-                "assessment",
-                ""
-            ),
-            body
-        )
+    add_paragraphs(
+        story,
+        [lesson.get("assessment", "")],
+        body
     )
 
 
@@ -753,18 +786,18 @@ def build_worksheet_pdf(
 
     title = pstyle(
         "WT",
-        25,
-        30,
+        27,
+        32,
         True,
         TA_CENTER,
-        space_after=2
+        space_after=3
     )
 
 
     sub = pstyle(
         "WS",
-        18,
-        23,
+        19,
+        24,
         False,
         TA_CENTER,
         space_after=13
@@ -778,6 +811,16 @@ def build_worksheet_pdf(
         False,
         TA_CENTER,
         space_after=14
+    )
+
+
+    student = pstyle(
+        "WST",
+        16,
+        21,
+        False,
+        TA_LEFT,
+        space_after=8
     )
 
 
@@ -815,11 +858,11 @@ def build_worksheet_pdf(
 
     bold = pstyle(
         "WB",
-        17,
+        18,
         24,
         True,
         TA_LEFT,
-        space_before=5,
+        space_before=8,
         space_after=7
     )
 
@@ -827,9 +870,9 @@ def build_worksheet_pdf(
     story = []
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # HEADER
-    # -----------------------------------------------------
+    # =====================================================
 
     story.append(
         safe_para(
@@ -860,18 +903,18 @@ def build_worksheet_pdf(
     )
 
 
-    story.append(
-        safe_para(
-            "ชื่อ-สกุล ................................................................................................",
-            normal
-        )
-    )
-
+    # =====================================================
+    # STUDENT INFO — ONE LINE
+    # =====================================================
 
     story.append(
         safe_para(
-            "ชั้น .................. เลขที่ .................. วันที่ ..................",
-            normal
+
+            "ชื่อ-สกุล .........................................................    "
+            "ชั้น ...............    "
+            "เลขที่ ...............",
+
+            student
         )
     )
 
@@ -926,10 +969,6 @@ def build_worksheet_pdf(
         1
     ):
 
-        # -------------------------------------------------
-        # NUMBER + QUESTION
-        # -------------------------------------------------
-
         question_text = (
             f"{i}. "
             f"{q.get('question', '')}"
@@ -943,10 +982,6 @@ def build_worksheet_pdf(
             )
         )
 
-
-        # -------------------------------------------------
-        # OPTIONS
-        # -------------------------------------------------
 
         options = (
             q.get("options")
@@ -967,10 +1002,6 @@ def build_worksheet_pdf(
                     )
                 )
 
-
-        # -------------------------------------------------
-        # ANSWER LINE
-        # -------------------------------------------------
 
         story.append(
             safe_para(
@@ -1042,18 +1073,18 @@ def build_quiz_pdf(
 
     title = pstyle(
         "QT",
-        25,
-        30,
+        27,
+        32,
         True,
         TA_CENTER,
-        space_after=2
+        space_after=3
     )
 
 
     sub = pstyle(
         "QS",
-        18,
-        23,
+        19,
+        24,
         False,
         TA_CENTER,
         space_after=13
@@ -1067,6 +1098,16 @@ def build_quiz_pdf(
         False,
         TA_CENTER,
         space_after=14
+    )
+
+
+    student = pstyle(
+        "QST",
+        16,
+        21,
+        False,
+        TA_LEFT,
+        space_after=8
     )
 
 
@@ -1104,9 +1145,9 @@ def build_quiz_pdf(
     story = []
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # HEADER
-    # -----------------------------------------------------
+    # =====================================================
 
     story.append(
         safe_para(
@@ -1137,18 +1178,18 @@ def build_quiz_pdf(
     )
 
 
-    story.append(
-        safe_para(
-            "ชื่อ-สกุล ................................................................................................",
-            normal
-        )
-    )
-
+    # =====================================================
+    # STUDENT INFO — ONE LINE
+    # =====================================================
 
     story.append(
         safe_para(
-            "ชั้น .................. เลขที่ ..................",
-            normal
+
+            "ชื่อ-สกุล .........................................................    "
+            "ชั้น ...............    "
+            "เลขที่ ...............",
+
+            student
         )
     )
 
@@ -1194,10 +1235,6 @@ def build_quiz_pdf(
         data.get("quiz", []),
         1
     ):
-
-        # IMPORTANT:
-        # ไม่แสดง (ปรนัย)
-        # ไม่แสดงชื่อประเภทข้อสอบ
 
         story.append(
             safe_para(
@@ -1287,18 +1324,18 @@ def build_answer_pdf(
 
     title = pstyle(
         "AT",
-        25,
-        30,
+        27,
+        32,
         True,
         TA_CENTER,
-        space_after=2
+        space_after=3
     )
 
 
     sub = pstyle(
         "AS",
-        18,
-        23,
+        19,
+        24,
         False,
         TA_CENTER,
         space_after=13
@@ -1317,19 +1354,19 @@ def build_answer_pdf(
 
     h = pstyle(
         "AH",
-        19,
-        24,
+        20,
+        26,
         True,
         TA_LEFT,
-        space_before=7,
-        space_after=8
+        space_before=10,
+        space_after=9
     )
 
 
     q = pstyle(
         "AQ",
-        16,
-        23,
+        17,
+        24,
         False,
         TA_LEFT,
         space_after=7
@@ -1338,6 +1375,10 @@ def build_answer_pdf(
 
     story = []
 
+
+    # =====================================================
+    # HEADER
+    # =====================================================
 
     story.append(
         safe_para(
@@ -1522,7 +1563,7 @@ def health():
 
         "status": "ok",
 
-        "version": "1.5",
+        "version": "1.8",
 
         "font_regular":
             FONT_REGULAR.name,
@@ -1610,17 +1651,26 @@ def generate(
     client = get_openai()
 
 
-    system = """
-คุณเป็นผู้ช่วยจัดทำเอกสารการเรียนการสอนภาษาไทยสำหรับครู
+    # =====================================================
+    # SYSTEM PROMPT
+    # =====================================================
 
-สร้างข้อมูลเป็น JSON เท่านั้น
+    system = """
+คุณเป็นผู้ช่วยจัดทำเอกสารการเรียนการสอนภาษาไทยสำหรับครูไทย
+
+หน้าที่ของคุณคือสร้าง "ชุดการสอน" ที่สามารถนำไปใช้สอนได้จริง
+ไม่ใช่เพียงสร้างรายการหัวข้อสั้น ๆ
+
+ตอบเป็น JSON เท่านั้น
 
 ห้ามใส่ Markdown
 
 ห้ามใส่ข้อความนอก JSON
 
 
-รูปแบบ JSON:
+=========================================================
+โครงสร้าง JSON
+=========================================================
 
 {
   "summary": {
@@ -1631,10 +1681,15 @@ def generate(
   },
 
   "lesson_plan": {
+
     "objective": [],
+
     "content": [],
+
     "key_points": [],
+
     "examples": [],
+
     "steps": [
       {
         "time": "",
@@ -1642,6 +1697,7 @@ def generate(
         "detail": ""
       }
     ],
+
     "assessment": ""
   },
 
@@ -1665,28 +1721,152 @@ def generate(
 }
 
 
-กติกาสำคัญ:
+=========================================================
+กฎสำคัญเกี่ยวกับแผนการสอน
+=========================================================
+
+1. ต้องสร้างเนื้อหาที่สามารถนำไปใช้สอนได้จริง
+
+2. ห้ามตอบเพียงชื่อหัวข้อหรือคำสั้น ๆ
+
+3. "objective" ต้องเป็นจุดประสงค์การเรียนรู้ที่ชัดเจน
+   อย่างน้อย 3 ข้อ
+
+4. "content" ต้องเป็นเนื้อหาความรู้จริง
+   สำหรับให้ครูใช้สอนนักเรียน
+   ต้องอธิบายแนวคิด ความหมาย หลักการ หรือวิธีการ
+   ตามหัวข้อที่ผู้ใช้ระบุ
+
+5. "key_points" คือ "สาระสำคัญ"
+   ต้องเป็นข้อความอธิบายเนื้อหาจริง
+   ไม่ใช่เพียงคำสำคัญหรือรายการคำศัพท์
+
+6. สาระสำคัญควรสรุปว่า
+   นักเรียนควรเข้าใจอะไร
+   หลักการสำคัญคืออะไร
+   และสามารถนำความรู้นั้นไปใช้อย่างไร
+
+7. content และ key_points ต้องมีรายละเอียดเพียงพอ
+   ไม่ใช่ข้อความ 1 บรรทัดสั้น ๆ
+
+8. ถ้าเป็นเนื้อหาที่อธิบายได้หลายประเด็น
+   ให้แยกเป็นหลายย่อหน้าหรือหลายรายการ
+
+9. "examples" ต้องมีตัวอย่างที่ครูสามารถหยิบไปใช้สอนได้จริง
+
+10. ตัวอย่างควรอธิบายพร้อมตัวอย่างประกอบ
+    ไม่ใช่เพียงตั้งชื่อหัวข้อ
+
+11. "steps" ต้องอธิบายขั้นตอนการสอนจริง
+
+12. แต่ละ step ต้องมี
+    - เวลา
+    - ชื่อกิจกรรม
+    - รายละเอียดว่าครูทำอะไรและนักเรียนทำอะไร
+
+13. "assessment" ต้องบอกวิธีประเมินจริง
+    เช่น การสังเกต การตอบคำถาม การทำใบงาน
+    หรือการตรวจแบบทดสอบ
+
+14. เนื้อหาทั้งหมดต้องเหมาะสมกับระดับชั้น
+
+15. หากผู้ใช้ระบุเวลา เช่น 30 นาที หรือ 1 ชั่วโมง
+    ให้จัดกิจกรรมให้สอดคล้องกับเวลานั้น
+
+
+=========================================================
+รูปแบบภาษา
+=========================================================
 
 1. ใช้ภาษาไทยเป็นหลัก
-2. เว้นแต่หัวข้อเป็นภาษาอื่น
-3. ห้ามใส่คำว่า "AI ครูผู้ช่วย" ในเอกสาร
-4. ห้ามใส่ชื่อประเภทข้อสอบลงหน้าคำถาม
+2. ใช้ภาษาที่เหมาะกับเอกสารการเรียนการสอนจริง
+3. เขียนให้ครูสามารถนำไปใช้ได้ทันที
+4. หลีกเลี่ยงข้อความที่ดูเหมือน AI เขียนแบบสั้น ๆ
+5. ไม่เขียนซ้ำความหมายเดิมหลายครั้ง
+6. เรียบเรียงเป็นธรรมชาติ
+7. หากเนื้อหามีหลายแนวคิด ให้แยกเป็นย่อหน้า
+8. ห้ามใช้ Emoji ในข้อมูลที่จะนำไปสร้าง PDF
+
+
+=========================================================
+กฎเกี่ยวกับข้อสอบ
+=========================================================
+
+1. จำนวนข้อสอบต้องตรงกับจำนวนที่ผู้ใช้กำหนด
+
+2. question ต้องมีเฉพาะข้อความคำถาม
+
+3. ห้ามใส่เลขข้อใน question
+
+4. ห้ามใส่ประเภทข้อสอบใน question
+
 5. ห้ามเขียน "(ปรนัย)"
+
 6. ห้ามเขียน "(เติมคำ)"
+
 7. ห้ามเขียน "(คำนวณ)"
+
 8. ห้ามเขียน "(ประยุกต์ใช้)"
-9. question ต้องมีเฉพาะตัวคำถาม
-10. ห้ามใส่เลขข้อใน question
-11. ระบบจะใส่เลขข้อเอง
-12. ถ้าเป็นปรนัย ให้ใส่ตัวเลือกใน options เป็นข้อความล้วน
-13. ไม่ต้องใส่ ก. ข. ค. ง. ใน options
-14. ใบงานควรมีพื้นที่ให้ตอบ
-15. แบบทดสอบควรมีคำถามชัดเจน
-16. จำนวนข้อแบบทดสอบต้องตามที่ผู้ใช้กำหนด
-17. เนื้อหาควรเหมาะสมกับระดับชั้น
-18. เรียบเรียงภาษาให้เหมือนเอกสารการเรียนการสอนจริง
-19. หลีกเลี่ยงข้อความที่เหมือนการก๊อปปี้วาง
-20. แต่ละหัวข้อควรเป็นย่อหน้าอ่านง่าย
+
+9. ถ้าเป็นปรนัย ให้ใส่ตัวเลือกใน options
+
+10. ไม่ต้องใส่ ก. ข. ค. ง. ใน options
+
+11. ถ้าเป็นปรนัยต้องมี 4 ตัวเลือก
+
+12. มีคำตอบถูกเพียง 1 ตัวเลือก
+
+13. explanation ต้องอธิบายเหตุผลของคำตอบ
+
+14. คำถามต้องสอดคล้องกับเนื้อหาที่สอน
+
+
+=========================================================
+กฎเกี่ยวกับใบงาน
+=========================================================
+
+1. ใบงานต้องสอดคล้องกับเนื้อหาที่สอน
+
+2. question ต้องไม่มีเลขข้อ
+
+3. ระบบจะใส่เลขข้อเอง
+
+4. ถ้าเป็นคำถามปลายเปิด ให้ answer เป็นแนวคำตอบ
+
+5. ถ้าเป็นปรนัย ให้ใส่ options
+
+6. ไม่ต้องใส่ ก. ข. ค. ง. ใน options
+
+7. ใบงานควรมีทั้งคำถามความเข้าใจ
+   และคำถามที่ให้นักเรียนคิดหรือประยุกต์ใช้ตามความเหมาะสม
+
+
+=========================================================
+กฎชื่อครู
+=========================================================
+
+ห้ามสร้างชื่อครูขึ้นมาเอง
+
+ชื่อครูต้องใช้จากข้อมูลที่ผู้ใช้ส่งมาเท่านั้น
+
+ถ้าไม่ได้ระบุชื่อครู ให้ส่งค่าเป็นค่าว่าง
+
+
+=========================================================
+กฎสำคัญเพิ่มเติม
+=========================================================
+
+ห้ามใส่คำว่า "AI ครูผู้ช่วย"
+
+ห้ามใส่คำว่า "AI-Teacher"
+
+ห้ามใส่ข้อความโฆษณา
+
+ห้ามใส่คำอธิบายเกี่ยวกับการทำงานของ AI
+
+ห้ามสร้างหัวข้อเพิ่มที่ไม่มีในโครงสร้าง JSON
+
+ตอบ JSON เท่านั้น
 """
 
 
