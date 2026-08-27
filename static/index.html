@@ -7,7 +7,7 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1, viewport-fit=cover"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
 >
 
 <meta
@@ -17,22 +17,34 @@
 
 <title>จัดทำชุดการสอน</title>
 
+
 <style>
 
 /* =====================================================
    ROOT
 ===================================================== */
 
-:root {
-  --bg: #fff8ed;
-  --card: #ffffff;
-  --ink: #27324a;
-  --muted: #737b91;
-  --primary: #6258e8;
-  --primary-dark: #5148d8;
-  --line: #e8e4dc;
-  --soft: #f7f5ff;
-  --mint: #dff7ed;
+:root{
+
+  --bg:#fff8ed;
+  --card:#ffffff;
+
+  --ink:#27324a;
+  --muted:#737b91;
+
+  --primary:#6258e8;
+  --primary2:#5148d8;
+
+  --line:#e8e4dc;
+
+  --soft:#f4f2ff;
+
+  --blue:#e8f2ff;
+
+  --mint:#dff7ed;
+
+  --danger:#ffe7e7;
+
 }
 
 
@@ -40,16 +52,18 @@
    RESET
 ===================================================== */
 
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html{
+  scroll-behavior:smooth;
 }
 
-body {
-  margin: 0;
+body{
+
+  margin:0;
+
   background:
     linear-gradient(
       180deg,
@@ -57,7 +71,7 @@ body {
       #f7f5ff 100%
     );
 
-  color: var(--ink);
+  color:var(--ink);
 
   font-family:
     -apple-system,
@@ -65,10 +79,12 @@ body {
     "Noto Sans Thai",
     sans-serif;
 
-  font-size: 15px;
-  line-height: 1.65;
+  font-size:15px;
 
-  -webkit-text-size-adjust: 100%;
+  line-height:1.65;
+
+  -webkit-text-size-adjust:100%;
+
 }
 
 
@@ -76,10 +92,17 @@ body {
    CONTAINER
 ===================================================== */
 
-.container {
-  width: min(900px, 94%);
-  margin: 0 auto;
-  padding-bottom: 30px;
+.container{
+
+  width:min(
+    900px,
+    94%
+  );
+
+  margin:0 auto;
+
+  padding-bottom:30px;
+
 }
 
 
@@ -87,28 +110,40 @@ body {
    HEADER
 ===================================================== */
 
-.header {
-  padding: 18px 0 5px;
+.header{
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding:
+    18px 0 5px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
 }
 
-.brand {
-  font-size: 20px;
-  font-weight: 800;
+.brand{
+
+  font-size:20px;
+
+  font-weight:800;
+
 }
 
-.badge {
-  background: var(--mint);
+.badge{
 
-  padding: 6px 11px;
+  background:var(--mint);
 
-  border-radius: 999px;
+  padding:
+    6px 11px;
 
-  font-size: 12px;
-  font-weight: 800;
+  border-radius:999px;
+
+  font-size:12px;
+
+  font-weight:800;
+
 }
 
 
@@ -116,13 +151,19 @@ body {
    HERO
 ===================================================== */
 
-.hero {
-  text-align: center;
-  padding: 25px 0 18px;
+.hero{
+
+  text-align:center;
+
+  padding:
+    25px 0 18px;
+
 }
 
-.hero h1 {
-  margin: 0 0 8px;
+.hero h1{
+
+  margin:
+    0 0 8px;
 
   font-size:
     clamp(
@@ -131,19 +172,24 @@ body {
       44px
     );
 
-  line-height: 1.2;
-  font-weight: 800;
+  line-height:1.2;
+
+  font-weight:800;
+
 }
 
-.hero p {
-  margin: 0 auto;
+.hero p{
 
-  max-width: 650px;
+  margin:0 auto;
 
-  color: var(--muted);
+  max-width:650px;
 
-  font-size: 16px;
-  line-height: 1.6;
+  color:var(--muted);
+
+  font-size:16px;
+
+  line-height:1.6;
+
 }
 
 
@@ -151,21 +197,29 @@ body {
    CARD
 ===================================================== */
 
-.card {
-  background: var(--card);
+.card{
+
+  background:var(--card);
 
   border:
     1px solid var(--line);
 
-  border-radius: 23px;
+  border-radius:23px;
 
-  padding: 18px;
+  padding:18px;
 
-  margin: 15px 0;
+  margin:
+    15px 0;
 
   box-shadow:
     0 10px 28px
-    rgba(45, 51, 80, .08);
+    rgba(
+      45,
+      51,
+      80,
+      .08
+    );
+
 }
 
 
@@ -173,85 +227,97 @@ body {
    LABEL
 ===================================================== */
 
-.label {
-  display: block;
+.label{
 
-  margin-bottom: 8px;
+  display:block;
 
-  font-size: 16px;
-  font-weight: 800;
+  margin-bottom:8px;
+
+  font-size:16px;
+
+  font-weight:800;
+
 }
 
 
 /* =====================================================
-   TEXTAREA
+   PROMPT
 ===================================================== */
 
-.prompt {
-  width: 100%;
+.prompt{
 
-  min-height: 105px;
+  width:100%;
 
-  padding: 14px;
+  min-height:105px;
 
-  resize: vertical;
+  padding:14px;
 
-  outline: none;
+  resize:vertical;
+
+  outline:none;
 
   border:
     2px solid #e7e3f7;
 
-  border-radius: 17px;
+  border-radius:17px;
 
-  background: #fcfbff;
+  background:#fcfbff;
 
-  color: var(--ink);
+  color:var(--ink);
 
-  font-family: inherit;
+  font-family:inherit;
 
-  font-size: 15px;
+  font-size:15px;
 
-  line-height: 1.6;
+  line-height:1.6;
+
 }
 
-.prompt:focus {
-  border-color: var(--primary);
+.prompt:focus{
+
+  border-color:
+    var(--primary);
+
 }
 
 
 /* =====================================================
-   EXAMPLE BUTTONS
+   EXAMPLES
 ===================================================== */
 
-.examples {
-  display: flex;
+.examples{
 
-  flex-wrap: wrap;
+  display:flex;
 
-  gap: 8px;
+  flex-wrap:wrap;
 
-  margin-top: 8px;
+  gap:8px;
+
+  margin-top:8px;
+
 }
 
-.example {
-  border: 0;
+.example{
 
-  border-radius: 999px;
+  border:0;
+
+  border-radius:999px;
 
   padding:
     7px 11px;
 
-  background: #f3f1ff;
+  background:#f3f1ff;
 
-  color: #5148d8;
+  color:#5148d8;
 
-  font-family: inherit;
+  font-family:inherit;
 
-  font-size: 13px;
+  font-size:13px;
 
-  font-weight: 700;
+  font-weight:700;
 
-  cursor: pointer;
+  cursor:pointer;
+
 }
 
 
@@ -259,13 +325,15 @@ body {
    GRID
 ===================================================== */
 
-.grid {
-  display: grid;
+.grid{
+
+  display:grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 12px;
+  gap:12px;
+
 }
 
 
@@ -273,39 +341,46 @@ body {
    FIELD
 ===================================================== */
 
-.field {
-  padding: 13px;
+.field{
+
+  padding:13px;
 
   border:
     1px solid var(--line);
 
-  border-radius: 17px;
+  border-radius:17px;
 
-  background: #faf9f5;
+  background:#faf9f5;
+
 }
 
 .field input,
-.field select {
-  width: 100%;
+.field select{
 
-  border: 0;
+  width:100%;
 
-  outline: 0;
+  border:0;
 
-  background: transparent;
+  outline:0;
 
-  color: var(--ink);
+  background:transparent;
 
-  font-family: inherit;
+  color:var(--ink);
 
-  font-size: 15px;
+  font-family:inherit;
 
-  font-weight: 700;
+  font-size:15px;
+
+  font-weight:700;
+
 }
 
-.field input::placeholder {
-  color: #a3a3a3;
-  font-weight: 500;
+.field input::placeholder{
+
+  color:#a3a3a3;
+
+  font-weight:500;
+
 }
 
 
@@ -313,42 +388,53 @@ body {
    QUESTION TYPES
 ===================================================== */
 
-.types {
-  display: grid;
+.types{
+
+  display:grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 9px;
+  gap:9px;
+
 }
 
-.check input {
-  position: absolute;
-  opacity: 0;
+.check input{
+
+  position:absolute;
+
+  opacity:0;
+
 }
 
-.check label {
-  display: block;
+.check label{
 
-  padding: 11px;
+  display:block;
+
+  padding:11px;
 
   border:
     2px solid var(--line);
 
-  border-radius: 15px;
+  border-radius:15px;
 
-  font-size: 15px;
-  font-weight: 700;
+  font-size:15px;
 
-  cursor: pointer;
+  font-weight:700;
+
+  cursor:pointer;
+
 }
 
-.check input:checked + label {
-  border-color: var(--primary);
+.check input:checked + label{
 
-  background: var(--soft);
+  border-color:
+    var(--primary);
 
-  color: #5148d8;
+  background:var(--soft);
+
+  color:#5148d8;
+
 }
 
 
@@ -356,49 +442,62 @@ body {
    PRIMARY BUTTON
 ===================================================== */
 
-.primary {
-  width: 100%;
+.primary{
 
-  border: 0;
+  width:100%;
 
-  border-radius: 17px;
+  border:0;
 
-  padding: 14px;
+  border-radius:17px;
+
+  padding:14px;
 
   background:
     linear-gradient(
       135deg,
       var(--primary),
-      var(--primary-dark)
+      var(--primary2)
     );
 
-  color: #fff;
+  color:#fff;
 
-  font-family: inherit;
+  font-family:inherit;
 
-  font-size: 17px;
-  font-weight: 800;
+  font-size:17px;
 
-  cursor: pointer;
+  font-weight:800;
+
+  cursor:pointer;
 
   box-shadow:
     0 8px 17px
-    rgba(98, 88, 232, .23);
+    rgba(
+      98,
+      88,
+      232,
+      .23
+    );
+
 }
 
-.primary:disabled {
-  opacity: .6;
-  cursor: wait;
+.primary:disabled{
+
+  opacity:.6;
+
+  cursor:wait;
+
 }
 
-.note {
-  margin-top: 9px;
+.note{
 
-  text-align: center;
+  margin-top:9px;
 
-  color: var(--muted);
+  text-align:center;
 
-  font-size: 12px;
+  color:var(--muted);
+
+  font-size:12px;
+
 }
 
 
@@ -406,8 +505,10 @@ body {
    HIDDEN
 ===================================================== */
 
-.hidden {
-  display: none !important;
+.hidden{
+
+  display:none !important;
+
 }
 
 
@@ -415,39 +516,52 @@ body {
    LOADING
 ===================================================== */
 
-.loading {
-  text-align: center;
+.loading{
+
+  text-align:center;
 
   padding:
     27px 18px;
+
 }
 
-.spinner {
-  font-size: 36px;
+.spinner{
+
+  font-size:36px;
 
   animation:
     bounce 1s infinite alternate;
+
 }
 
-@keyframes bounce {
-  to {
-    transform: translateY(-7px);
+@keyframes bounce{
+
+  to{
+
+    transform:
+      translateY(-7px);
+
   }
+
 }
 
-.loading h3 {
+.loading h3{
+
   margin:
     9px 0 3px;
 
-  font-size: 19px;
+  font-size:19px;
+
 }
 
-.loading p {
-  margin: 0;
+.loading p{
 
-  color: var(--muted);
+  margin:0;
 
-  font-size: 14px;
+  color:var(--muted);
+
+  font-size:14px;
+
 }
 
 
@@ -455,29 +569,33 @@ body {
    ERROR
 ===================================================== */
 
-.error {
-  padding: 13px;
+.error{
 
-  border-radius: 15px;
+  padding:13px;
 
-  background: #ffe7e7;
+  border-radius:15px;
 
-  color: #9d2929;
+  background:var(--danger);
 
-  font-size: 14px;
+  color:#9d2929;
 
-  white-space: pre-wrap;
+  font-size:14px;
+
+  white-space:pre-wrap;
+
 }
 
 
 /* =====================================================
-   RESULT HEADER
+   RESULT
 ===================================================== */
 
-.result-head h2 {
-  margin: 0;
+.result-head h2{
 
-  font-size: 22px;
+  margin:0;
+
+  font-size:22px;
+
 }
 
 
@@ -485,27 +603,31 @@ body {
    CHIPS
 ===================================================== */
 
-.chips {
-  display: flex;
+.chips{
 
-  flex-wrap: wrap;
+  display:flex;
 
-  gap: 6px;
+  flex-wrap:wrap;
 
-  margin-top: 7px;
+  gap:6px;
+
+  margin-top:7px;
+
 }
 
-.chip {
+.chip{
+
   padding:
     5px 9px;
 
-  border-radius: 999px;
+  border-radius:999px;
 
-  background: #e8f2ff;
+  background:var(--blue);
 
-  font-size: 11px;
+  font-size:11px;
 
-  font-weight: 800;
+  font-weight:800;
+
 }
 
 
@@ -513,18 +635,20 @@ body {
    SAVED
 ===================================================== */
 
-.saved {
-  margin-top: 10px;
+.saved{
 
-  padding: 11px;
+  margin-top:10px;
 
-  border-radius: 15px;
+  padding:11px;
 
-  background: var(--mint);
+  border-radius:15px;
 
-  color: #28704e;
+  background:var(--mint);
 
-  font-size: 13px;
+  color:#28704e;
+
+  font-size:13px;
+
 }
 
 
@@ -532,46 +656,54 @@ body {
    TABS
 ===================================================== */
 
-.tabs {
-  display: flex;
+.tabs{
 
-  gap: 7px;
+  display:flex;
 
-  overflow-x: auto;
+  gap:7px;
 
-  margin-top: 15px;
+  overflow-x:auto;
 
-  padding-bottom: 4px;
+  margin-top:15px;
 
-  -webkit-overflow-scrolling: touch;
+  padding-bottom:4px;
+
+  -webkit-overflow-scrolling:touch;
+
 }
 
-.tab {
-  flex: 0 0 auto;
+.tab{
 
-  border: 0;
+  flex:
+    0 0 auto;
 
-  border-radius: 11px;
+  border:0;
+
+  border-radius:11px;
 
   padding:
     8px 11px;
 
-  background: #f1f0ed;
+  background:#f1f0ed;
 
-  color: var(--muted);
+  color:var(--muted);
 
-  font-family: inherit;
+  font-family:inherit;
 
-  font-size: 13px;
+  font-size:13px;
 
-  font-weight: 800;
+  font-weight:800;
 
-  cursor: pointer;
+  cursor:pointer;
+
 }
 
-.tab.active {
-  background: #5148d8;
-  color: #fff;
+.tab.active{
+
+  background:#5148d8;
+
+  color:#fff;
+
 }
 
 
@@ -579,25 +711,31 @@ body {
    PANEL
 ===================================================== */
 
-.panel {
-  font-size: 15px;
+.panel{
 
-  line-height: 1.75;
+  font-size:15px;
+
+  line-height:1.75;
+
 }
 
-.panel h3 {
+.panel h3{
+
   margin:
     20px 0 9px;
 
-  font-size: 19px;
+  font-size:19px;
 
-  line-height: 1.4;
+  line-height:1.4;
 
-  font-weight: 800;
+  font-weight:800;
+
 }
 
-.panel h3:first-child {
-  margin-top: 11px;
+.panel h3:first-child{
+
+  margin-top:11px;
+
 }
 
 
@@ -605,80 +743,97 @@ body {
    ITEM
 ===================================================== */
 
-.item {
-  margin: 8px 0;
+.item{
 
-  padding: 12px;
+  margin:
+    8px 0;
+
+  padding:12px;
 
   border:
     1px solid var(--line);
 
-  border-radius: 15px;
+  border-radius:15px;
 
-  background: #fff;
+  background:#fff;
 
-  font-size: 15px;
+  font-size:15px;
 
-  line-height: 1.75;
+  line-height:1.75;
+
 }
 
-.item b {
-  font-size: 15px;
+.item b{
+
+  font-size:15px;
+
 }
 
 
 /* =====================================================
-   PDF DOWNLOAD
-   เหลือเพียง 1 ปุ่ม
+   PDF AREA
 ===================================================== */
 
-.pdf-area {
-  margin-top: 19px;
+.pdf-area{
+
+  margin-top:19px;
+
 }
 
-.download-all {
-  display: flex;
 
-  align-items: center;
+/* =====================================================
+   DOWNLOAD ALL BUTTON
+===================================================== */
 
-  justify-content: center;
+.download-all{
 
-  width: 100%;
+  display:flex;
 
-  min-height: 55px;
+  align-items:center;
+
+  justify-content:center;
+
+  width:100%;
+
+  min-height:55px;
 
   border:
     2px solid #e5e1f5;
 
-  border-radius: 16px;
+  border-radius:16px;
 
-  background: #fff;
+  background:#fff;
 
-  color: #5148d8;
+  color:#5148d8;
 
-  font-family: inherit;
+  font-family:inherit;
 
-  font-size: 16px;
+  font-size:16px;
 
-  font-weight: 800;
+  font-weight:800;
 
-  cursor: pointer;
+  text-decoration:none;
 
-  text-decoration: none;
+  cursor:pointer;
 
-  transition: .15s;
+  transition:.15s;
+
 }
 
-.download-all:active {
-  transform: scale(.98);
+.download-all:active{
 
-  background: #f7f5ff;
+  transform:scale(.98);
+
+  background:#f7f5ff;
+
 }
 
-.download-all:disabled {
-  opacity: .6;
+.download-all:disabled{
 
-  cursor: wait;
+  opacity:.6;
+
+  cursor:wait;
+
 }
 
 
@@ -686,31 +841,35 @@ body {
    NEW PACK
 ===================================================== */
 
-.actions {
-  margin-top: 10px;
+.actions{
+
+  margin-top:10px;
+
 }
 
-.secondary {
-  width: 100%;
+.secondary{
+
+  width:100%;
 
   border:
     2px solid #e5e1f5;
 
-  border-radius: 16px;
+  border-radius:16px;
 
-  padding: 12px;
+  padding:12px;
 
-  background: #fff;
+  background:#fff;
 
-  color: #5148d8;
+  color:#5148d8;
 
-  font-family: inherit;
+  font-family:inherit;
 
-  font-size: 15px;
+  font-size:15px;
 
-  font-weight: 800;
+  font-weight:800;
 
-  cursor: pointer;
+  cursor:pointer;
+
 }
 
 
@@ -718,48 +877,69 @@ body {
    MOBILE
 ===================================================== */
 
-@media (max-width: 650px) {
+@media(max-width:650px){
 
-  .container {
-    width: 94%;
+  .container{
+
+    width:94%;
+
   }
 
-  .card {
-    padding: 16px;
+  .card{
+
+    padding:16px;
+
   }
 
   .grid,
-  .types {
-    grid-template-columns: 1fr;
+  .types{
+
+    grid-template-columns:1fr;
+
   }
 
-  .hero {
-    padding-top: 22px;
+  .hero{
+
+    padding-top:22px;
+
   }
 
-  .hero h1 {
-    font-size: 33px;
+  .hero h1{
+
+    font-size:33px;
+
   }
 
-  .hero p {
-    font-size: 15px;
+  .hero p{
+
+    font-size:15px;
+
   }
 
-  .panel {
-    font-size: 15px;
+  .panel{
+
+    font-size:15px;
+
   }
 
-  .panel h3 {
-    font-size: 19px;
+  .panel h3{
+
+    font-size:19px;
+
   }
 
-  .item {
-    font-size: 15px;
+  .item{
+
+    font-size:15px;
+
   }
 
-  .download-all {
-    font-size: 15px;
+  .download-all{
+
+    font-size:15px;
+
   }
+
 }
 
 
@@ -767,15 +947,20 @@ body {
    SMALL MOBILE
 ===================================================== */
 
-@media (max-width: 390px) {
+@media(max-width:390px){
 
-  .hero h1 {
-    font-size: 30px;
+  .hero h1{
+
+    font-size:30px;
+
   }
 
-  .card {
-    padding: 14px;
+  .card{
+
+    padding:14px;
+
   }
+
 }
 
 </style>
@@ -790,7 +975,7 @@ body {
 
 
 <!-- =====================================================
-HEADER
+     HEADER
 ===================================================== -->
 
 <header class="header">
@@ -807,7 +992,7 @@ HEADER
 
 
 <!-- =====================================================
-HERO
+     HERO
 ===================================================== -->
 
 <section class="hero">
@@ -825,7 +1010,7 @@ HERO
 
 
 <!-- =====================================================
-BUILDER
+     BUILDER
 ===================================================== -->
 
 <section
@@ -837,6 +1022,7 @@ BUILDER
     👋 วันนี้คุณอยากสอนอะไร?
   </label>
 
+
   <textarea
     id="prompt"
     class="prompt"
@@ -845,6 +1031,7 @@ BUILDER
 
 
   <div class="examples">
+
 
     <button
       type="button"
@@ -872,13 +1059,14 @@ BUILDER
       🇬🇧 Animals ป.3
     </button>
 
+
   </div>
 
 </section>
 
 
 <!-- =====================================================
-SETTINGS
+     SETTINGS
 ===================================================== -->
 
 <section class="card">
@@ -886,6 +1074,8 @@ SETTINGS
 
   <div class="grid">
 
+
+    <!-- TEACHER -->
 
     <div class="field">
 
@@ -900,6 +1090,8 @@ SETTINGS
 
     </div>
 
+
+    <!-- COUNT -->
 
     <div class="field">
 
@@ -925,6 +1117,8 @@ SETTINGS
 
     </div>
 
+
+    <!-- DIFFICULTY -->
 
     <div class="field">
 
@@ -963,7 +1157,9 @@ SETTINGS
 
   <!-- QUESTION TYPES -->
 
-  <div style="margin-top:16px">
+  <div
+    style="margin-top:16px"
+  >
 
     <label class="label">
 
@@ -993,7 +1189,9 @@ SETTINGS
           checked
         >
 
-        <label for="multiple_choice">
+        <label
+          for="multiple_choice"
+        >
           ☑️ ปรนัย
         </label>
 
@@ -1007,7 +1205,9 @@ SETTINGS
           id="fill_blank"
         >
 
-        <label for="fill_blank">
+        <label
+          for="fill_blank"
+        >
           ✏️ เติมคำ
         </label>
 
@@ -1021,7 +1221,9 @@ SETTINGS
           id="calculation"
         >
 
-        <label for="calculation">
+        <label
+          for="calculation"
+        >
           🔢 คำนวณ
         </label>
 
@@ -1035,7 +1237,9 @@ SETTINGS
           id="application"
         >
 
-        <label for="application">
+        <label
+          for="application"
+        >
           💡 ประยุกต์ใช้
         </label>
 
@@ -1049,7 +1253,9 @@ SETTINGS
 
   <!-- GENERATE -->
 
-  <div style="margin-top:16px">
+  <div
+    style="margin-top:16px"
+  >
 
     <button
       id="generateBtn"
@@ -1072,7 +1278,7 @@ SETTINGS
 
 
 <!-- =====================================================
-LOADING
+     LOADING
 ===================================================== -->
 
 <section
@@ -1084,19 +1290,22 @@ LOADING
     ✨
   </div>
 
+
   <h3>
     กำลังเตรียมชุดการสอน...
   </h3>
+
 
   <p>
     กำลังสร้างเอกสารและ PDF กรุณารอสักครู่
   </p>
 
+
 </section>
 
 
 <!-- =====================================================
-ERROR
+     ERROR
 ===================================================== -->
 
 <section
@@ -1113,7 +1322,7 @@ ERROR
 
 
 <!-- =====================================================
-RESULT
+     RESULT
 ===================================================== -->
 
 <section
@@ -1145,7 +1354,9 @@ RESULT
   </div>
 
 
-  <!-- TABS -->
+  <!-- =================================================
+       TABS
+  ================================================== -->
 
   <div class="tabs">
 
@@ -1220,18 +1431,10 @@ RESULT
        ปุ่มเดียว
   ================================================== -->
 
-  <div class="pdf-area">
-
-    <button
-      id="downloadAllBtn"
-      type="button"
-      class="download-all"
-      onclick="downloadAllPDF()"
-    >
-      📥 ดาวน์โหลดไฟล์ทั้งหมด
-    </button>
-
-  </div>
+  <div
+    id="pdfs"
+    class="pdf-area"
+  ></div>
 
 
   <!-- =================================================
@@ -1268,11 +1471,13 @@ let currentData = null;
 
 
 /* =====================================================
-   HELPER
+   SHORT ID
 ===================================================== */
 
-function $(id) {
+function $(id){
+
   return document.getElementById(id);
+
 }
 
 
@@ -1280,7 +1485,7 @@ function $(id) {
    EXAMPLE
 ===================================================== */
 
-function fillExample(value) {
+function fillExample(value){
 
   $("prompt").value = value;
 
@@ -1288,22 +1493,24 @@ function fillExample(value) {
 
 
 /* =====================================================
-   ESCAPE HTML
+   ESC HTML
 ===================================================== */
 
-function esc(value) {
+function esc(value){
 
   return String(value ?? "")
     .replace(
       /[&<>"']/g,
-      function (m) {
+      function(m){
 
         return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
+
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
+
         }[m];
 
       }
@@ -1316,19 +1523,22 @@ function esc(value) {
    ERROR
 ===================================================== */
 
-function showError(text) {
+function showError(text){
 
   $("error")
     .classList
     .remove("hidden");
 
+
   $("errorText").textContent =
     typeof text === "object"
+
       ? JSON.stringify(
           text,
           null,
           2
         )
+
       : text;
 
 }
@@ -1338,7 +1548,7 @@ function showError(text) {
    LOADING
 ===================================================== */
 
-function setLoading(value) {
+function setLoading(value){
 
   $("loading")
     .classList
@@ -1351,20 +1561,23 @@ function setLoading(value) {
   $("generateBtn").disabled = value;
 
 
-  /* =================================================
-     สำคัญ:
-     ตอนกดสร้าง ให้เลื่อนลงมาที่ Loading
-  ================================================== */
+  /*
+    เมื่อเริ่มสร้าง
+    ให้เลื่อนลงมาที่ Loading
+  */
 
-  if (value) {
+  if(value){
 
     setTimeout(
-      function () {
+      function(){
 
         $("loading")
           .scrollIntoView({
-            behavior: "smooth",
-            block: "center"
+
+            behavior:"smooth",
+
+            block:"center"
+
           });
 
       },
@@ -1383,18 +1596,20 @@ function setLoading(value) {
 document
   .querySelectorAll(".tab")
   .forEach(
-    function (button) {
+    function(button){
 
       button.addEventListener(
         "click",
-        function () {
-
+        function(){
 
           document
             .querySelectorAll(".tab")
             .forEach(
-              function (b) {
-                b.classList.remove("active");
+              function(tab){
+
+                tab.classList
+                  .remove("active");
+
               }
             );
 
@@ -1402,21 +1617,28 @@ document
           document
             .querySelectorAll(".panel")
             .forEach(
-              function (p) {
-                p.classList.add("hidden");
+              function(panel){
+
+                panel.classList
+                  .add("hidden");
+
               }
             );
 
 
-          button.classList.add("active");
+          button.classList
+            .add("active");
 
 
           const panel =
             $(button.dataset.tab);
 
 
-          if (panel) {
-            panel.classList.remove("hidden");
+          if(panel){
+
+            panel.classList
+              .remove("hidden");
+
           }
 
         }
@@ -1430,17 +1652,20 @@ document
    LOCAL STORAGE
 ===================================================== */
 
-function saveLocal(data) {
+function saveLocal(data){
 
-  try {
+  try{
 
     localStorage.setItem(
+
       "ai_teacher_v15_data",
+
       JSON.stringify(data)
+
     );
 
   }
-  catch (e) {
+  catch(e){
 
     console.warn(
       "ไม่สามารถบันทึกข้อมูล",
@@ -1452,9 +1677,9 @@ function saveLocal(data) {
 }
 
 
-function loadLocal() {
+function loadLocal(){
 
-  try {
+  try{
 
     const value =
       localStorage.getItem(
@@ -1467,7 +1692,7 @@ function loadLocal() {
       : null;
 
   }
-  catch (e) {
+  catch(e){
 
     return null;
 
@@ -1480,7 +1705,7 @@ function loadLocal() {
    GENERATE
 ===================================================== */
 
-async function generate() {
+async function generate(){
 
 
   const prompt =
@@ -1496,23 +1721,27 @@ async function generate() {
 
 
   const selected = [
+
     ...document
       .querySelectorAll(
         ".check input:checked"
       )
+
   ]
     .map(
-      function (x) {
-        return x.id;
+      function(input){
+
+        return input.id;
+
       }
     );
 
 
-  /* =================================================
+  /* ---------------------------------------------------
      VALIDATE
-  ================================================== */
+  --------------------------------------------------- */
 
-  if (!prompt) {
+  if(!prompt){
 
     showError(
       "พิมพ์หัวข้อที่อยากสอนก่อนนะครับ 😊"
@@ -1525,7 +1754,7 @@ async function generate() {
   }
 
 
-  if (!selected.length) {
+  if(!selected.length){
 
     showError(
       "เลือกอย่างน้อย 1 รูปแบบข้อสอบครับ"
@@ -1536,9 +1765,9 @@ async function generate() {
   }
 
 
-  /* =================================================
+  /* ---------------------------------------------------
      RESET
-  ================================================== */
+  --------------------------------------------------- */
 
   $("error")
     .classList
@@ -1553,11 +1782,11 @@ async function generate() {
   setLoading(true);
 
 
-  /* =================================================
+  /* ---------------------------------------------------
      API
-  ================================================== */
+  --------------------------------------------------- */
 
-  try {
+  try{
 
 
     const response =
@@ -1565,11 +1794,13 @@ async function generate() {
         "/api/generate",
         {
 
-          method: "POST",
+          method:"POST",
 
-          headers: {
+          headers:{
+
             "Content-Type":
               "application/json"
+
           },
 
           body:
@@ -1600,17 +1831,19 @@ async function generate() {
       await response.json();
 
 
-    if (!response.ok) {
+    if(!response.ok){
 
       throw new Error(
+
         data.detail ||
         "เกิดข้อผิดพลาดจากเซิร์ฟเวอร์"
+
       );
 
     }
 
 
-    if (!data) {
+    if(!data){
 
       throw new Error(
         "ไม่ได้รับข้อมูลจากเซิร์ฟเวอร์"
@@ -1619,34 +1852,38 @@ async function generate() {
     }
 
 
-    /* =================================================
+    /* -------------------------------------------------
        SAVE
-    ================================================== */
+    ------------------------------------------------- */
 
     currentData = data;
+
 
     saveLocal(data);
 
 
-    /* =================================================
+    /* -------------------------------------------------
        RENDER
-    ================================================== */
+    ------------------------------------------------- */
 
     render(data);
 
 
   }
-  catch (error) {
+  catch(error){
 
     console.error(error);
 
+
     showError(
+
       error.message ||
       "เกิดข้อผิดพลาด กรุณาลองใหม่"
+
     );
 
   }
-  finally {
+  finally{
 
     setLoading(false);
 
@@ -1659,7 +1896,7 @@ async function generate() {
    RENDER
 ===================================================== */
 
-function render(data) {
+function render(data){
 
 
   $("error")
@@ -1677,9 +1914,9 @@ function render(data) {
     .remove("hidden");
 
 
-  /* =================================================
+  /* ===================================================
      SUMMARY
-  ================================================== */
+  =================================================== */
 
   const summary =
     data.summary || {};
@@ -1689,60 +1926,84 @@ function render(data) {
 
     ${
       summary.grade
-        ? `
-          <span class="chip">
-            🎒 ${esc(summary.grade)}
-          </span>
-        `
-        : ""
+
+      ? `
+
+        <span class="chip">
+          🎒 ${esc(summary.grade)}
+        </span>
+
+      `
+
+      : ""
     }
+
 
     ${
       summary.subject
-        ? `
-          <span class="chip">
-            📖 ${esc(summary.subject)}
-          </span>
-        `
-        : ""
+
+      ? `
+
+        <span class="chip">
+          📖 ${esc(summary.subject)}
+        </span>
+
+      `
+
+      : ""
     }
+
 
     ${
       summary.topic
-        ? `
-          <span class="chip">
-            ✏️ ${esc(summary.topic)}
-          </span>
-        `
-        : ""
+
+      ? `
+
+        <span class="chip">
+          ✏️ ${esc(summary.topic)}
+        </span>
+
+      `
+
+      : ""
     }
+
 
     ${
       summary.duration
-        ? `
-          <span class="chip">
-            ⏱️ ${esc(summary.duration)}
-          </span>
-        `
-        : ""
+
+      ? `
+
+        <span class="chip">
+          ⏱️ ${esc(summary.duration)}
+        </span>
+
+      `
+
+      : ""
     }
+
 
     ${
       summary.teacher
-        ? `
-          <span class="chip">
-            👨‍🏫 ${esc(summary.teacher)}
-          </span>
-        `
-        : ""
+
+      ? `
+
+        <span class="chip">
+          👨‍🏫 ${esc(summary.teacher)}
+        </span>
+
+      `
+
+      : ""
     }
 
   `;
 
 
-  /* =================================================
+  /* ===================================================
      LESSON
-  ================================================== */
+  =================================================== */
 
   const lesson =
     data.lesson_plan || {};
@@ -1752,46 +2013,62 @@ function render(data) {
     Array.isArray(
       lesson.objective
     )
-      ? lesson.objective
-      : [];
+
+    ? lesson.objective
+
+    : [];
 
 
   const content =
     Array.isArray(
       lesson.content
     )
-      ? lesson.content
-      : lesson.content
-        ? [lesson.content]
-        : [];
+
+    ? lesson.content
+
+    : lesson.content
+
+      ? [lesson.content]
+
+      : [];
 
 
   const keyPoints =
     Array.isArray(
       lesson.key_points
     )
-      ? lesson.key_points
-      : lesson.key_points
-        ? [lesson.key_points]
-        : [];
+
+    ? lesson.key_points
+
+    : lesson.key_points
+
+      ? [lesson.key_points]
+
+      : [];
 
 
   const examples =
     Array.isArray(
       lesson.examples
     )
-      ? lesson.examples
-      : lesson.examples
-        ? [lesson.examples]
-        : [];
+
+    ? lesson.examples
+
+    : lesson.examples
+
+      ? [lesson.examples]
+
+      : [];
 
 
   const steps =
     Array.isArray(
       lesson.steps
     )
-      ? lesson.steps
-      : [];
+
+    ? lesson.steps
+
+    : [];
 
 
   $("lesson").innerHTML = `
@@ -1800,26 +2077,34 @@ function render(data) {
       1. จุดประสงค์การเรียนรู้
     </h3>
 
+
     ${
       objectives.length
-        ? objectives
-            .map(
-              function (x) {
 
-                return `
-                  <div class="item">
-                    - ${esc(x)}
-                  </div>
-                `;
+      ? objectives
+          .map(
+            function(x){
 
-              }
-            )
-            .join("")
-        : `
+              return `
+
+                <div class="item">
+                  - ${esc(x)}
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ยังไม่มีข้อมูล
           </div>
+
         `
+
     }
 
 
@@ -1827,26 +2112,34 @@ function render(data) {
       2. เนื้อหาที่ใช้สอน
     </h3>
 
+
     ${
       content.length
-        ? content
-            .map(
-              function (x) {
 
-                return `
-                  <div class="item">
-                    ${esc(x)}
-                  </div>
-                `;
+      ? content
+          .map(
+            function(x){
 
-              }
-            )
-            .join("")
-        : `
+              return `
+
+                <div class="item">
+                  ${esc(x)}
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ยังไม่มีข้อมูล
           </div>
+
         `
+
     }
 
 
@@ -1854,46 +2147,58 @@ function render(data) {
       สาระสำคัญ
     </h3>
 
+
     ${
       keyPoints.length
-        ? keyPoints
-            .map(
-              function (x) {
 
-                return `
-                  <div class="item">
-                    ${esc(x)}
-                  </div>
-                `;
+      ? keyPoints
+          .map(
+            function(x){
 
-              }
-            )
-            .join("")
-        : `
+              return `
+
+                <div class="item">
+                  ${esc(x)}
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ยังไม่มีข้อมูล
           </div>
+
         `
+
     }
 
 
     ${
       examples.length
-        ? `
+
+      ? `
 
           <h3>
             ตัวอย่างสำหรับใช้สอน
           </h3>
 
+
           ${
             examples
               .map(
-                function (x) {
+                function(x){
 
                   return `
+
                     <div class="item">
                       ${esc(x)}
                     </div>
+
                   `;
 
                 }
@@ -1902,7 +2207,9 @@ function render(data) {
           }
 
         `
-        : ""
+
+      : ""
+
     }
 
 
@@ -1910,36 +2217,53 @@ function render(data) {
       3. ขั้นตอนการจัดการเรียนรู้
     </h3>
 
+
     ${
       steps.length
-        ? steps
-            .map(
-              function (x) {
 
-                return `
-                  <div class="item">
+      ? steps
+          .map(
+            function(x){
 
-                    <b>
-                      ${esc(x.time || "")}
-                      ·
-                      ${esc(x.title || "")}
-                    </b>
+              return `
 
-                    <div style="margin-top:5px">
-                      ${esc(x.detail || "")}
-                    </div>
+                <div class="item">
+
+                  <b>
+
+                    ${esc(x.time || "")}
+
+                    ·
+
+                    ${esc(x.title || "")}
+
+                  </b>
+
+
+                  <div
+                    style="margin-top:5px"
+                  >
+
+                    ${esc(x.detail || "")}
 
                   </div>
-                `;
 
-              }
-            )
-            .join("")
-        : `
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ยังไม่มีข้อมูล
           </div>
+
         `
+
     }
 
 
@@ -1947,26 +2271,31 @@ function render(data) {
       4. การประเมินผล
     </h3>
 
+
     <div class="item">
+
       ${esc(
         lesson.assessment ||
         "ยังไม่มีข้อมูล"
       )}
+
     </div>
 
   `;
 
 
-  /* =================================================
+  /* ===================================================
      WORKSHEET
-  ================================================== */
+  =================================================== */
 
   const worksheet =
     Array.isArray(
       data.worksheet
     )
-      ? data.worksheet
-      : [];
+
+    ? data.worksheet
+
+    : [];
 
 
   $("worksheet").innerHTML = `
@@ -1975,95 +2304,120 @@ function render(data) {
       📝 ใบงาน
     </h3>
 
+
     ${
       worksheet.length
-        ? worksheet
-            .map(
-              function (x, i) {
 
-                return `
+      ? worksheet
+          .map(
+            function(x,i){
 
-                  <div class="item">
+              return `
 
-                    <b>
-                      ${i + 1}.
-                      ${esc(x.question)}
-                    </b>
+                <div class="item">
 
-                    ${
-                      Array.isArray(x.options)
-                        ? x.options
-                            .map(
-                              function (o, j) {
 
-                                const letters =
-                                  [
-                                    "ก.",
-                                    "ข.",
-                                    "ค.",
-                                    "ง.",
-                                    "จ."
-                                  ];
+                  <b>
 
-                                return `
+                    ${i + 1}.
+                    ${esc(x.question)}
 
-                                  <div
-                                    style="
-                                      margin-left:18px;
-                                      margin-top:3px;
-                                    "
-                                  >
-                                    ${letters[j] || ""}
-                                    ${esc(o)}
-                                  </div>
+                  </b>
 
-                                `;
 
-                              }
-                            )
-                            .join("")
-                        : ""
-                    }
+                  ${
+                    Array.isArray(
+                      x.options
+                    )
 
-                    <div
-                      style="
-                        margin-top:9px;
-                      "
-                    >
-                      คำตอบ
-                      ..............................................................
-                    </div>
+                    ? x.options
+                        .map(
+                          function(o,j){
+
+                            const letters = [
+
+                              "ก.",
+                              "ข.",
+                              "ค.",
+                              "ง.",
+                              "จ."
+
+                            ];
+
+
+                            return `
+
+                              <div
+                                style="
+                                  margin-left:18px;
+                                  margin-top:3px;
+                                "
+                              >
+
+                                ${
+                                  letters[j] || ""
+                                }
+
+                                ${esc(o)}
+
+                              </div>
+
+                            `;
+
+                          }
+                        )
+                        .join("")
+
+                    : ""
+
+                  }
+
+
+                  <div
+                    style="
+                      margin-top:9px;
+                    "
+                  >
+
+                    คำตอบ
+                    ..............................................................
 
                   </div>
 
-                `;
 
-              }
-            )
-            .join("")
-        : `
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ไม่มีข้อมูลใบงาน
           </div>
+
         `
+
     }
 
   `;
 
 
-  /* =================================================
+  /* ===================================================
      QUIZ
-     แสดงเฉพาะ:
-     1. คำถาม
-     ไม่มีข้อความประเภทข้อสอบ
-  ================================================== */
+  =================================================== */
 
   const quiz =
     Array.isArray(
       data.quiz
     )
-      ? data.quiz
-      : [];
+
+    ? data.quiz
+
+    : [];
 
 
   $("quiz").innerHTML = `
@@ -2072,110 +2426,142 @@ function render(data) {
       🧠 แบบทดสอบ ${quiz.length} ข้อ
     </h3>
 
+
     ${
       quiz.length
-        ? quiz
-            .map(
-              function (x, i) {
 
-                return `
+      ? quiz
+          .map(
+            function(x,i){
 
-                  <div class="item">
+              return `
 
-                    <b>
-                      ${i + 1}.
-                      ${esc(x.question)}
-                    </b>
+                <div class="item">
 
-                    ${
-                      Array.isArray(x.options)
-                        ? x.options
-                            .map(
-                              function (o, j) {
 
-                                const letters =
-                                  [
-                                    "ก.",
-                                    "ข.",
-                                    "ค.",
-                                    "ง.",
-                                    "จ."
-                                  ];
+                  <b>
 
-                                return `
+                    ${i + 1}.
+                    ${esc(x.question)}
 
-                                  <div
-                                    style="
-                                      margin-left:18px;
-                                      margin-top:3px;
-                                    "
-                                  >
-                                    ${letters[j] || ""}
-                                    ${esc(o)}
-                                  </div>
+                  </b>
 
-                                `;
 
-                              }
-                            )
-                            .join("")
-                        : ""
-                    }
+                  ${
+                    Array.isArray(
+                      x.options
+                    )
 
-                  </div>
+                    ? x.options
+                        .map(
+                          function(o,j){
 
-                `;
+                            const letters = [
 
-              }
-            )
-            .join("")
-        : `
+                              "ก.",
+                              "ข.",
+                              "ค.",
+                              "ง.",
+                              "จ."
+
+                            ];
+
+
+                            return `
+
+                              <div
+                                style="
+                                  margin-left:18px;
+                                  margin-top:3px;
+                                "
+                              >
+
+                                ${
+                                  letters[j] || ""
+                                }
+
+                                ${esc(o)}
+
+                              </div>
+
+                            `;
+
+                          }
+                        )
+                        .join("")
+
+                    : ""
+
+                  }
+
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ไม่มีข้อมูลแบบทดสอบ
           </div>
+
         `
+
     }
 
   `;
 
 
-  /* =================================================
+  /* ===================================================
      ANSWER
-  ================================================== */
+  =================================================== */
 
   $("answer").innerHTML = `
+
 
     <h3>
       ✅ เฉลยใบงาน
     </h3>
 
+
     ${
       worksheet.length
-        ? worksheet
-            .map(
-              function (x, i) {
 
-                return `
+      ? worksheet
+          .map(
+            function(x,i){
 
-                  <div class="item">
+              return `
 
-                    <b>
-                      ${i + 1}.
-                      ${esc(x.answer)}
-                    </b>
+                <div class="item">
 
-                  </div>
+                  <b>
 
-                `;
+                    ${i + 1}.
+                    ${esc(x.answer)}
 
-              }
-            )
-            .join("")
-        : `
+                  </b>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ไม่มีข้อมูลเฉลยใบงาน
           </div>
+
         `
+
     }
 
 
@@ -2183,66 +2569,149 @@ function render(data) {
       ✅ เฉลยแบบทดสอบ
     </h3>
 
+
     ${
       quiz.length
-        ? quiz
-            .map(
-              function (x, i) {
 
-                return `
+      ? quiz
+          .map(
+            function(x,i){
 
-                  <div class="item">
+              return `
 
-                    <b>
-                      ${i + 1}.
-                      ${esc(x.answer)}
-                    </b>
+                <div class="item">
 
-                    ${
-                      x.explanation
-                        ? `
 
-                          <div
-                            style="
-                              margin-top:5px;
-                              color:#737b91;
-                            "
-                          >
-                            ${esc(x.explanation)}
-                          </div>
+                  <b>
 
-                        `
-                        : ""
-                    }
+                    ${i + 1}.
+                    ${esc(x.answer)}
 
-                  </div>
+                  </b>
 
-                `;
 
-              }
-            )
-            .join("")
-        : `
+                  ${
+                    x.explanation
+
+                    ? `
+
+                        <div
+                          style="
+                            margin-top:5px;
+                            color:#737b91;
+                          "
+                        >
+
+                          ${esc(
+                            x.explanation
+                          )}
+
+                        </div>
+
+                      `
+
+                    : ""
+
+                  }
+
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+
+      : `
+
           <div class="item">
             ไม่มีข้อมูลเฉลยแบบทดสอบ
           </div>
+
         `
+
     }
 
   `;
 
 
-  /* =================================================
+  /* ===================================================
+     PDF
+     
+     ใช้ URL จาก main.py เดิม:
+     
+     lesson_pdf
+     worksheet_pdf
+     quiz_pdf
+     answer_pdf
+  =================================================== */
+
+  const pdf =
+    data.pdf || {};
+
+
+  if(
+
+    pdf.lesson_pdf ||
+    pdf.worksheet_pdf ||
+    pdf.quiz_pdf ||
+    pdf.answer_pdf
+
+  ){
+
+    $("pdfs").innerHTML = `
+
+      <button
+        type="button"
+        class="download-all"
+        onclick="downloadAllPDF()"
+      >
+
+        📥 ดาวน์โหลดไฟล์ทั้งหมด
+
+      </button>
+
+    `;
+
+  }
+  else{
+
+    $("pdfs").innerHTML = `
+
+      <div
+        style="
+          padding:13px;
+          border-radius:15px;
+          background:#ffe7e7;
+          color:#9d2929;
+          text-align:center;
+        "
+      >
+
+        ไม่พบไฟล์ PDF
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* ===================================================
      SCROLL RESULT
-  ================================================== */
+  =================================================== */
 
   setTimeout(
-    function () {
+    function(){
 
       $("result")
         .scrollIntoView({
-          behavior: "smooth",
-          block: "start"
+
+          behavior:"smooth",
+
+          block:"start"
+
         });
 
     },
@@ -2257,20 +2726,23 @@ function render(data) {
 ===================================================== */
 
 /*
-  ใช้ data.pdf เดิมทั้ง 4 ตัว
+   กดปุ่มเดียว
 
-  data.pdf.lesson_pdf
-  data.pdf.worksheet_pdf
-  data.pdf.quiz_pdf
-  data.pdf.answer_pdf
+   ระบบจะดาวน์โหลด:
 
-  กดปุ่มเดียวแล้วสั่งดาวน์โหลดทั้ง 4
-*/
+   1. แผนการสอน.pdf
+   2. ใบงาน.pdf
+   3. แบบทดสอบ.pdf
+   4. เฉลย.pdf
 
-async function downloadAllPDF() {
+   เป็น PDF แยกไฟล์
+   ไม่ใช่ ZIP
+===================================================== */
+
+function downloadAllPDF(){
 
 
-  if (!currentData) {
+  if(!currentData){
 
     showError(
       "ยังไม่มีชุดการสอนให้ดาวน์โหลด"
@@ -2288,37 +2760,55 @@ async function downloadAllPDF() {
   const files = [
 
     {
-      name: "แผนการสอน.pdf",
-      url: pdf.lesson_pdf
+      url:
+        pdf.lesson_pdf,
+
+      name:
+        "แผนการสอน.pdf"
+
     },
 
     {
-      name: "ใบงาน.pdf",
-      url: pdf.worksheet_pdf
+      url:
+        pdf.worksheet_pdf,
+
+      name:
+        "ใบงาน.pdf"
+
     },
 
     {
-      name: "แบบทดสอบ.pdf",
-      url: pdf.quiz_pdf
+      url:
+        pdf.quiz_pdf,
+
+      name:
+        "แบบทดสอบ.pdf"
+
     },
 
     {
-      name: "เฉลย.pdf",
-      url: pdf.answer_pdf
+      url:
+        pdf.answer_pdf,
+
+      name:
+        "เฉลย.pdf"
+
     }
 
   ]
-    .filter(
-      function (file) {
-        return !!file.url;
-      }
-    );
+  .filter(
+    function(file){
+
+      return !!file.url;
+
+    }
+  );
 
 
-  if (!files.length) {
+  if(!files.length){
 
     showError(
-      "ไม่พบไฟล์ PDF ในข้อมูลที่ระบบส่งกลับมา"
+      "ไม่พบไฟล์ PDF"
     );
 
     return;
@@ -2326,172 +2816,99 @@ async function downloadAllPDF() {
   }
 
 
+  /*
+     เปลี่ยนข้อความปุ่ม
+  */
+
   const button =
-    $("downloadAllBtn");
-
-
-  button.disabled = true;
-
-
-  button.textContent =
-    "⏳ กำลังเตรียมไฟล์...";
-
-
-  try {
-
-
-    /*
-      ดาวน์โหลดทีละไฟล์
-      เพื่อไม่ให้เบราว์เซอร์ยิงพร้อมกันทั้งหมด
-    */
-
-    for (
-      const file of files
-    ) {
-
-      await downloadOnePDF(
-        file.url,
-        file.name
-      );
-
-
-      /*
-        เว้นช่วงเล็กน้อย
-        ช่วยลดโอกาส Safari บล็อก
-        การดาวน์โหลดหลายไฟล์
-      */
-
-      await sleep(500);
-
-    }
-
-
-    button.textContent =
-      "✅ ดาวน์โหลดไฟล์ทั้งหมดแล้ว";
-
-
-    await sleep(1200);
-
-
-  }
-  catch (error) {
-
-    console.error(error);
-
-
-    showError(
-      "ไม่สามารถดาวน์โหลดไฟล์ PDF ได้\n\n" +
-      (
-        error.message ||
-        "กรุณาลองใหม่อีกครั้ง"
-      )
+    document.querySelector(
+      ".download-all"
     );
 
-  }
-  finally {
 
-    button.disabled = false;
+  if(button){
+
+    button.disabled = true;
 
     button.textContent =
-      "📥 ดาวน์โหลดไฟล์ทั้งหมด";
+      "⏳ กำลังดาวน์โหลด...";
 
   }
-
-}
-
-
-/* =====================================================
-   DOWNLOAD ONE PDF
-===================================================== */
-
-async function downloadOnePDF(
-  url,
-  filename
-) {
 
 
   /*
-    ถ้า URL เป็นของเว็บเดียวกัน
-    ให้ fetch แล้วสร้าง Blob
+     ใช้การเปิด PDF แต่ละไฟล์
+     จาก URL เดิมของระบบ
+
+     ไม่สร้าง ZIP
   */
 
-  const response =
-    await fetch(url);
-
-
-  if (!response.ok) {
-
-    throw new Error(
-      "ดาวน์โหลด " +
-      filename +
-      " ไม่สำเร็จ"
-    );
-
-  }
-
-
-  const blob =
-    await response.blob();
-
-
-  const blobUrl =
-    URL.createObjectURL(blob);
-
-
-  const a =
-    document.createElement("a");
-
-
-  a.href =
-    blobUrl;
-
-
-  a.download =
-    filename;
-
-
-  a.style.display =
-    "none";
-
-
-  document.body.appendChild(a);
-
-
-  a.click();
-
-
-  a.remove();
-
-
-  setTimeout(
-    function () {
-
-      URL.revokeObjectURL(
-        blobUrl
-      );
-
-    },
-    1000
-  );
-
-}
-
-
-/* =====================================================
-   SLEEP
-===================================================== */
-
-function sleep(ms) {
-
-  return new Promise(
-    function (resolve) {
+  files.forEach(
+    function(file,index){
 
       setTimeout(
-        resolve,
-        ms
+        function(){
+
+          const link =
+            document.createElement(
+              "a"
+            );
+
+
+          link.href =
+            file.url;
+
+
+          link.download =
+            file.name;
+
+
+          link.target =
+            "_blank";
+
+
+          link.rel =
+            "noopener";
+
+
+          document.body
+            .appendChild(link);
+
+
+          link.click();
+
+
+          link.remove();
+
+
+        },
+
+        index * 700
+
       );
 
     }
+  );
+
+
+  /*
+     คืนสถานะปุ่ม
+  */
+
+  setTimeout(
+    function(){
+
+      if(button){
+
+        button.disabled = false;
+
+        button.textContent =
+          "📥 ดาวน์โหลดไฟล์ทั้งหมด";
+
+      }
+
+    },
+    files.length * 700 + 1000
   );
 
 }
@@ -2501,7 +2918,7 @@ function sleep(ms) {
    NEW PACK
 ===================================================== */
 
-function newPack() {
+function newPack(){
 
 
   currentData = null;
@@ -2522,15 +2939,15 @@ function newPack() {
 
   window.scrollTo({
 
-    top: 0,
+    top:0,
 
-    behavior: "smooth"
+    behavior:"smooth"
 
   });
 
 
   setTimeout(
-    function () {
+    function(){
 
       $("prompt").focus();
 
@@ -2547,14 +2964,14 @@ function newPack() {
 
 window.addEventListener(
   "DOMContentLoaded",
-  function () {
+  function(){
 
 
     const old =
       loadLocal();
 
 
-    if (old) {
+    if(old){
 
       currentData =
         old;
