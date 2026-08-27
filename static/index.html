@@ -15,8 +15,7 @@ name="theme-color"
 content="#fff8ed"
 >
 
-<title>Teacher Pack</title>
-
+<title>ชุดการสอน</title>
 
 <style>
 
@@ -32,47 +31,47 @@ content="#fff8ed"
 
   --mint:#dff8ee;
   --blue:#e3f0ff;
-
-  --line:#e8e4dc;
+  --line:#e9e5dc;
 
   --shadow:
-  0 12px 30px rgba(49,55,85,.09);
+    0 12px 30px
+    rgba(49,55,85,.09);
 }
-
 
 *{
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
 
 body{
 
   margin:0;
 
   background:
-  linear-gradient(
-    180deg,
-    #fff8ed 0%,
-    #f7f5ff 100%
-  );
-
-  color:var(--ink);
+    linear-gradient(
+      180deg,
+      #fff8ed 0%,
+      #f7f5ff 100%
+    );
 
   font-family:
-  -apple-system,
-  BlinkMacSystemFont,
-  "Noto Sans Thai",
-  sans-serif;
-}
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans Thai",
+    sans-serif;
 
+  color:var(--ink);
+}
 
 button,
 input,
-select,
-textarea{
+textarea,
+select{
   font:inherit;
 }
-
 
 .container{
 
@@ -84,233 +83,223 @@ textarea{
   margin:auto;
 }
 
-
 .header{
 
   padding:
-  22px 0 10px;
+    22px 0 10px;
 
   display:flex;
 
   justify-content:
-  space-between;
+    space-between;
 
   align-items:center;
-
-  gap:12px;
 }
-
 
 .brand{
 
   display:flex;
 
+  gap:12px;
+
   align-items:center;
 
-  gap:10px;
+  font-weight:800;
 
   font-size:20px;
-
-  font-weight:800;
 }
-
 
 .logo{
 
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
 
-  border-radius:14px;
+  border-radius:15px;
 
   background:#fff;
+
+  box-shadow:
+    var(--shadow);
 
   display:grid;
 
   place-items:center;
 
-  box-shadow:var(--shadow);
-
-  font-size:23px;
+  font-size:25px;
 }
-
 
 .badge{
 
-  background:var(--mint);
+  font-size:12px;
+
+  background:
+    var(--mint);
 
   padding:
-  7px 11px;
+    7px 11px;
 
   border-radius:999px;
 
-  font-size:12px;
-
-  font-weight:800;
+  font-weight:700;
 }
-
 
 .hero{
 
   text-align:center;
 
   padding:
-  28px 0 20px;
+    25px 0 18px;
 }
-
 
 .hero h1{
 
-  margin:0 0 10px;
-
   font-size:
-  clamp(30px,7vw,48px);
+    clamp(
+      30px,
+      7vw,
+      48px
+    );
+
+  margin:
+    0 0 10px;
 
   letter-spacing:-1px;
 }
 
-
 .hero p{
 
-  margin:0;
-
-  color:var(--muted);
+  color:
+    var(--muted);
 
   font-size:16px;
-}
 
+  margin:0;
+}
 
 .card{
 
-  background:var(--card);
+  background:
+    var(--card);
 
   border:
-  1px solid var(--line);
+    1px solid var(--line);
 
   border-radius:24px;
 
   padding:22px;
 
-  box-shadow:var(--shadow);
+  box-shadow:
+    var(--shadow);
 
   margin:16px 0;
 }
 
-
 .label{
-
-  display:block;
 
   font-weight:800;
 
   margin-bottom:9px;
+
+  display:block;
 }
 
+input[type="text"]{
+
+  width:100%;
+
+  border:
+    2px solid #e8e4f8;
+
+  border-radius:16px;
+
+  padding:
+    14px 16px;
+
+  outline:none;
+
+  background:#fcfbff;
+}
+
+input[type="text"]:focus{
+
+  border-color:
+    var(--primary);
+}
 
 .prompt{
 
   width:100%;
 
-  min-height:110px;
-
-  resize:vertical;
-
-  padding:16px;
+  min-height:112px;
 
   border:
-  2px solid #e8e4f8;
+    2px solid #e8e4f8;
 
   border-radius:18px;
 
-  background:#fcfbff;
+  padding:16px;
+
+  resize:vertical;
 
   outline:none;
-}
 
+  background:#fcfbff;
+}
 
 .prompt:focus{
 
   border-color:
-  var(--primary);
+    var(--primary);
 }
-
 
 .examples{
 
   display:flex;
 
-  flex-wrap:wrap;
-
   gap:8px;
+
+  flex-wrap:wrap;
 
   margin-top:10px;
 }
-
 
 .example{
 
   border:0;
 
-  background:#f2f0ff;
+  background:#f4f2ff;
 
   color:#5148e8;
 
   border-radius:999px;
 
-  padding:8px 12px;
+  padding:
+    8px 12px;
 
   cursor:pointer;
 }
-
-
-.teacher-input{
-
-  width:100%;
-
-  border:
-  2px solid #e8e4f8;
-
-  border-radius:16px;
-
-  padding:14px;
-
-  outline:none;
-
-  background:#fcfbff;
-
-  margin-bottom:14px;
-}
-
-
-.teacher-input:focus{
-
-  border-color:
-  var(--primary);
-}
-
 
 .grid{
 
   display:grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
   gap:14px;
 }
-
 
 .field{
 
   background:#faf9f5;
 
   border:
-  1px solid var(--line);
+    1px solid var(--line);
 
   padding:15px;
 
   border-radius:18px;
 }
-
 
 select{
 
@@ -318,32 +307,30 @@ select{
 
   border:0;
 
-  background:transparent;
-
-  outline:none;
+  background:
+    transparent;
 
   color:var(--ink);
 
+  outline:none;
+
   font-weight:700;
 }
-
 
 .types{
 
   display:grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
   gap:10px;
 }
-
 
 .check{
 
   position:relative;
 }
-
 
 .check input{
 
@@ -352,7 +339,6 @@ select{
   opacity:0;
 }
 
-
 .check label{
 
   display:block;
@@ -360,7 +346,7 @@ select{
   padding:14px;
 
   border:
-  2px solid var(--line);
+    2px solid var(--line);
 
   border-radius:16px;
 
@@ -371,19 +357,17 @@ select{
   font-weight:700;
 }
 
-
-.check input:checked+label{
+.check input:checked + label{
 
   border-color:
-  var(--primary);
+    var(--primary);
 
   background:#f0efff;
 
   color:#5148e8;
 }
 
-
-.primary{
+button.primary{
 
   width:100%;
 
@@ -394,11 +378,11 @@ select{
   padding:17px;
 
   background:
-  linear-gradient(
-    135deg,
-    var(--primary),
-    var(--primary2)
-  );
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary2)
+    );
 
   color:#fff;
 
@@ -409,18 +393,16 @@ select{
   cursor:pointer;
 
   box-shadow:
-  0 9px 18px
-  rgba(108,99,255,.25);
+    0 9px 18px
+    rgba(108,99,255,.25);
 }
 
-
-.primary:disabled{
+button.primary:disabled{
 
   opacity:.6;
 
   cursor:wait;
 }
-
 
 .note{
 
@@ -433,12 +415,10 @@ select{
   margin-top:12px;
 }
 
-
 .hidden{
 
   display:none!important;
 }
-
 
 .loading{
 
@@ -447,72 +427,66 @@ select{
   padding:35px;
 }
 
-
 .spinner{
 
   font-size:38px;
 
   animation:
-  bounce 1s infinite alternate;
+    bounce 1s
+    infinite alternate;
 }
-
 
 @keyframes bounce{
 
   to{
-    transform:translateY(-8px);
+    transform:
+      translateY(-8px);
   }
 
 }
-
 
 .result-head{
 
   display:flex;
 
   justify-content:
-  space-between;
-
-  align-items:center;
+    space-between;
 
   gap:12px;
 
+  align-items:center;
+
   flex-wrap:wrap;
 }
-
 
 .result-head h2{
 
   margin:0;
 }
 
-
 .chips{
 
   display:flex;
 
-  flex-wrap:wrap;
-
   gap:7px;
 
-  margin-top:8px;
+  flex-wrap:wrap;
 }
-
 
 .chip{
 
   padding:
-  7px 10px;
+    7px 10px;
 
   border-radius:999px;
 
-  background:var(--blue);
+  background:
+    var(--blue);
 
   font-size:12px;
 
   font-weight:800;
 }
-
 
 .tabs{
 
@@ -523,10 +497,7 @@ select{
   overflow:auto;
 
   padding-bottom:4px;
-
-  margin-top:18px;
 }
-
 
 .tab{
 
@@ -536,17 +507,17 @@ select{
 
   background:#f2f1ee;
 
-  color:var(--muted);
-
   border-radius:12px;
 
-  padding:10px 13px;
+  padding:
+    10px 13px;
 
   font-weight:800;
 
+  color:var(--muted);
+
   cursor:pointer;
 }
-
 
 .tab.active{
 
@@ -555,27 +526,22 @@ select{
   color:#fff;
 }
 
-
 .panel{
 
-  line-height:1.8;
-
-  margin-top:20px;
+  line-height:1.75;
 }
-
 
 .panel h3{
 
-  margin-top:24px;
+  margin-top:0;
 }
-
 
 .item{
 
-  padding:15px;
+  padding:14px;
 
   border:
-  1px solid var(--line);
+    1px solid var(--line);
 
   border-radius:16px;
 
@@ -584,10 +550,7 @@ select{
   background:#fff;
 }
 
-
 .qtype{
-
-  display:inline-block;
 
   font-size:11px;
 
@@ -595,47 +558,28 @@ select{
 
   color:#5148e8;
 
-  padding:5px 8px;
+  padding:
+    5px 8px;
 
   border-radius:999px;
 
   font-weight:800;
 }
 
-
-.options{
-
-  margin-top:10px;
-
-  padding-left:25px;
-}
-
-
-.answer{
-
-  color:#6f7890;
-
-  margin-top:7px;
-}
-
-
 .actions{
 
   display:grid;
 
   grid-template-columns:
-  1fr 1fr;
+    1fr 1fr;
 
   gap:10px;
-
-  margin-top:20px;
 }
-
 
 .secondary{
 
   border:
-  2px solid #e7e3f6;
+    2px solid #e7e3f6;
 
   background:#fff;
 
@@ -650,6 +594,22 @@ select{
   cursor:pointer;
 }
 
+.success{
+
+  background:
+    #e4f8ef;
+
+  color:
+    #176b4c;
+
+  padding:14px;
+
+  border-radius:16px;
+
+  margin-bottom:15px;
+
+  font-weight:700;
+}
 
 .error{
 
@@ -662,90 +622,46 @@ select{
   border-radius:16px;
 }
 
+.teacher-box{
+
+  margin-bottom:18px;
+}
 
 .saved{
 
-  background:#e9f8f0;
+  background:#eef5ff;
 
-  color:#23724d;
+  color:#315f9e;
 
-  padding:12px 14px;
+  padding:12px;
 
   border-radius:14px;
 
+  font-size:14px;
+
   margin-top:10px;
-
-  font-size:13px;
-
-  font-weight:700;
 }
-
 
 @media(max-width:650px){
 
   .grid{
-
     grid-template-columns:1fr;
   }
-
 
   .types{
-
     grid-template-columns:1fr;
   }
-
 
   .actions{
-
     grid-template-columns:1fr;
   }
 
-
   .card{
-
     padding:17px;
   }
 
-
   .header{
-
     padding-top:16px;
-  }
-
-}
-
-
-@media print{
-
-  body{
-
-    background:#fff;
-  }
-
-
-  .header,
-  .hero,
-  #builder,
-  .actions,
-  .tabs{
-
-    display:none!important;
-  }
-
-
-  .card{
-
-    box-shadow:none;
-
-    border:0;
-
-    padding:0;
-  }
-
-
-  .panel{
-
-    display:block!important;
   }
 
 }
@@ -754,28 +670,22 @@ select{
 
 </head>
 
-
 <body>
 
-
 <div class="container">
-
 
 <header class="header">
 
   <div class="brand">
 
-    <div class="logo">
-      📚
-    </div>
+    <div class="logo">📚</div>
 
-    Teacher Pack
+    ชุดการสอน
 
   </div>
 
-
   <div class="badge">
-    V1.5
+    V1.8
   </div>
 
 </header>
@@ -784,11 +694,11 @@ select{
 <section class="hero">
 
   <h1>
-    สอนอะไรวันนี้? ✨
+    เตรียมการสอน ✨
   </h1>
 
   <p>
-    พิมพ์คำสั่ง แล้วสร้างเอกสารการสอนพร้อมใช้
+    กรอกข้อมูล แล้วให้ระบบจัดทำชุดการสอนให้
   </p>
 
 </section>
@@ -803,54 +713,63 @@ id="builder"
 class="card"
 >
 
+  <div class="teacher-box">
 
-  <label class="label">
-    👨‍🏫 ชื่อครู
-  </label>
+    <label class="label">
+      👨‍🏫 ชื่อครูผู้สอน
+    </label>
 
+    <input
+      id="teacherName"
+      type="text"
+      placeholder="เช่น ครูสมปอง เข้ามา"
+    >
 
-  <input
-  id="teacherName"
-  class="teacher-input"
-  type="text"
-  placeholder="เช่น นายสมชาย ใจดี"
-  maxlength="100"
-  >
+  </div>
 
 
   <label class="label">
     👋 วันนี้คุณอยากสอนอะไร?
   </label>
 
-
   <textarea
-  id="prompt"
-  class="prompt"
-  placeholder="เช่น ระบบสุริยะ ป.5 1 ชั่วโมง"
+    id="prompt"
+    class="prompt"
+    placeholder="เช่น เศษส่วน ป.4 1 ชั่วโมง"
   ></textarea>
 
 
   <div class="examples">
 
     <button
-    class="example"
-    onclick="fillExample('เศษส่วน ป.4 1 ชั่วโมง')"
+      class="example"
+      onclick="
+        fillExample(
+          'เศษส่วน ป.4 1 ชั่วโมง'
+        )
+      "
     >
       🧮 เศษส่วน ป.4
     </button>
 
-
     <button
-    class="example"
-    onclick="fillExample('ระบบสุริยะ ป.5 1 ชั่วโมง')"
+      class="example"
+      onclick="
+        fillExample(
+          'ระบบสุริยะ ป.5 1 ชั่วโมง'
+        )
+      "
     >
       🌎 ระบบสุริยะ ป.5
     </button>
 
-
     <button
-    class="example"
-    onclick="fillExample('Animals ป.3 30 นาที')"
+      class="example"
+      onclick="
+        fillExample(
+          'Animals ป.3 30 นาที'
+        )
+      "
     >
       🇬🇧 Animals ป.3
     </button>
@@ -862,9 +781,7 @@ class="card"
 
 <section class="card">
 
-
   <div class="grid">
-
 
     <div class="field">
 
@@ -878,7 +795,10 @@ class="card"
           5 ข้อ
         </option>
 
-        <option value="10" selected>
+        <option
+          value="10"
+          selected
+        >
           10 ข้อ
         </option>
 
@@ -919,7 +839,10 @@ class="card"
           ยาก
         </option>
 
-        <option value="mixed" selected>
+        <option
+          value="mixed"
+          selected
+        >
           ผสม
         </option>
 
@@ -927,22 +850,20 @@ class="card"
 
     </div>
 
-
   </div>
 
 
   <div style="margin-top:18px">
-
 
     <label class="label">
 
       🧠 รูปแบบข้อสอบ
 
       <span
-      style="
-      color:#6f7890;
-      font-weight:500
-      "
+        style="
+          color:#6f7890;
+          font-weight:500
+        "
       >
         (เลือกได้หลายแบบ)
       </span>
@@ -952,16 +873,17 @@ class="card"
 
     <div class="types">
 
-
       <div class="check">
 
         <input
-        type="checkbox"
-        id="multiple_choice"
-        checked
+          type="checkbox"
+          id="multiple_choice"
+          checked
         >
 
-        <label for="multiple_choice">
+        <label
+          for="multiple_choice"
+        >
           ☑️ ปรนัย
         </label>
 
@@ -971,11 +893,13 @@ class="card"
       <div class="check">
 
         <input
-        type="checkbox"
-        id="fill_blank"
+          type="checkbox"
+          id="fill_blank"
         >
 
-        <label for="fill_blank">
+        <label
+          for="fill_blank"
+        >
           ✏️ เติมคำ
         </label>
 
@@ -985,11 +909,13 @@ class="card"
       <div class="check">
 
         <input
-        type="checkbox"
-        id="calculation"
+          type="checkbox"
+          id="calculation"
         >
 
-        <label for="calculation">
+        <label
+          for="calculation"
+        >
           🔢 คำนวณ
         </label>
 
@@ -999,16 +925,17 @@ class="card"
       <div class="check">
 
         <input
-        type="checkbox"
-        id="application"
+          type="checkbox"
+          id="application"
         >
 
-        <label for="application">
+        <label
+          for="application"
+        >
           💡 ประยุกต์ใช้
         </label>
 
       </div>
-
 
     </div>
 
@@ -1017,15 +944,13 @@ class="card"
 
   <div style="margin-top:18px">
 
-
     <button
-    id="generateBtn"
-    class="primary"
-    onclick="generate()"
+      id="generateBtn"
+      class="primary"
+      onclick="generate()"
     >
       ✨ สร้างชุดการสอน
     </button>
-
 
     <div class="note">
 
@@ -1033,9 +958,7 @@ class="card"
 
     </div>
 
-
   </div>
-
 
 </section>
 
@@ -1057,8 +980,12 @@ class="card loading hidden"
     กำลังเตรียมชุดการสอน...
   </h3>
 
-  <p style="color:#6f7890">
-    AI กำลังจัดเนื้อหาและตรวจคำตอบ
+  <p
+    style="
+      color:#6f7890
+    "
+  >
+    ระบบกำลังจัดเรียงเนื้อหา
   </p>
 
 </section>
@@ -1074,8 +1001,8 @@ class="card hidden"
 >
 
   <div
-  class="error"
-  id="errorText"
+    class="error"
+    id="errorText"
   ></div>
 
 </section>
@@ -1090,7 +1017,6 @@ id="result"
 class="card hidden"
 >
 
-
   <div class="result-head">
 
     <div>
@@ -1100,8 +1026,11 @@ class="card hidden"
       </h2>
 
       <div
-      id="summary"
-      class="chips"
+        id="summary"
+        class="chips"
+        style="
+          margin-top:8px
+        "
       ></div>
 
     </div>
@@ -1110,42 +1039,47 @@ class="card hidden"
 
 
   <div
-  id="savedMessage"
-  class="saved hidden"
+    id="savedMessage"
+    class="success"
+    style="
+      margin-top:15px
+    "
   >
-    💾 ชุดการสอนนี้ถูกบันทึกไว้ในเครื่องแล้ว
+    💾 ชุดการสอนถูกบันทึกไว้ในเครื่องแล้ว
   </div>
 
 
-  <div class="tabs">
+  <div
+    class="tabs"
+    style="
+      margin-top:18px
+    "
+  >
 
     <button
-    class="tab active"
-    data-tab="lesson"
+      class="tab active"
+      data-tab="lesson"
     >
       📚 แผนการสอน
     </button>
 
-
     <button
-    class="tab"
-    data-tab="worksheet"
+      class="tab"
+      data-tab="worksheet"
     >
       📝 ใบงาน
     </button>
 
-
     <button
-    class="tab"
-    data-tab="quiz"
+      class="tab"
+      data-tab="quiz"
     >
       🧠 แบบทดสอบ
     </button>
 
-
     <button
-    class="tab"
-    data-tab="answer"
+      class="tab"
+      data-tab="answer"
     >
       ✅ เฉลย
     </button>
@@ -1154,209 +1088,97 @@ class="card hidden"
 
 
   <div
-  id="lesson"
-  class="panel"
+    id="lesson"
+    class="panel"
+  ></div>
+
+  <div
+    id="worksheet"
+    class="panel hidden"
+  ></div>
+
+  <div
+    id="quiz"
+    class="panel hidden"
+  ></div>
+
+  <div
+    id="answer"
+    class="panel hidden"
   ></div>
 
 
   <div
-  id="worksheet"
-  class="panel hidden"
-  ></div>
-
-
-  <div
-  id="quiz"
-  class="panel hidden"
-  ></div>
-
-
-  <div
-  id="answer"
-  class="panel hidden"
-  ></div>
-
-
-  <div class="actions">
-
+    class="actions"
+    style="
+      margin-top:18px
+    "
+  >
 
     <button
-    class="secondary"
-    onclick="downloadPDF()"
+      class="secondary"
+      onclick="downloadPDF()"
     >
-      📄 ดาวน์โหลด PDF
+      📄 บันทึก PDF
     </button>
 
-
     <button
-    class="secondary"
-    onclick="window.print()"
-    >
-      🖨️ พิมพ์
-    </button>
-
-
-    <button
-    class="secondary"
-    onclick="newPack()"
+      class="secondary"
+      onclick="newPack()"
     >
       🔄 สร้างชุดใหม่
     </button>
 
-
-    <button
-    class="secondary"
-    onclick="clearSaved()"
-    >
-      🗑️ ล้างชุดที่บันทึก
-    </button>
-
-
   </div>
 
-
 </section>
-
 
 </div>
 
 
 <script>
 
-
-// ========================================================
-// GLOBAL
-// ========================================================
-
 let currentData = null;
-
-
-const STORAGE_KEY =
-  "teacher_pack_current_v15";
 
 
 const typeNames = {
 
-  multiple_choice:"ปรนัย",
+  multiple_choice:
+    "ปรนัย",
 
-  fill_blank:"เติมคำ",
+  fill_blank:
+    "เติมคำ",
 
-  calculation:"คำนวณ",
+  calculation:
+    "คำนวณ",
 
-  application:"ประยุกต์ใช้"
+  application:
+    "ประยุกต์ใช้"
 
 };
 
 
-// ========================================================
-// ESCAPE
-// ========================================================
+/* ========================================================
+   LOCAL STORAGE
+======================================================== */
 
-function esc(s){
-
-  return String(
-    s ?? ""
-  ).replace(
-    /[&<>"']/g,
-    function(m){
-
-      return {
-
-        "&":"&amp;",
-
-        "<":"&lt;",
-
-        ">":"&gt;",
-
-        '"':"&quot;",
-
-        "'":"&#039;"
-
-      }[m];
-
-    }
-  );
-
-}
+const STORAGE_KEY =
+  "teacher_pack_current_v18";
 
 
-// ========================================================
-// EXAMPLE
-// ========================================================
+function saveCurrentData(){
 
-function fillExample(value){
-
-  document.getElementById(
-    "prompt"
-  ).value = value;
-
-}
-
-
-// ========================================================
-// TABS
-// ========================================================
-
-document
-.querySelectorAll(".tab")
-.forEach(function(btn){
-
-  btn.addEventListener(
-    "click",
-    function(){
-
-      document
-      .querySelectorAll(".tab")
-      .forEach(function(b){
-
-        b.classList.remove(
-          "active"
-        );
-
-      });
-
-
-      document
-      .querySelectorAll(".panel")
-      .forEach(function(p){
-
-        p.classList.add(
-          "hidden"
-        );
-
-      });
-
-
-      btn.classList.add(
-        "active"
-      );
-
-
-      document
-      .getElementById(
-        btn.dataset.tab
-      )
-      .classList.remove(
-        "hidden"
-      );
-
-    }
-  );
-
-});
-
-
-// ========================================================
-// SAVE
-// ========================================================
-
-function saveData(data){
+  if(!currentData){
+    return;
+  }
 
   try{
 
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify(data)
+      JSON.stringify(
+        currentData
+      )
     );
 
   }catch(e){
@@ -1371,11 +1193,7 @@ function saveData(data){
 }
 
 
-// ========================================================
-// LOAD
-// ========================================================
-
-function loadData(){
+function loadCurrentData(){
 
   try{
 
@@ -1384,22 +1202,15 @@ function loadData(){
         STORAGE_KEY
       );
 
-
     if(!raw){
-
       return null;
-
     }
 
-
-    return JSON.parse(raw);
+    return JSON.parse(
+      raw
+    );
 
   }catch(e){
-
-    console.log(
-      "load error",
-      e
-    );
 
     return null;
 
@@ -1408,22 +1219,180 @@ function loadData(){
 }
 
 
-// ========================================================
-// GENERATE
-// ========================================================
+/* ========================================================
+   ESCAPE
+======================================================== */
+
+function esc(value){
+
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    function(m){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+
+      }[m];
+
+    }
+  );
+
+}
+
+
+/* ========================================================
+   EXAMPLE
+======================================================== */
+
+function fillExample(value){
+
+  document.getElementById(
+    "prompt"
+  ).value = value;
+
+}
+
+
+/* ========================================================
+   TABS
+======================================================== */
+
+document
+.querySelectorAll(".tab")
+.forEach(
+  function(btn){
+
+    btn.addEventListener(
+      "click",
+      function(){
+
+        document
+        .querySelectorAll(".tab")
+        .forEach(
+          function(b){
+
+            b.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+        document
+        .querySelectorAll(".panel")
+        .forEach(
+          function(panel){
+
+            panel.classList.add(
+              "hidden"
+            );
+
+          }
+        );
+
+
+        btn.classList.add(
+          "active"
+        );
+
+
+        document
+        .getElementById(
+          btn.dataset.tab
+        )
+        .classList.remove(
+          "hidden"
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* ========================================================
+   LOADING
+======================================================== */
+
+function setLoading(
+  value
+){
+
+  document
+  .getElementById(
+    "loading"
+  )
+  .classList.toggle(
+    "hidden",
+    !value
+  );
+
+
+  document
+  .getElementById(
+    "generateBtn"
+  )
+  .disabled = value;
+
+}
+
+
+/* ========================================================
+   ERROR
+======================================================== */
+
+function showError(
+  message
+){
+
+  document
+  .getElementById(
+    "error"
+  )
+  .classList.remove(
+    "hidden"
+  );
+
+
+  document
+  .getElementById(
+    "errorText"
+  )
+  .textContent =
+    message;
+
+}
+
+
+/* ========================================================
+   GENERATE
+======================================================== */
 
 async function generate(){
 
   const prompt =
     document
-    .getElementById("prompt")
+    .getElementById(
+      "prompt"
+    )
     .value
     .trim();
 
 
   const teacherName =
     document
-    .getElementById("teacherName")
+    .getElementById(
+      "teacherName"
+    )
     .value
     .trim();
 
@@ -1436,14 +1405,16 @@ async function generate(){
       )
     ]
     .map(
-      x => x.id
+      function(x){
+        return x.id;
+      }
     );
 
 
   if(!teacherName){
 
     showError(
-      "กรุณากรอกชื่อครูก่อนสร้างเอกสารครับ"
+      "กรุณากรอกชื่อครูผู้สอนก่อนครับ"
     );
 
     return;
@@ -1473,11 +1444,21 @@ async function generate(){
   }
 
 
-  setLoading(true);
+  document
+  .getElementById(
+    "error"
+  )
+  .classList.add(
+    "hidden"
+  );
+
+
+  setLoading(
+    true
+  );
 
 
   try{
-
 
     const response =
       await fetch(
@@ -1488,37 +1469,38 @@ async function generate(){
 
           headers:{
             "Content-Type":
-            "application/json"
+              "application/json"
           },
 
           body:
-          JSON.stringify({
+            JSON.stringify({
 
-            prompt,
+              prompt:
+                prompt,
 
-            teacher_name:
-            teacherName,
+              teacher_name:
+                teacherName,
 
-            question_count:
-            Number(
-              document
-              .getElementById(
-                "count"
-              )
-              .value
-            ),
+              question_count:
+                Number(
+                  document
+                  .getElementById(
+                    "count"
+                  )
+                  .value
+                ),
 
-            question_types:
-            selected,
+              question_types:
+                selected,
 
-            difficulty:
-            document
-            .getElementById(
-              "difficulty"
-            )
-            .value
+              difficulty:
+                document
+                .getElementById(
+                  "difficulty"
+                )
+                .value
 
-          })
+            })
 
         }
       );
@@ -1538,296 +1520,369 @@ async function generate(){
     }
 
 
-    currentData = data;
+    currentData =
+      data;
 
 
-    saveData(
-      data
-    );
+    saveCurrentData();
 
 
     render(
-      data
+      currentData
     );
 
 
   }catch(error){
 
     showError(
-      error.message
+      error.message ||
+      "เกิดข้อผิดพลาด"
     );
 
   }finally{
 
-    setLoading(false);
+    setLoading(
+      false
+    );
 
   }
 
 }
 
 
-// ========================================================
-// LOADING
-// ========================================================
+/* ========================================================
+   RENDER
+======================================================== */
 
-function setLoading(value){
+function render(data){
+
+  if(!data){
+    return;
+  }
+
 
   document
-  .getElementById("loading")
-  .classList
-  .toggle(
-    "hidden",
-    !value
+  .getElementById(
+    "error"
+  )
+  .classList.add(
+    "hidden"
   );
 
 
   document
-  .getElementById("generateBtn")
-  .disabled = value;
+  .getElementById(
+    "result"
+  )
+  .classList.remove(
+    "hidden"
+  );
+
+
+  const summary =
+    data.summary || {};
+
+
+  document
+  .getElementById(
+    "summary"
+  )
+  .innerHTML =
+
+    `<span class="chip">
+      👨‍🏫 ${esc(
+        data.teacher_name
+      )}
+    </span>
+
+    <span class="chip">
+      🎒 ${esc(
+        summary.grade
+      )}
+    </span>
+
+    <span class="chip">
+      📖 ${esc(
+        summary.subject
+      )}
+    </span>
+
+    <span class="chip">
+      ✏️ ${esc(
+        summary.topic
+      )}
+    </span>
+
+    <span class="chip">
+      ⏱️ ${esc(
+        summary.duration
+      )}
+    </span>`;
+
+
+  renderLesson(
+    data
+  );
+
+
+  renderWorksheet(
+    data
+  );
+
+
+  renderQuiz(
+    data
+  );
+
+
+  renderAnswer(
+    data
+  );
+
+
+  window.scrollTo(
+    {
+      top:
+        document
+        .getElementById(
+          "result"
+        )
+        .offsetTop - 15,
+
+      behavior:
+        "smooth"
+    }
+  );
 
 }
 
 
-// ========================================================
-// ERROR
-// ========================================================
+/* ========================================================
+   LESSON
+======================================================== */
 
-function showError(message){
+function renderLesson(data){
+
+  const lesson =
+    data.lesson_plan || {};
+
+
+  const objectives =
+    Array.isArray(
+      lesson.objective
+    )
+    ? lesson.objective
+    : [];
+
+
+  const steps =
+    Array.isArray(
+      lesson.steps
+    )
+    ? lesson.steps
+    : [];
+
+
+  let html = "";
+
+
+  html +=
+    `<h3>
+      1. จุดประสงค์การเรียนรู้
+    </h3>`;
+
+
+  html +=
+    `<ul>`;
+
+  objectives.forEach(
+    function(item){
+
+      html +=
+        `<li>
+          ${esc(item)}
+        </li>`;
+
+    }
+  );
+
+  html +=
+    `</ul>`;
+
+
+  html +=
+    `<h3>
+      2. เนื้อหาที่ใช้สอน
+    </h3>`;
+
+
+  html +=
+    `<div class="item">
+      ${formatText(
+        lesson.content
+      )}
+    </div>`;
+
+
+  if(
+    Array.isArray(
+      lesson.important_points
+    )
+    &&
+    lesson.important_points.length
+  ){
+
+    html +=
+      `<h3>
+        สาระสำคัญ
+      </h3>`;
+
+    lesson
+    .important_points
+    .forEach(
+      function(item){
+
+        html +=
+          `<div class="item">
+            ${esc(item)}
+          </div>`;
+
+      }
+    );
+
+  }
+
+
+  if(
+    Array.isArray(
+      lesson.examples
+    )
+    &&
+    lesson.examples.length
+  ){
+
+    html +=
+      `<h3>
+        ตัวอย่างสำหรับใช้สอน
+      </h3>`;
+
+    lesson
+    .examples
+    .forEach(
+      function(item){
+
+        html +=
+          `<div class="item">
+            ${esc(item)}
+          </div>`;
+
+      }
+    );
+
+  }
+
+
+  html +=
+    `<h3>
+      3. ขั้นตอนการจัดการเรียนรู้
+    </h3>`;
+
+
+  steps.forEach(
+    function(step,index){
+
+      html +=
+        `<div class="item">
+
+          <b>
+            ${index + 1}.
+            ${esc(
+              step.time
+            )}
+            ·
+            ${esc(
+              step.title
+            )}
+          </b>
+
+          <div
+            style="
+              margin-top:7px
+            "
+          >
+            ${formatText(
+              step.detail
+            )}
+          </div>
+
+        </div>`;
+
+    }
+  );
+
+
+  html +=
+    `<h3>
+      4. การประเมินผล
+    </h3>
+
+    <div class="item">
+      ${formatText(
+        lesson.assessment
+      )}
+    </div>`;
+
 
   document
-  .getElementById("error")
-  .classList
-  .remove("hidden");
-
-
-  document
-  .getElementById("errorText")
-  .textContent =
-    message;
+  .getElementById(
+    "lesson"
+  )
+  .innerHTML =
+    html;
 
 }
 
 
-// ========================================================
-// RENDER
-// ========================================================
+/* ========================================================
+   TEXT FORMAT
+======================================================== */
 
-function render(data){
+function formatText(
+  value
+){
 
-  document
-  .getElementById("error")
-  .classList
-  .add("hidden");
+  if(!value){
+    return "";
+  }
 
 
-  document
-  .getElementById("result")
-  .classList
-  .remove("hidden");
+  return esc(
+    value
+  )
+  .replace(
+    /\n/g,
+    "<br>"
+  );
 
+}
 
-  const s =
-    data.summary;
 
+/* ========================================================
+   WORKSHEET
+======================================================== */
 
-  document
-  .getElementById("summary")
-  .innerHTML = `
+function renderWorksheet(data){
 
-    <span class="chip">
-      👨‍🏫 ${esc(s.teacher_name)}
-    </span>
+  const worksheet =
+    Array.isArray(
+      data.worksheet
+    )
+    ? data.worksheet
+    : [];
 
-    <span class="chip">
-      🎒 ${esc(s.grade)}
-    </span>
 
-    <span class="chip">
-      📖 ${esc(s.subject)}
-    </span>
-
-    <span class="chip">
-      ✏️ ${esc(s.topic)}
-    </span>
-
-    <span class="chip">
-      ⏱️ ${esc(s.duration)}
-    </span>
-
-  `;
-
-
-  // ======================================================
-  // LESSON
-  // ======================================================
-
-  document
-  .getElementById("lesson")
-  .innerHTML = `
-
-    <h3>
-      จุดประสงค์การเรียนรู้
-    </h3>
-
-    <ul>
-
-      ${data.lesson_plan.objective
-        .map(
-          x =>
-          `<li>${esc(x)}</li>`
-        )
-        .join("")
-      }
-
-    </ul>
-
-
-    <h3>
-      เนื้อหาที่ใช้สอน
-    </h3>
-
-    <div class="item">
-
-      ${esc(
-        data.teaching_content.intro
-      )}
-
-    </div>
-
-
-    <h3>
-      สาระสำคัญ
-    </h3>
-
-    ${data.teaching_content.concepts
-      .map(
-        x =>
-        `<div class="item">${esc(x)}</div>`
-      )
-      .join("")
-    }
-
-
-    <h3>
-      ตัวอย่างสำหรับใช้สอน
-    </h3>
-
-    ${data.teaching_content.examples
-      .map(
-        x => `
-
-          <div class="item">
-
-            <b>
-              ${esc(x.title)}
-            </b>
-
-            <div style="margin-top:8px">
-
-              ${esc(x.explanation)}
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join("")
-    }
-
-
-    <h3>
-      คำถามชวนคิด
-    </h3>
-
-    <ul>
-
-      ${data.teaching_content.thinking_questions
-        .map(
-          x =>
-          `<li>${esc(x)}</li>`
-        )
-        .join("")
-      }
-
-    </ul>
-
-
-    <h3>
-      ขั้นตอนการจัดการเรียนรู้
-    </h3>
-
-    ${data.lesson_plan.steps
-      .map(
-        (x,i) => `
-
-          <div class="item">
-
-            <b>
-              ${i+1}.
-              ${esc(x.title)}
-            </b>
-
-            <div>
-              เวลา:
-              ${esc(x.time)}
-            </div>
-
-            <div style="margin-top:6px">
-
-              ${esc(x.detail)}
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join("")
-    }
-
-
-    <h3>
-      เคล็ดลับสำหรับครู
-    </h3>
-
-    <ul>
-
-      ${data.teaching_content.teacher_tips
-        .map(
-          x =>
-          `<li>${esc(x)}</li>`
-        )
-        .join("")
-      }
-
-    </ul>
-
-
-    <h3>
-      การประเมินผล
-    </h3>
-
-    <div class="item">
-
-      ${esc(
-        data.lesson_plan.assessment
-      )}
-
-    </div>
-
-  `;
-
-
-  // ======================================================
-  // WORKSHEET
-  // ======================================================
-
-  document
-  .getElementById("worksheet")
-  .innerHTML = `
-
-    <h3>
+  let html =
+    `<h3>
       ใบงาน
     </h3>
 
@@ -1837,7 +1892,7 @@ function render(data){
         ชื่อ-สกุล
       </b>
 
-      ..................................................................
+      ________________________________
 
       <br><br>
 
@@ -1845,263 +1900,296 @@ function render(data){
         ชั้น
       </b>
 
-      ....................
+      __________
 
       <b>
         เลขที่
       </b>
 
-      ....................
+      __________
 
-    </div>
+      <b>
+        วันที่
+      </b>
 
+      __________
 
-    ${data.worksheet
-      .map(
-        x => `
-
-          <div class="item">
-
-            <div>
-
-              <b>
-                ข้อ ${x.no}
-              </b>
-
-              &nbsp;&nbsp;
-
-              ${esc(x.question)}
-
-            </div>
+    </div>`;
 
 
-            <div
+  worksheet.forEach(
+    function(item,index){
+
+      const no =
+        item.no ||
+        index + 1;
+
+
+      html +=
+        `<div class="item">
+
+          <b>
+            ข้อ ${esc(no)}
+          </b>
+
+          &nbsp;
+
+          ${esc(
+            item.question
+          )}
+
+          <div
             style="
-            margin-top:14px;
+              margin-top:12px
             "
-            >
-
-              คำตอบ............................................................................
-
-            </div>
-
+          >
+            คำตอบ
+            ..............................................................
           </div>
 
-        `
-      )
-      .join("")
+        </div>`;
+
     }
-
-  `;
-
-
-  // ======================================================
-  // QUIZ
-  // ======================================================
-
-  document
-  .getElementById("quiz")
-  .innerHTML = `
-
-    <h3>
-      แบบทดสอบ ${data.quiz.length} ข้อ
-    </h3>
-
-
-    ${data.quiz
-      .map(
-        x => `
-
-          <div class="item">
-
-            <span class="qtype">
-
-              ${esc(
-                typeNames[x.type] ||
-                x.type
-              )}
-
-            </span>
-
-
-            <div
-            style="
-            margin-top:10px;
-            "
-            >
-
-              <b>
-                ข้อ ${x.no}
-              </b>
-
-              &nbsp;&nbsp;
-
-              ${esc(x.question)}
-
-            </div>
-
-
-            ${
-              x.options &&
-              x.options.length
-              ?
-
-              `
-
-              <div class="options">
-
-                ${x.options
-                  .map(
-                    (o,i) =>
-                    `
-
-                    <div>
-
-                      ${
-                        [
-                          "ก.",
-                          "ข.",
-                          "ค.",
-                          "ง."
-                        ][i] ||
-                        (i+1)+"."
-                      }
-
-                      &nbsp;
-
-                      ${esc(o)}
-
-                    </div>
-
-                    `
-                  )
-                  .join("")
-                }
-
-              </div>
-
-              `
-
-              :
-
-              `
-
-              <div class="answer">
-
-                คำตอบ..............................................
-
-              </div>
-
-              `
-            }
-
-          </div>
-
-        `
-      )
-      .join("")
-    }
-
-  `;
-
-
-  // ======================================================
-  // ANSWER
-  // ======================================================
-
-  document
-  .getElementById("answer")
-  .innerHTML = `
-
-    <h3>
-      เฉลยใบงาน
-    </h3>
-
-
-    ${data.worksheet
-      .map(
-        x => `
-
-          <div class="item">
-
-            <b>
-              ข้อ ${x.no}
-            </b>
-
-            <div style="margin-top:6px">
-
-              ${esc(x.answer)}
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join("")
-    }
-
-
-    <h3>
-      เฉลยแบบทดสอบ
-    </h3>
-
-
-    ${data.quiz
-      .map(
-        x => `
-
-          <div class="item">
-
-            <b>
-              ข้อ ${x.no}
-              —
-              ${esc(x.answer)}
-            </b>
-
-            <div class="answer">
-
-              ${esc(x.explanation)}
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join("")
-    }
-
-  `;
+  );
 
 
   document
   .getElementById(
-    "savedMessage"
+    "worksheet"
   )
-  .classList
-  .remove("hidden");
-
-
-  window.scrollTo({
-
-    top:
-    document
-    .getElementById(
-      "result"
-    )
-    .offsetTop - 15,
-
-    behavior:"smooth"
-
-  });
+  .innerHTML =
+    html;
 
 }
 
 
-// ========================================================
-// DOWNLOAD PDF
-// ========================================================
+/* ========================================================
+   QUIZ
+======================================================== */
+
+function renderQuiz(data){
+
+  const quiz =
+    Array.isArray(
+      data.quiz
+    )
+    ? data.quiz
+    : [];
+
+
+  let html =
+    `<h3>
+      แบบทดสอบ ${quiz.length} ข้อ
+    </h3>`;
+
+
+  quiz.forEach(
+    function(item,index){
+
+      const no =
+        item.no ||
+        index + 1;
+
+
+      html +=
+        `<div class="item">
+
+          <span class="qtype">
+
+            ${esc(
+              typeNames[
+                item.type
+              ] ||
+              item.type ||
+              ""
+            )}
+
+          </span>
+
+          <div
+            style="
+              margin-top:8px
+            "
+          >
+
+            <b>
+              ข้อ ${esc(no)}
+            </b>
+
+            &nbsp;
+
+            ${esc(
+              item.question
+            )}
+
+          </div>`;
+
+
+      if(
+        Array.isArray(
+          item.options
+        )
+        &&
+        item.options.length
+      ){
+
+        html +=
+          `<ol
+            type="A"
+          >`;
+
+
+        item.options
+        .forEach(
+          function(option){
+
+            html +=
+              `<li>
+                ${esc(option)}
+              </li>`;
+
+          }
+        );
+
+
+        html +=
+          `</ol>`;
+
+      }
+
+
+      html +=
+        `</div>`;
+
+    }
+  );
+
+
+  document
+  .getElementById(
+    "quiz"
+  )
+  .innerHTML =
+    html;
+
+}
+
+
+/* ========================================================
+   ANSWER
+======================================================== */
+
+function renderAnswer(data){
+
+  const worksheet =
+    Array.isArray(
+      data.worksheet
+    )
+    ? data.worksheet
+    : [];
+
+
+  const quiz =
+    Array.isArray(
+      data.quiz
+    )
+    ? data.quiz
+    : [];
+
+
+  let html =
+    `<h3>
+      เฉลยใบงาน
+    </h3>`;
+
+
+  worksheet.forEach(
+    function(item,index){
+
+      html +=
+        `<div class="item">
+
+          <b>
+            ข้อ ${
+              esc(
+                item.no ||
+                index + 1
+              )
+            }
+          </b>
+
+          <div
+            style="
+              margin-top:6px
+            "
+          >
+            ${esc(
+              item.answer
+            )}
+          </div>
+
+        </div>`;
+
+    }
+  );
+
+
+  html +=
+    `<h3>
+      เฉลยแบบทดสอบ
+    </h3>`;
+
+
+  quiz.forEach(
+    function(item,index){
+
+      html +=
+        `<div class="item">
+
+          <b>
+            ข้อ ${
+              esc(
+                item.no ||
+                index + 1
+              )
+            }
+          </b>
+
+          —
+          ${esc(
+            item.answer
+          )}
+
+          <div
+            style="
+              color:#6f7890;
+              margin-top:5px
+            "
+          >
+            ${esc(
+              item.explanation
+            )}
+          </div>
+
+        </div>`;
+
+    }
+  );
+
+
+  document
+  .getElementById(
+    "answer"
+  )
+  .innerHTML =
+    html;
+
+}
+
+
+/* ========================================================
+   DOWNLOAD PDF
+======================================================== */
 
 async function downloadPDF(){
 
@@ -2116,24 +2204,46 @@ async function downloadPDF(){
   }
 
 
+  const button =
+    document
+    .querySelector(
+      ".actions .secondary"
+    );
+
+
+  const original =
+    button.textContent;
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "⏳ กำลังสร้าง PDF...";
+
+
   try{
 
     const response =
       await fetch(
-        "/api/pdf?section=all",
+        "/api/pdf",
         {
 
           method:"POST",
 
           headers:{
             "Content-Type":
-            "application/json"
+              "application/json"
           },
 
           body:
-          JSON.stringify(
-            currentData
-          )
+            JSON.stringify({
+
+              data:
+                currentData
+
+            })
 
         }
       );
@@ -2141,12 +2251,22 @@ async function downloadPDF(){
 
     if(!response.ok){
 
-      const error =
-        await response.json();
+      let message =
+        "สร้าง PDF ไม่สำเร็จ";
+
+      try{
+
+        const error =
+          await response.json();
+
+        message =
+          error.detail ||
+          message;
+
+      }catch(e){}
 
       throw new Error(
-        error.detail ||
-        "สร้าง PDF ไม่สำเร็จ"
+        message
       );
 
     }
@@ -2168,16 +2288,16 @@ async function downloadPDF(){
       );
 
 
-    a.href = url;
-
+    a.href =
+      url;
 
     a.download =
       "teacher-pack.pdf";
 
 
-    document
-    .body
-    .appendChild(a);
+    document.body.appendChild(
+      a
+    );
 
 
     a.click();
@@ -2194,79 +2314,76 @@ async function downloadPDF(){
   }catch(error){
 
     showError(
-      error.message
+      error.message ||
+      "สร้าง PDF ไม่สำเร็จ"
     );
+
+  }finally{
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      original;
 
   }
 
 }
 
 
-// ========================================================
-// NEW PACK
-// ========================================================
+/* ========================================================
+   NEW PACK
+======================================================== */
 
 function newPack(){
 
-  document
-  .getElementById("result")
-  .classList
-  .add("hidden");
+  currentData =
+    null;
 
-
-  document
-  .getElementById("prompt")
-  .value = "";
-
-
-  window.scrollTo({
-
-    top:0,
-
-    behavior:"smooth"
-
-  });
-
-}
-
-
-// ========================================================
-// CLEAR SAVED
-// ========================================================
-
-function clearSaved(){
 
   localStorage.removeItem(
     STORAGE_KEY
   );
 
 
-  currentData = null;
+  document
+  .getElementById(
+    "result"
+  )
+  .classList.add(
+    "hidden"
+  );
 
 
   document
-  .getElementById("result")
-  .classList
-  .add("hidden");
+  .getElementById(
+    "error"
+  )
+  .classList.add(
+    "hidden"
+  );
 
 
-  alert(
-    "ลบชุดการสอนที่บันทึกไว้แล้ว"
+  window.scrollTo(
+    {
+      top:0,
+      behavior:"smooth"
+    }
   );
 
 }
 
 
-// ========================================================
-// RESTORE ON LOAD
-// ========================================================
+/* ========================================================
+   RESTORE
+======================================================== */
 
 window.addEventListener(
-  "load",
+  "DOMContentLoaded",
   function(){
 
     const saved =
-      loadData();
+      loadCurrentData();
 
 
     if(saved){
@@ -2274,25 +2391,9 @@ window.addEventListener(
       currentData =
         saved;
 
-
       render(
         saved
       );
-
-
-      const teacher =
-        saved
-        .summary
-        ?.teacher_name ||
-        "";
-
-
-      document
-      .getElementById(
-        "teacherName"
-      )
-      .value =
-        teacher;
 
     }
 
@@ -2300,7 +2401,6 @@ window.addEventListener(
 );
 
 </script>
-
 
 </body>
 
