@@ -79,36 +79,9 @@ class GenerateRequest(BaseModel):
         max_length=500
     )
 
-    subject: str = Field(
-        default="",
-        max_length=100,
-        description="ชื่อวิชา เช่น ภาษาอังกฤษ, คณิตศาสตร์, วิทยาศาสตร์"
-    )
-
     teacher_name: str = Field(
         default="",
         max_length=100
-    )
-
-    # เดิมเรียกว่า vocabulary เฉพาะภาษาอังกฤษ
-    # เปลี่ยนเป็นชื่อกลางๆ ใช้ได้ทุกวิชา
-    # เช่น คำศัพท์ (ภาษา) / สูตร (คณิต) / นิยาม (วิทย์)
-    key_terms: list[str] = Field(
-        default_factory=list,
-        description="คำศัพท์ / มโนทัศน์ / นิยามสำคัญที่ต้องใช้ในเนื้อหา"
-    )
-
-    # เดิมคือ sentence pattern เฉพาะภาษา
-    # เปลี่ยนเป็นกลางๆ ใช้ได้ทั้งโครงสร้างประโยค สูตรคณิต ขั้นตอนวิทย์
-    key_patterns: list[str] = Field(
-        default_factory=list,
-        description="โครงสร้างประโยค / สูตร / ขั้นตอน / กฎสำคัญที่ต้องใช้"
-    )
-
-    learning_focus: str = Field(
-        default="",
-        max_length=300,
-        description="จุดเน้นเพิ่มเติม เช่น เน้นฟัง-พูด, เน้นคำนวณ, เน้นทดลอง"
     )
 
     question_count: int = Field(
@@ -129,10 +102,10 @@ class GenerateRequest(BaseModel):
 # =========================================================
 # SYSTEM PROMPT
 # =========================================================
+
 SYSTEM_PROMPT = """
 
 คุณคือผู้ช่วยจัดทำเอกสารการเรียนการสอนสำหรับครูไทย
-ใช้ได้กับทุกวิชา ไม่จำกัดเฉพาะวิชาใดวิชาหนึ่ง
 
 สร้างเอกสารดังนี้:
 
@@ -156,18 +129,6 @@ SYSTEM_PROMPT = """
 - เลขข้อเรียงจาก 1 เป็นต้นไป
 - ตัวเลือกใช้ ก. ข. ค. ง.
 
-กติกาเรื่องคำศัพท์/สูตร/โครงสร้างสำคัญ:
-
-- หากผู้ใช้ระบุ "เนื้อหา/คำศัพท์/มโนทัศน์สำคัญ" หรือ
-  "โครงสร้าง/สูตร/รูปแบบสำคัญ" มาให้ ต้องใช้สิ่งเหล่านั้น
-  เป็นแกนหลักของเนื้อหาทั้งหมด ห้ามแต่งเนื้อหาอื่นที่ไม่เกี่ยวข้อง
-- หากไม่ได้ระบุมา ให้พิจารณาความเหมาะสมกับวิชาและระดับชั้นเอง
-- ปรับรูปแบบการอธิบายให้เข้ากับธรรมชาติของแต่ละวิชา เช่น
-  วิชาภาษาเน้นคำศัพท์และประโยค
-  วิชาคณิตศาสตร์เน้นสูตรและตัวอย่างการคำนวณ
-  วิชาวิทยาศาสตร์เน้นนิยามและขั้นตอนการทดลอง
-  วิชาสังคม/ประวัติศาสตร์เน้นเหตุการณ์และลำดับเวลา
-
 ใบงาน:
 
 ข้อ 1  คำถาม
@@ -190,7 +151,6 @@ SYSTEM_PROMPT = """
 ตอบเป็น JSON ตาม Schema เท่านั้น
 
 """
-
 
 
 # =========================================================
@@ -523,85 +483,90 @@ def health():
 # =========================================================
 # GENERATE
 # =========================================================
+
 @app.post("/api/generate")
 def generate(req: GenerateRequest):
 
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv(
+        "OPENAI_API_KEY"
+    )
 
     if not api_key:
+
         raise HTTPException(
             status_code=500,
             detail="ยังไม่ได้ตั้งค่า OPENAI_API_KEY"
         )
 
+
     allowed_types = {
+
         "multiple_choice",
         "fill_blank",
         "calculation",
         "application"
+
     }
 
+
     invalid = [
+
         x for x in req.question_types
+
         if x not in allowed_types
+
     ]
 
+
     if invalid:
+
         raise HTTPException(
+
             status_code=400,
+
             detail=(
                 "รูปแบบข้อสอบไม่ถูกต้อง: "
                 + ", ".join(invalid)
             )
+
         )
 
-    teacher = req.teacher_name.strip() or "ไม่ระบุ"
-    subject = req.subject.strip() or "ไม่ระบุ (ให้พิจารณาจากคำสั่ง)"
+
+    teacher = (
+        req.teacher_name.strip()
+        or "ไม่ระบุ"
+    )
+
 
     type_names = {
+
         "multiple_choice": "ปรนัย",
+
         "fill_blank": "เติมคำ",
+
         "calculation": "คำนวณ",
+
         "application": "ประยุกต์ใช้"
+
     }
 
+
     selected_types = ", ".join(
-        type_names[x] for x in req.question_types
+
+        type_names[x]
+
+        for x in req.question_types
+
     )
 
-    # ---- ส่วนใหม่: แปลง list เป็นข้อความ bullet ----
-
-    key_terms_text = (
-        "\n".join(f"- {t.strip()}" for t in req.key_terms if t.strip())
-        or "ไม่ได้ระบุ (ให้ AI พิจารณาความเหมาะสมเอง)"
-    )
-
-    key_patterns_text = (
-        "\n".join(f"- {p.strip()}" for p in req.key_patterns if p.strip())
-        or "ไม่ได้ระบุ"
-    )
-
-    learning_focus_text = req.learning_focus.strip() or "ไม่ระบุ"
 
     user_prompt = f"""
-
-วิชา:
-{subject}
 
 ชื่อครู:
 {teacher}
 
 คำสั่ง:
 {req.prompt}
-
-เนื้อหา/คำศัพท์/มโนทัศน์สำคัญที่ต้องใช้เป็นแกนหลัก:
-{key_terms_text}
-
-โครงสร้าง/สูตร/รูปแบบสำคัญที่ต้องใช้:
-{key_patterns_text}
-
-จุดเน้นการเรียนรู้เพิ่มเติม:
-{learning_focus_text}
 
 จำนวนข้อสอบ:
 {req.question_count}
@@ -615,11 +580,95 @@ def generate(req: GenerateRequest):
 สร้างเอกสารให้พร้อมใช้จริง
 
 ตรวจสอบเลขข้อ
+
 ตรวจสอบตัวเลข
+
 ตรวจสอบคำตอบ
+
 ห้ามใส่ Emoji
 
 """
+
+
+    try:
+
+        client = OpenAI(
+            api_key=api_key
+        )
+
+
+        response = client.responses.create(
+
+            model=MODEL,
+
+            instructions=SYSTEM_PROMPT,
+
+            input=user_prompt,
+
+            text={
+
+                "format": {
+
+                    "type": "json_schema",
+
+                    "name": "teacher_pack",
+
+                    "strict": True,
+
+                    "schema": SCHEMA
+
+                }
+
+            }
+
+        )
+
+
+        if not response.output_text:
+
+            raise Exception(
+                "AI ไม่ส่งข้อมูลกลับมา"
+            )
+
+
+        data = json.loads(
+            response.output_text
+        )
+
+
+        data[
+            "summary"
+        ][
+            "teacher_name"
+        ] = teacher
+
+
+        return data
+
+
+    except json.JSONDecodeError:
+
+        raise HTTPException(
+
+            status_code=500,
+
+            detail="AI ส่ง JSON ไม่ถูกต้อง"
+
+        )
+
+
+    except Exception as e:
+
+        raise HTTPException(
+
+            status_code=500,
+
+            detail=(
+                "สร้างชุดการสอนไม่สำเร็จ: "
+                + str(e)
+            )
+
+        )
 
 
 # =========================================================
