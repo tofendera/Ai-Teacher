@@ -21,7 +21,7 @@ from reportlab.platypus import (
     Table,
     TableStyle,
     PageBreak,
-    KeepTogether,
+    KeepTogether
 )
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -31,13 +31,20 @@ from reportlab.pdfbase.ttfonts import TTFont
 # PATH
 # =========================================================
 
-APP_DIR = Path(__file__).resolve().parent
+# main.py อยู่ใน:
+# Ai-Teacher/app/main.py
+#
+# ดังนั้น parent.parent = Ai-Teacher
 
-PROJECT_DIR = APP_DIR.parent
+PROJECT_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_DIR = PROJECT_DIR / "static"
 
 INDEX_FILE = STATIC_DIR / "index.html"
+
+FONT_DIR = PROJECT_DIR / "fonts"
+
+THAI_FONT_FILE = FONT_DIR / "NotoSansThai-Regular.ttf"
 
 
 # =========================================================
@@ -46,12 +53,12 @@ INDEX_FILE = STATIC_DIR / "index.html"
 
 app = FastAPI(
     title="AI ครูผู้ช่วย",
-    version="1.2.0",
+    version="1.2.0"
 )
 
 
 # =========================================================
-# STATIC
+# STATIC FILES
 # =========================================================
 
 if STATIC_DIR.exists():
@@ -61,30 +68,33 @@ if STATIC_DIR.exists():
         StaticFiles(
             directory=str(STATIC_DIR)
         ),
-        name="static",
+        name="static"
     )
 
 
 # =========================================================
-# CONFIG
+# OPENAI
 # =========================================================
 
 MODEL = "gpt-5-mini"
 
 
-type_names = {
+# =========================================================
+# QUESTION TYPE NAMES
+# =========================================================
+
+# ต้องประกาศด้านนอก generate()
+# เพราะ build_pdf() ก็ต้องใช้งานด้วย
+
+TYPE_NAMES = {
+
     "multiple_choice": "ปรนัย",
+
     "fill_blank": "เติมคำ",
+
     "calculation": "คำนวณ",
-    "application": "ประยุกต์ใช้",
-}
 
-
-allowed_types = {
-    "multiple_choice",
-    "fill_blank",
-    "calculation",
-    "application",
+    "application": "ประยุกต์ใช้"
 }
 
 
@@ -96,13 +106,13 @@ class GenerateRequest(BaseModel):
 
     prompt: str = Field(
         min_length=2,
-        max_length=500,
+        max_length=500
     )
 
     question_count: int = Field(
         default=10,
         ge=5,
-        le=30,
+        le=30
     )
 
     question_types: list[str] = Field(
@@ -122,14 +132,15 @@ SYSTEM_PROMPT = """
 
 คุณคือ AI ครูผู้ช่วยสำหรับครูไทย
 
-หน้าที่คือเปลี่ยนคำสั่งสั้น ๆ
+หน้าที่ของคุณคือเปลี่ยนคำสั่งสั้น ๆ
 ของครู เช่น
 
 "เศษส่วน ป.4 1 ชั่วโมง"
 
 ให้กลายเป็น Teacher Pack พร้อมใช้
 
-Teacher Pack ต้องประกอบด้วย:
+
+Teacher Pack ประกอบด้วย:
 
 1. ข้อมูลสรุปบทเรียน
 2. จุดประสงค์การเรียนรู้
@@ -152,13 +163,19 @@ Teacher Pack ต้องประกอบด้วย:
 - วิเคราะห์เวลาเรียน
 - เนื้อหาต้องเหมาะกับวัย
 - เนื้อหาต้องเหมาะกับระดับชั้น
-- หากข้อมูลบางส่วนไม่ชัด ให้ใช้บริบทที่สมเหตุสมผล
-- ห้ามอ้างหลักสูตรเฉพาะถ้าไม่แน่ใจ
+
+- หากข้อมูลบางส่วนไม่ชัด
+  ให้ใช้บริบทที่สมเหตุสมผล
+
+- ห้ามอ้างหลักสูตรเฉพาะ
+  ถ้าไม่แน่ใจ
+
 - ห้ามสร้างข้อมูลมั่ว
+
 - ตรวจสอบความถูกต้องก่อนส่ง
 
 
-เนื้อหาที่ใช้สอน:
+ส่วนเนื้อหาที่ใช้สอน:
 
 ต้องเขียนให้ครูสามารถนำไปอธิบาย
 กับนักเรียนได้จริง
@@ -174,16 +191,19 @@ Teacher Pack ต้องประกอบด้วย:
 - เคล็ดลับสำหรับครู
 
 
-ใบงาน:
+ส่วนใบงาน:
 
-เป็นแบบฝึกหัดสำหรับนักเรียน
-ต้องสอดคล้องกับหัวข้อ
-และเหมาะกับระดับชั้น
+ใบงานคือแบบฝึกฝน
+สำหรับให้นักเรียนฝึกทักษะ
+
+ไม่จำเป็นต้องมีรูปแบบเดียวกับแบบทดสอบ
+
+แต่ต้องสอดคล้องกับหัวข้อ
 
 
-แบบทดสอบ:
+ส่วนแบบทดสอบ:
 
-สร้างเฉพาะประเภทที่ผู้ใช้เลือก
+ต้องสร้างเฉพาะประเภทที่ผู้ใช้เลือก
 
 ประเภทที่รองรับ:
 
@@ -214,16 +234,12 @@ application
 ประยุกต์ใช้:
 
 - เป็นสถานการณ์ที่เหมาะกับวัย
-- สัมพันธ์กับเนื้อหา
+- ต้องสัมพันธ์กับเนื้อหา
 
 
-สำคัญ:
-
-ห้ามสร้างข้อสอบประเภท
+ห้ามสร้างประเภทข้อสอบ
 ที่ผู้ใช้ไม่ได้เลือก
 
-ต้องสร้างข้อสอบให้ครบจำนวน
-ที่ผู้ใช้ร้องขอ
 
 ตอบเป็น JSON ตาม Schema เท่านั้น
 
@@ -241,6 +257,10 @@ SCHEMA = {
     "additionalProperties": False,
 
     "properties": {
+
+        # -------------------------------------------------
+        # SUMMARY
+        # -------------------------------------------------
 
         "summary": {
 
@@ -264,17 +284,21 @@ SCHEMA = {
 
                 "duration": {
                     "type": "string"
-                },
+                }
             },
 
             "required": [
                 "grade",
                 "subject",
                 "topic",
-                "duration",
-            ],
+                "duration"
+            ]
         },
 
+
+        # -------------------------------------------------
+        # LESSON PLAN
+        # -------------------------------------------------
 
         "lesson_plan": {
 
@@ -290,7 +314,7 @@ SCHEMA = {
 
                     "items": {
                         "type": "string"
-                    },
+                    }
                 },
 
                 "steps": {
@@ -315,29 +339,33 @@ SCHEMA = {
 
                             "detail": {
                                 "type": "string"
-                            },
+                            }
                         },
 
                         "required": [
                             "time",
                             "title",
-                            "detail",
-                        ],
-                    },
+                            "detail"
+                        ]
+                    }
                 },
 
                 "assessment": {
                     "type": "string"
-                },
+                }
             },
 
             "required": [
                 "objective",
                 "steps",
-                "assessment",
-            ],
+                "assessment"
+            ]
         },
 
+
+        # -------------------------------------------------
+        # TEACHING CONTENT
+        # -------------------------------------------------
 
         "teaching_content": {
 
@@ -357,7 +385,7 @@ SCHEMA = {
 
                     "items": {
                         "type": "string"
-                    },
+                    }
                 },
 
                 "examples": {
@@ -378,14 +406,14 @@ SCHEMA = {
 
                             "explanation": {
                                 "type": "string"
-                            },
+                            }
                         },
 
                         "required": [
                             "title",
-                            "explanation",
-                        ],
-                    },
+                            "explanation"
+                        ]
+                    }
                 },
 
                 "teacher_tips": {
@@ -394,7 +422,7 @@ SCHEMA = {
 
                     "items": {
                         "type": "string"
-                    },
+                    }
                 },
 
                 "thinking_questions": {
@@ -403,8 +431,8 @@ SCHEMA = {
 
                     "items": {
                         "type": "string"
-                    },
-                },
+                    }
+                }
             },
 
             "required": [
@@ -412,10 +440,14 @@ SCHEMA = {
                 "concepts",
                 "examples",
                 "teacher_tips",
-                "thinking_questions",
-            ],
+                "thinking_questions"
+            ]
         },
 
+
+        # -------------------------------------------------
+        # WORKSHEET
+        # -------------------------------------------------
 
         "worksheet": {
 
@@ -439,17 +471,21 @@ SCHEMA = {
 
                     "answer": {
                         "type": "string"
-                    },
+                    }
                 },
 
                 "required": [
                     "no",
                     "question",
-                    "answer",
-                ],
-            },
+                    "answer"
+                ]
+            }
         },
 
+
+        # -------------------------------------------------
+        # QUIZ
+        # -------------------------------------------------
 
         "quiz": {
 
@@ -481,7 +517,7 @@ SCHEMA = {
 
                         "items": {
                             "type": "string"
-                        },
+                        }
                     },
 
                     "answer": {
@@ -490,7 +526,7 @@ SCHEMA = {
 
                     "explanation": {
                         "type": "string"
-                    },
+                    }
                 },
 
                 "required": [
@@ -499,10 +535,10 @@ SCHEMA = {
                     "question",
                     "options",
                     "answer",
-                    "explanation",
-                ],
-            },
-        },
+                    "explanation"
+                ]
+            }
+        }
     },
 
     "required": [
@@ -510,13 +546,13 @@ SCHEMA = {
         "lesson_plan",
         "teaching_content",
         "worksheet",
-        "quiz",
-    ],
+        "quiz"
+    ]
 }
 
 
 # =========================================================
-# HOME
+# HOME PAGE
 # =========================================================
 
 @app.get("/")
@@ -526,56 +562,89 @@ def home():
 
         raise HTTPException(
             status_code=500,
-            detail="ไม่พบไฟล์ static/index.html",
+            detail="ไม่พบไฟล์ static/index.html"
         )
 
     return FileResponse(
         str(INDEX_FILE),
-        media_type="text/html",
+        media_type="text/html"
     )
 
 
 # =========================================================
-# HEALTH
+# HEALTH CHECK
 # =========================================================
 
 @app.get("/health")
 def health():
 
     return {
+
         "status": "ok",
+
         "app": "AI ครูผู้ช่วย",
+
         "version": "1.2.0",
-        "model": MODEL,
+
+        "model": MODEL
     }
 
 
 # =========================================================
-# GENERATE
+# GENERATE TEACHER PACK
 # =========================================================
 
 @app.post("/api/generate")
 def generate(req: GenerateRequest):
 
-    api_key = os.getenv("OPENAI_API_KEY")
+    # -----------------------------------------------------
+    # API KEY
+    # -----------------------------------------------------
+
+    api_key = os.getenv(
+        "OPENAI_API_KEY"
+    )
 
     if not api_key:
 
         raise HTTPException(
             status_code=500,
-            detail="ยังไม่ได้ตั้งค่า OPENAI_API_KEY ใน Render",
+            detail=(
+                "ยังไม่ได้ตั้งค่า "
+                "OPENAI_API_KEY "
+                "ใน Render"
+            )
         )
 
 
     # -----------------------------------------------------
-    # VALIDATE TYPES
+    # ALLOWED TYPES
+    # -----------------------------------------------------
+
+    allowed_types = {
+
+        "multiple_choice",
+
+        "fill_blank",
+
+        "calculation",
+
+        "application"
+    }
+
+
+    # -----------------------------------------------------
+    # CHECK TYPES
     # -----------------------------------------------------
 
     if not req.question_types:
 
         raise HTTPException(
             status_code=400,
-            detail="กรุณาเลือกรูปแบบข้อสอบอย่างน้อย 1 แบบ",
+            detail=(
+                "กรุณาเลือกรูปแบบข้อสอบ "
+                "อย่างน้อย 1 แบบ"
+            )
         )
 
 
@@ -596,13 +665,17 @@ def generate(req: GenerateRequest):
             detail=(
                 "รูปแบบข้อสอบไม่ถูกต้อง: "
                 + ", ".join(invalid_types)
-            ),
+            )
         )
 
 
+    # -----------------------------------------------------
+    # TYPE NAMES
+    # -----------------------------------------------------
+
     selected_types = ", ".join(
 
-        type_names[t]
+        TYPE_NAMES[t]
 
         for t in req.question_types
     )
@@ -634,15 +707,15 @@ def generate(req: GenerateRequest):
 {req.difficulty}
 
 
-ข้อกำหนด:
+ข้อกำหนดเพิ่มเติม:
 
 - สร้าง Teacher Pack ครบชุด
 - สร้างเนื้อหาที่ครูใช้สอนจริง
 - สร้างตัวอย่างประกอบการสอน
 - สร้างใบงานประมาณ 10-20 ข้อ
 - สร้างแบบทดสอบจำนวน {req.question_count} ข้อ
-- ใช้เฉพาะประเภทที่เลือก
-- ห้ามสร้างประเภทอื่น
+- แบบทดสอบต้องใช้เฉพาะประเภทที่เลือก
+- ห้ามสร้างประเภทที่ไม่ได้เลือก
 - ตรวจสอบเฉลยทุกข้อ
 - ตรวจสอบความสอดคล้องระหว่างคำถามและคำตอบ
 """
@@ -668,15 +741,24 @@ def generate(req: GenerateRequest):
             input=user_prompt,
 
             text={
+
                 "format": {
+
                     "type": "json_schema",
+
                     "name": "teacher_pack",
+
                     "strict": True,
-                    "schema": SCHEMA,
+
+                    "schema": SCHEMA
                 }
-            },
+            }
         )
 
+
+        # -------------------------------------------------
+        # OUTPUT
+        # -------------------------------------------------
 
         output_text = response.output_text
 
@@ -699,19 +781,26 @@ def generate(req: GenerateRequest):
     except json.JSONDecodeError:
 
         raise HTTPException(
+
             status_code=500,
-            detail="AI ส่งข้อมูลกลับมาไม่ใช่ JSON ที่ถูกต้อง",
+
+            detail=(
+                "AI ส่งข้อมูลกลับมา "
+                "ไม่ใช่ JSON ที่ถูกต้อง"
+            )
         )
 
 
     except Exception as e:
 
         raise HTTPException(
+
             status_code=500,
+
             detail=(
                 "สร้างชุดการสอนไม่สำเร็จ: "
                 + str(e)
-            ),
+            )
         )
 
 
@@ -721,84 +810,86 @@ def generate(req: GenerateRequest):
 
 def register_thai_font():
 
-    candidates = [
+    """
+    โหลดฟอนต์ภาษาไทยจากโปรเจกต์โดยตรง
 
-        (
-            "/usr/share/fonts/truetype/noto/"
-            "NotoSansThai-Regular.ttf",
+    โครงสร้างที่ต้องมี:
 
-            "/usr/share/fonts/truetype/noto/"
-            "NotoSansThai-Bold.ttf",
-        ),
+    Ai-Teacher/
+        app/
+            main.py
+        fonts/
+            NotoSansThai-Regular.ttf
+    """
 
-        (
-            "/usr/share/fonts/opentype/noto/"
-            "NotoSansThai-Regular.ttf",
+    # -----------------------------------------------------
+    # CHECK FONT DIRECTORY
+    # -----------------------------------------------------
 
-            "/usr/share/fonts/opentype/noto/"
-            "NotoSansThai-Bold.ttf",
-        ),
+    if not FONT_DIR.exists():
 
-        (
-            "/usr/share/fonts/truetype/noto/"
-            "NotoSansThaiLooped-Regular.ttf",
-
-            "/usr/share/fonts/truetype/noto/"
-            "NotoSansThaiLooped-Bold.ttf",
-        ),
-    ]
+        raise RuntimeError(
+            "ไม่พบโฟลเดอร์ fonts: "
+            + str(FONT_DIR)
+        )
 
 
-    for regular, bold in candidates:
+    # -----------------------------------------------------
+    # CHECK FONT FILE
+    # -----------------------------------------------------
 
-        if (
-            Path(regular).exists()
-            and Path(bold).exists()
-        ):
+    if not THAI_FONT_FILE.exists():
 
-            try:
+        raise RuntimeError(
+            "ไม่พบไฟล์ฟอนต์ภาษาไทย: "
+            + str(THAI_FONT_FILE)
+        )
 
-                pdfmetrics.registerFont(
-                    TTFont(
-                        "Thai",
-                        regular
-                    )
-                )
 
-                pdfmetrics.registerFont(
-                    TTFont(
-                        "Thai-Bold",
-                        bold
-                    )
-                )
+    # -----------------------------------------------------
+    # REGISTER FONT
+    # -----------------------------------------------------
 
-                return (
+    try:
+
+        # ป้องกัน register ซ้ำ
+        if "Thai" not in pdfmetrics.getRegisteredFontNames():
+
+            pdfmetrics.registerFont(
+                TTFont(
                     "Thai",
-                    "Thai-Bold"
+                    str(THAI_FONT_FILE)
                 )
-
-            except Exception:
-
-                pass
+            )
 
 
-    return (
-        "Helvetica",
-        "Helvetica-Bold"
-    )
+        return "Thai"
+
+
+    except Exception as e:
+
+        raise RuntimeError(
+            "โหลดฟอนต์ภาษาไทยไม่สำเร็จ: "
+            + str(e)
+        )
 
 
 # =========================================================
-# ESCAPE
+# ESCAPE HTML
 # =========================================================
 
 def esc(text):
 
     return (
+
         str(text or "")
+
         .replace("&", "&amp;")
+
         .replace("<", "&lt;")
+
         .replace(">", "&gt;")
+
     )
 
 
@@ -808,14 +899,26 @@ def esc(text):
 
 def build_pdf(
     data,
-    section="all",
+    section="all"
 ):
 
-    regular, bold = register_thai_font()
+    # -----------------------------------------------------
+    # REGISTER THAI FONT
+    # -----------------------------------------------------
 
+    thai_font = register_thai_font()
+
+
+    # -----------------------------------------------------
+    # BUFFER
+    # -----------------------------------------------------
 
     buffer = BytesIO()
 
+
+    # -----------------------------------------------------
+    # DOCUMENT
+    # -----------------------------------------------------
 
     doc = SimpleDocTemplate(
 
@@ -831,9 +934,13 @@ def build_pdf(
 
         bottomMargin=16 * mm,
 
-        title="AI ครูผู้ช่วย",
+        title="AI ครูผู้ช่วย"
     )
 
+
+    # -----------------------------------------------------
+    # STYLES
+    # -----------------------------------------------------
 
     styles = getSampleStyleSheet()
 
@@ -844,15 +951,15 @@ def build_pdf(
 
         parent=styles["Title"],
 
-        fontName=bold,
+        fontName=thai_font,
 
         fontSize=20,
 
-        leading=25,
+        leading=26,
 
         alignment=TA_CENTER,
 
-        spaceAfter=8,
+        spaceAfter=8
     )
 
 
@@ -862,15 +969,15 @@ def build_pdf(
 
         parent=styles["Heading1"],
 
-        fontName=bold,
+        fontName=thai_font,
 
         fontSize=15,
 
-        leading=20,
+        leading=21,
 
         spaceBefore=10,
 
-        spaceAfter=7,
+        spaceAfter=7
     )
 
 
@@ -880,15 +987,15 @@ def build_pdf(
 
         parent=styles["Heading2"],
 
-        fontName=bold,
+        fontName=thai_font,
 
         fontSize=12,
 
-        leading=17,
+        leading=18,
 
         spaceBefore=8,
 
-        spaceAfter=5,
+        spaceAfter=5
     )
 
 
@@ -898,13 +1005,13 @@ def build_pdf(
 
         parent=styles["BodyText"],
 
-        fontName=regular,
+        fontName=thai_font,
 
         fontSize=10.5,
 
-        leading=17,
+        leading=18,
 
-        spaceAfter=5,
+        spaceAfter=5
     )
 
 
@@ -914,9 +1021,11 @@ def build_pdf(
 
         parent=body,
 
+        fontName=thai_font,
+
         fontSize=9,
 
-        leading=14,
+        leading=14
     )
 
 
@@ -926,16 +1035,23 @@ def build_pdf(
 
         parent=body,
 
-        fontName=bold,
+        fontName=thai_font,
 
-        spaceAfter=3,
+        spaceAfter=3
     )
 
+
+    # -----------------------------------------------------
+    # STORY
+    # -----------------------------------------------------
 
     story = []
 
 
-    summary = data["summary"]
+    summary = data.get(
+        "summary",
+        {}
+    )
 
 
     # =====================================================
@@ -943,50 +1059,64 @@ def build_pdf(
     # =====================================================
 
     story.append(
+
         Paragraph(
             "AI ครูผู้ช่วย",
-            title_style,
+            title_style
         )
+
     )
 
 
     story.append(
+
         Paragraph(
             "ชุดการสอนพร้อมใช้",
-            h2,
+            h2
         )
+
     )
 
 
     story.append(
+
         Paragraph(
+
             f"<b>วิชา:</b> "
-            f"{esc(summary['subject'])}"
+            f"{esc(summary.get('subject'))}"
             f"&nbsp;&nbsp;&nbsp;"
             f"<b>ชั้น:</b> "
-            f"{esc(summary['grade'])}",
-            body,
+            f"{esc(summary.get('grade'))}",
+
+            body
         )
+
     )
 
 
     story.append(
+
         Paragraph(
+
             f"<b>เรื่อง:</b> "
-            f"{esc(summary['topic'])}"
+            f"{esc(summary.get('topic'))}"
             f"&nbsp;&nbsp;&nbsp;"
             f"<b>เวลา:</b> "
-            f"{esc(summary['duration'])}",
-            body,
+            f"{esc(summary.get('duration'))}",
+
+            body
         )
+
     )
 
 
     story.append(
+
         Spacer(
             1,
-            5 * mm,
+            5 * mm
         )
+
     )
 
 
@@ -1001,135 +1131,186 @@ def build_pdf(
         content = data["teaching_content"]
 
 
+        # -------------------------------------------------
+        # OBJECTIVE
+        # -------------------------------------------------
+
         story.append(
+
             Paragraph(
                 "1. จุดประสงค์การเรียนรู้",
-                h1,
+                h1
             )
+
         )
 
 
         for item in lesson["objective"]:
 
             story.append(
+
                 Paragraph(
                     "• " + esc(item),
-                    body,
+                    body
                 )
+
             )
 
 
+        # -------------------------------------------------
+        # TEACHING CONTENT
+        # -------------------------------------------------
+
         story.append(
+
             Paragraph(
                 "2. เนื้อหาที่ใช้สอน",
-                h1,
+                h1
             )
+
         )
 
 
         story.append(
+
             Paragraph(
                 esc(content["intro"]),
-                body,
+                body
             )
+
         )
 
 
+        # -------------------------------------------------
+        # CONCEPTS
+        # -------------------------------------------------
+
         story.append(
+
             Paragraph(
                 "สาระสำคัญ",
-                h2,
+                h2
             )
+
         )
 
 
         for item in content["concepts"]:
 
             story.append(
+
                 Paragraph(
                     "• " + esc(item),
-                    body,
+                    body
                 )
+
             )
 
+
+        # -------------------------------------------------
+        # EXAMPLES
+        # -------------------------------------------------
 
         story.append(
+
             Paragraph(
                 "ตัวอย่างสำหรับใช้สอน",
-                h2,
+                h2
             )
+
         )
 
 
         for example in content["examples"]:
 
             story.append(
-                KeepTogether(
-                    [
-                        Paragraph(
-                            esc(
-                                example["title"]
-                            ),
-                            question_style,
+
+                KeepTogether([
+
+                    Paragraph(
+
+                        esc(
+                            example["title"]
                         ),
 
-                        Paragraph(
-                            esc(
-                                example["explanation"]
-                            ),
-                            body,
+                        question_style
+                    ),
+
+                    Paragraph(
+
+                        esc(
+                            example["explanation"]
                         ),
-                    ]
-                )
+
+                        body
+                    )
+
+                ])
+
             )
 
+
+        # -------------------------------------------------
+        # THINKING QUESTIONS
+        # -------------------------------------------------
 
         story.append(
+
             Paragraph(
                 "คำถามชวนคิด",
-                h2,
+                h2
             )
+
         )
 
 
-        for item in content[
-            "thinking_questions"
-        ]:
+        for item in content["thinking_questions"]:
 
             story.append(
+
                 Paragraph(
                     "• " + esc(item),
-                    body,
+                    body
                 )
+
             )
 
+
+        # -------------------------------------------------
+        # LESSON STEPS
+        # -------------------------------------------------
 
         story.append(
+
             Paragraph(
                 "3. ขั้นตอนการจัดการเรียนรู้",
-                h1,
+                h1
             )
+
         )
 
 
         rows = [
 
             [
+
                 Paragraph(
                     "<b>เวลา</b>",
-                    small,
+                    small
                 ),
 
                 Paragraph(
                     "<b>กิจกรรม</b>",
-                    small,
+                    small
                 ),
 
                 Paragraph(
                     "<b>รายละเอียด</b>",
-                    small,
-                ),
+                    small
+                )
+
             ]
+
         ]
 
 
@@ -1138,21 +1319,24 @@ def build_pdf(
             rows.append(
 
                 [
+
                     Paragraph(
                         esc(step["time"]),
-                        small,
+                        small
                     ),
 
                     Paragraph(
                         esc(step["title"]),
-                        small,
+                        small
                     ),
 
                     Paragraph(
                         esc(step["detail"]),
-                        small,
-                    ),
+                        small
+                    )
+
                 ]
+
             )
 
 
@@ -1161,112 +1345,168 @@ def build_pdf(
             rows,
 
             colWidths=[
+
                 24 * mm,
+
                 40 * mm,
-                112 * mm,
+
+                112 * mm
+
             ],
 
-            repeatRows=1,
+            repeatRows=1
         )
 
 
         table.setStyle(
 
-            TableStyle(
+            TableStyle([
 
-                [
-                    (
-                        "BACKGROUND",
-                        (0, 0),
-                        (-1, 0),
-                        colors.HexColor("#eeeaff"),
-                    ),
+                (
 
-                    (
-                        "GRID",
-                        (0, 0),
-                        (-1, -1),
-                        0.4,
-                        colors.HexColor("#d9d4e8"),
-                    ),
+                    "BACKGROUND",
 
-                    (
-                        "VALIGN",
-                        (0, 0),
-                        (-1, -1),
-                        "TOP",
-                    ),
+                    (0, 0),
 
-                    (
-                        "LEFTPADDING",
-                        (0, 0),
-                        (-1, -1),
-                        5,
-                    ),
+                    (-1, 0),
 
-                    (
-                        "RIGHTPADDING",
-                        (0, 0),
-                        (-1, -1),
-                        5,
-                    ),
+                    colors.HexColor(
+                        "#eeeaff"
+                    )
 
-                    (
-                        "TOPPADDING",
-                        (0, 0),
-                        (-1, -1),
-                        5,
-                    ),
+                ),
 
-                    (
-                        "BOTTOMPADDING",
-                        (0, 0),
-                        (-1, -1),
-                        5,
-                    ),
-                ]
-            )
+                (
+
+                    "GRID",
+
+                    (0, 0),
+
+                    (-1, -1),
+
+                    0.4,
+
+                    colors.HexColor(
+                        "#d9d4e8"
+                    )
+
+                ),
+
+                (
+
+                    "VALIGN",
+
+                    (0, 0),
+
+                    (-1, -1),
+
+                    "TOP"
+
+                ),
+
+                (
+
+                    "LEFTPADDING",
+
+                    (0, 0),
+
+                    (-1, -1),
+
+                    5
+
+                ),
+
+                (
+
+                    "RIGHTPADDING",
+
+                    (0, 0),
+
+                    (-1, -1),
+
+                    5
+
+                ),
+
+                (
+
+                    "TOPPADDING",
+
+                    (0, 0),
+
+                    (-1, -1),
+
+                    5
+
+                ),
+
+                (
+
+                    "BOTTOMPADDING",
+
+                    (0, 0),
+
+                    (-1, -1),
+
+                    5
+
+                )
+
+            ])
+
         )
 
 
         story.append(table)
 
 
+        # -------------------------------------------------
+        # TEACHER TIPS
+        # -------------------------------------------------
+
         story.append(
+
             Paragraph(
                 "4. เคล็ดลับสำหรับครู",
-                h1,
+                h1
             )
+
         )
 
 
-        for item in content[
-            "teacher_tips"
-        ]:
+        for item in content["teacher_tips"]:
 
             story.append(
+
                 Paragraph(
                     "• " + esc(item),
-                    body,
+                    body
                 )
+
             )
 
+
+        # -------------------------------------------------
+        # ASSESSMENT
+        # -------------------------------------------------
 
         story.append(
+
             Paragraph(
                 "5. การประเมินผล",
-                h1,
+                h1
             )
+
         )
 
 
         story.append(
+
             Paragraph(
-                esc(
-                    lesson["assessment"]
-                ),
-                body,
+                esc(lesson["assessment"]),
+                body
             )
+
         )
 
 
@@ -1280,36 +1520,48 @@ def build_pdf(
 
 
         story.append(
+
             Paragraph(
                 "ใบงาน",
-                title_style,
+                title_style
             )
+
         )
 
 
         story.append(
+
             Paragraph(
+
                 f"<b>เรื่อง:</b> "
-                f"{esc(summary['topic'])}",
-                body,
+                f"{esc(summary.get('topic'))}",
+
+                body
             )
+
         )
 
 
         story.append(
+
             Paragraph(
+
                 "ชื่อ................................................ "
                 "ชั้น........ เลขที่........",
-                body,
+
+                body
             )
+
         )
 
 
         story.append(
+
             Spacer(
                 1,
-                4 * mm,
+                4 * mm
             )
+
         )
 
 
@@ -1317,27 +1569,31 @@ def build_pdf(
 
             story.append(
 
-                KeepTogether(
-                    [
+                KeepTogether([
 
-                        Paragraph(
-                            f"{item['no']}. "
-                            f"{esc(item['question'])}",
-                            body,
-                        ),
+                    Paragraph(
 
-                        Paragraph(
-                            "คำตอบ: "
-                            "................................................................................",
-                            body,
-                        ),
+                        f"{item['no']}. "
+                        f"{esc(item['question'])}",
 
-                        Spacer(
-                            1,
-                            2 * mm,
-                        ),
-                    ]
-                )
+                        body
+                    ),
+
+                    Paragraph(
+
+                        "คำตอบ: "
+                        "................................................................................",
+
+                        body
+                    ),
+
+                    Spacer(
+                        1,
+                        2 * mm
+                    )
+
+                ])
+
             )
 
 
@@ -1351,36 +1607,50 @@ def build_pdf(
 
 
         story.append(
+
             Paragraph(
                 "แบบทดสอบ",
-                title_style,
+                title_style
             )
+
         )
 
 
         story.append(
+
             Paragraph(
+
                 f"<b>เรื่อง:</b> "
-                f"{esc(summary['topic'])}",
-                body,
+                f"{esc(summary.get('topic'))}",
+
+                body
             )
+
         )
 
 
         story.append(
+
             Paragraph(
+
                 "ชื่อ................................................ "
                 "ชั้น........ เลขที่........",
-                body,
+
+                body
             )
+
         )
 
 
         story.append(
+
             Paragraph(
+
                 "คำชี้แจง: ทำแบบทดสอบตามคำสั่งของแต่ละข้อ",
-                body,
+
+                body
             )
+
         )
 
 
@@ -1389,17 +1659,26 @@ def build_pdf(
             block = [
 
                 Paragraph(
+
                     f"ข้อ {item['no']} "
-                    f"[{esc(type_names.get(item['type'], item['type']))}]",
-                    question_style,
+                    f"[{esc(TYPE_NAMES.get(item['type'], item['type']))}]",
+
+                    question_style
                 ),
 
                 Paragraph(
+
                     esc(item["question"]),
-                    body,
-                ),
+
+                    body
+                )
+
             ]
 
+
+            # -------------------------------------------------
+            # OPTIONS
+            # -------------------------------------------------
 
             if item.get("options"):
 
@@ -1411,25 +1690,34 @@ def build_pdf(
                         65 + i
                     )
 
+
                     block.append(
+
                         Paragraph(
+
                             f"{letter}. "
                             f"{esc(option)}",
-                            body,
+
+                            body
                         )
+
                     )
 
 
             block.append(
+
                 Spacer(
                     1,
-                    2 * mm,
+                    2 * mm
                 )
+
             )
 
 
             story.append(
+
                 KeepTogether(block)
+
             )
 
 
@@ -1443,37 +1731,55 @@ def build_pdf(
 
 
         story.append(
+
             Paragraph(
                 "เฉลย",
-                title_style,
+                title_style
             )
+
         )
 
 
+        # -------------------------------------------------
+        # WORKSHEET ANSWERS
+        # -------------------------------------------------
+
         story.append(
+
             Paragraph(
                 "เฉลยใบงาน",
-                h1,
+                h1
             )
+
         )
 
 
         for item in data["worksheet"]:
 
             story.append(
+
                 Paragraph(
+
                     f"{item['no']}. "
                     f"{esc(item['answer'])}",
-                    body,
+
+                    body
                 )
+
             )
 
+
+        # -------------------------------------------------
+        # QUIZ ANSWERS
+        # -------------------------------------------------
 
         story.append(
+
             Paragraph(
                 "เฉลยแบบทดสอบ",
-                h1,
+                h1
             )
+
         )
 
 
@@ -1481,33 +1787,37 @@ def build_pdf(
 
             story.append(
 
-                KeepTogether(
-                    [
+                KeepTogether([
 
-                        Paragraph(
-                            f"ข้อ {item['no']} — "
-                            f"{esc(item['answer'])}",
-                            question_style,
+                    Paragraph(
+
+                        f"ข้อ {item['no']} — "
+                        f"{esc(item['answer'])}",
+
+                        question_style
+                    ),
+
+                    Paragraph(
+
+                        esc(
+                            item["explanation"]
                         ),
 
-                        Paragraph(
-                            esc(
-                                item["explanation"]
-                            ),
-                            small,
-                        ),
-                    ]
-                )
+                        small
+                    )
+
+                ])
+
             )
 
 
     # =====================================================
-    # SECTION
+    # SELECT SECTION
     # =====================================================
 
     if section in (
         "all",
-        "lesson",
+        "lesson"
     ):
 
         add_lesson()
@@ -1515,7 +1825,7 @@ def build_pdf(
 
     if section in (
         "all",
-        "worksheet",
+        "worksheet"
     ):
 
         add_worksheet()
@@ -1523,7 +1833,7 @@ def build_pdf(
 
     if section in (
         "all",
-        "quiz",
+        "quiz"
     ):
 
         add_quiz()
@@ -1531,7 +1841,7 @@ def build_pdf(
 
     if section in (
         "all",
-        "answers",
+        "answers"
     ):
 
         add_answers()
@@ -1541,14 +1851,19 @@ def build_pdf(
     # FOOTER
     # =====================================================
 
-    def footer(canvas, doc):
+    def footer(
+        canvas,
+        doc
+    ):
 
         canvas.saveState()
 
+
         canvas.setFont(
-            regular,
-            8,
+            thai_font,
+            8
         )
+
 
         canvas.setFillColor(
             colors.HexColor(
@@ -1556,22 +1871,33 @@ def build_pdf(
             )
         )
 
+
         canvas.drawCentredString(
 
             A4[0] / 2,
 
             9 * mm,
 
-            f"AI ครูผู้ช่วย • หน้า {doc.page}",
+            f"AI ครูผู้ช่วย • หน้า {doc.page}"
+
         )
+
 
         canvas.restoreState()
 
 
+    # =====================================================
+    # BUILD
+    # =====================================================
+
     doc.build(
+
         story,
+
         onFirstPage=footer,
-        onLaterPages=footer,
+
+        onLaterPages=footer
+
     )
 
 
@@ -1581,42 +1907,67 @@ def build_pdf(
 
 
 # =========================================================
-# PDF API
+# PDF ENDPOINT
 # =========================================================
 
 @app.post("/api/pdf")
 def create_pdf(
+
     data: dict,
-    section: str = "all",
+
+    section: str = "all"
+
 ):
 
+    # -----------------------------------------------------
+    # ALLOWED SECTIONS
+    # -----------------------------------------------------
+
     allowed_sections = {
+
         "all",
+
         "lesson",
+
         "worksheet",
+
         "quiz",
-        "answers",
+
+        "answers"
+
     }
 
 
     if section not in allowed_sections:
 
         raise HTTPException(
+
             status_code=400,
-            detail="section ไม่ถูกต้อง",
+
+            detail="section ไม่ถูกต้อง"
+
         )
 
+
+    # -----------------------------------------------------
+    # BUILD PDF
+    # -----------------------------------------------------
 
     try:
 
         pdf_file = build_pdf(
+
             data,
-            section,
+
+            section
+
         )
 
 
         filename = (
+
             f"ai-teacher-{section}.pdf"
+
         )
 
 
@@ -1627,9 +1978,13 @@ def create_pdf(
             media_type="application/pdf",
 
             headers={
+
                 "Content-Disposition":
+
                 f'attachment; filename="{filename}"'
-            },
+
+            }
+
         )
 
 
@@ -1640,7 +1995,11 @@ def create_pdf(
             status_code=500,
 
             detail=(
+
                 "สร้าง PDF ไม่สำเร็จ: "
+
                 + str(e)
-            ),
+
+            )
+
         )
