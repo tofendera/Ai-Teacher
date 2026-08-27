@@ -2,7 +2,6 @@
 <html lang="th">
 
 <head>
-
 <meta charset="utf-8">
 
 <meta
@@ -15,7 +14,7 @@
   content="#fff8ed"
 >
 
-<title>สร้างชุดการสอน</title>
+<title>Teacher Pack</title>
 
 <style>
 
@@ -27,6 +26,7 @@
   --primary:#6c63ff;
   --primary2:#5148e8;
   --mint:#dff8ee;
+  --pink:#ffe3ec;
   --blue:#e3f0ff;
   --line:#e9e5dc;
   --shadow:0 12px 30px rgba(49,55,85,.09);
@@ -48,11 +48,13 @@ body{
       #fff8ed 0,
       #f7f5ff 100%
     );
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Noto Sans Thai",
     sans-serif;
+
   color:var(--ink);
 }
 
@@ -70,13 +72,39 @@ textarea{
 }
 
 .header{
-  padding:22px 0 12px;
+  padding:24px 0 12px;
+
   display:flex;
-  justify-content:flex-end;
+  justify-content:space-between;
   align-items:center;
 }
 
-.version{
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+
+  font-weight:800;
+  font-size:20px;
+}
+
+.logo{
+  width:46px;
+  height:46px;
+
+  border-radius:15px;
+
+  background:#fff;
+
+  box-shadow:var(--shadow);
+
+  display:grid;
+  place-items:center;
+
+  font-size:25px;
+}
+
+.badge{
   font-size:12px;
   background:var(--mint);
   padding:7px 11px;
@@ -86,100 +114,144 @@ textarea{
 
 .hero{
   text-align:center;
-  padding:28px 0 20px;
+  padding:30px 0 20px;
 }
 
 .hero h1{
-  font-size:clamp(
-    30px,
-    7vw,
-    46px
-  );
+  font-size:clamp(30px,7vw,48px);
+
   margin:0 0 10px;
+
   letter-spacing:-1px;
 }
 
 .hero p{
   color:var(--muted);
+
   font-size:16px;
+
   margin:0;
-  line-height:1.6;
 }
 
 .card{
   background:var(--card);
+
   border:1px solid var(--line);
+
   border-radius:24px;
+
   padding:22px;
+
   box-shadow:var(--shadow);
+
   margin:16px 0;
 }
 
 .label{
   font-weight:800;
+
   margin-bottom:9px;
+
   display:block;
 }
 
-.field-group{
-  margin-bottom:18px;
-}
-
-.input,
-.prompt,
-select{
-  width:100%;
-  border:2px solid #e8e4f8;
-  border-radius:17px;
-  padding:15px;
-  outline:none;
-  background:#fcfbff;
-  color:var(--ink);
-}
-
-.input:focus,
-.prompt:focus,
-select:focus{
-  border-color:var(--primary);
-}
-
 .prompt{
-  min-height:120px;
+  width:100%;
+
+  min-height:112px;
+
+  border:2px solid #e8e4f8;
+
+  border-radius:18px;
+
+  padding:16px;
+
   resize:vertical;
+
+  outline:none;
+
+  background:#fcfbff;
+}
+
+.prompt:focus{
+  border-color:var(--primary);
 }
 
 .examples{
   display:flex;
+
   gap:8px;
+
   flex-wrap:wrap;
+
   margin-top:10px;
 }
 
 .example{
   border:0;
+
   background:#f4f2ff;
+
   color:#5148e8;
+
   border-radius:999px;
+
   padding:8px 12px;
+
   cursor:pointer;
 }
 
 .grid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:14px;
 }
 
 .field{
   background:#faf9f5;
+
   border:1px solid var(--line);
+
   padding:15px;
+
   border-radius:18px;
+}
+
+.field input{
+  width:100%;
+
+  border:0;
+
+  outline:none;
+
+  background:transparent;
+
+  color:var(--ink);
+
+  font-weight:700;
+}
+
+select{
+  width:100%;
+
+  border:0;
+
+  background:transparent;
+
+  color:var(--ink);
+
+  outline:none;
+
+  font-weight:700;
 }
 
 .types{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:10px;
 }
 
@@ -189,40 +261,58 @@ select:focus{
 
 .check input{
   position:absolute;
+
   opacity:0;
 }
 
 .check label{
   display:block;
+
   padding:14px;
+
   border:2px solid var(--line);
+
   border-radius:16px;
+
   background:#fff;
+
   cursor:pointer;
+
   font-weight:700;
 }
 
-.check input:checked + label{
+.check input:checked+label{
   border-color:var(--primary);
+
   background:#f0efff;
+
   color:#5148e8;
 }
 
 button.primary{
   width:100%;
+
   border:0;
+
   border-radius:18px;
+
   padding:17px;
+
   background:
     linear-gradient(
       135deg,
       var(--primary),
       var(--primary2)
     );
+
   color:#fff;
+
   font-weight:800;
+
   font-size:18px;
+
   cursor:pointer;
+
   box-shadow:
     0 9px 18px
     rgba(108,99,255,.25);
@@ -230,13 +320,17 @@ button.primary{
 
 button.primary:disabled{
   opacity:.6;
+
   cursor:wait;
 }
 
 .note{
   text-align:center;
+
   color:var(--muted);
+
   font-size:13px;
+
   margin-top:12px;
 }
 
@@ -246,11 +340,13 @@ button.primary:disabled{
 
 .loading{
   text-align:center;
-  padding:38px 20px;
+
+  padding:35px;
 }
 
-.loading-icon{
-  font-size:40px;
+.spinner{
+  font-size:38px;
+
   animation:bounce 1s infinite alternate;
 }
 
@@ -260,139 +356,215 @@ button.primary:disabled{
   }
 }
 
-.progress{
-  height:10px;
-  background:#eee;
+.error{
+  background:#ffe7e7;
+
+  color:#9d2929;
+
+  padding:14px;
+
+  border-radius:16px;
+
+  white-space:pre-wrap;
+}
+
+.result-head{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+}
+
+.result-head h2{
+  margin:0;
+}
+
+.chips{
+  display:flex;
+
+  gap:7px;
+
+  flex-wrap:wrap;
+}
+
+.chip{
+  padding:7px 10px;
+
   border-radius:999px;
-  overflow:hidden;
-  margin-top:18px;
+
+  background:var(--blue);
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+.tabs{
+  display:flex;
+
+  gap:8px;
+
+  overflow:auto;
+
+  padding-bottom:4px;
+}
+
+.tab{
+  white-space:nowrap;
+
+  border:0;
+
+  background:#f2f1ee;
+
+  border-radius:12px;
+
+  padding:10px 13px;
+
+  font-weight:800;
+
+  color:var(--muted);
+
+  cursor:pointer;
+}
+
+.tab.active{
+  background:#5148e8;
+
+  color:#fff;
+}
+
+.panel{
+  line-height:1.75;
+}
+
+.panel h3{
+  margin-top:0;
+}
+
+.item{
+  padding:14px;
+
+  border:1px solid var(--line);
+
+  border-radius:16px;
+
+  margin:10px 0;
+
+  background:#fff;
+}
+
+.qtype{
+  font-size:11px;
+
+  background:#f1f0ff;
+
+  color:#5148e8;
+
+  padding:5px 8px;
+
+  border-radius:999px;
+
+  font-weight:800;
+}
+
+.actions{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+}
+
+.secondary{
+  border:2px solid #e7e3f6;
+
+  background:#fff;
+
+  color:#5148e8;
+
+  border-radius:16px;
+
+  padding:13px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.secondary:disabled{
+  opacity:.5;
+
+  cursor:wait;
+}
+
+.saved{
+  background:#e8f8f1;
+
+  color:#237451;
+
+  padding:13px;
+
+  border-radius:16px;
+
+  margin-bottom:14px;
+
+  font-weight:700;
+}
+
+.progress-box{
+  margin-top:15px;
+
+  background:#f6f5ff;
+
+  border-radius:16px;
+
+  padding:15px;
 }
 
 .progress-bar{
-  width:0%;
+  height:8px;
+
+  background:#e7e4ff;
+
+  border-radius:99px;
+
+  overflow:hidden;
+
+  margin-top:10px;
+}
+
+.progress-bar span{
+  display:block;
+
+  width:30%;
+
   height:100%;
+
   background:
     linear-gradient(
       90deg,
       #6c63ff,
       #5148e8
     );
-  transition:
-    width .4s ease;
+
+  border-radius:99px;
+
+  animation:progress 1.5s infinite;
 }
 
-.loading-text{
-  font-weight:800;
-  margin-top:15px;
-}
+@keyframes progress{
+  0%{
+    transform:translateX(-120%);
+  }
 
-.error{
-  background:#ffe7e7;
-  color:#9d2929;
-  padding:14px;
-  border-radius:16px;
-  line-height:1.6;
-}
-
-.result-title{
-  font-size:26px;
-  font-weight:800;
-  margin-bottom:10px;
-}
-
-.chips{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-}
-
-.chip{
-  padding:8px 11px;
-  border-radius:999px;
-  background:var(--blue);
-  font-size:13px;
-  font-weight:800;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:5px;
-  margin-top:20px;
-}
-
-.tab{
-  white-space:nowrap;
-  border:0;
-  background:#f2f1ee;
-  border-radius:13px;
-  padding:11px 14px;
-  font-weight:800;
-  color:var(--muted);
-  cursor:pointer;
-}
-
-.tab.active{
-  background:#5148e8;
-  color:#fff;
-}
-
-.panel{
-  line-height:1.8;
-}
-
-.panel h3{
-  margin-top:22px;
-}
-
-.item{
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  margin:10px 0;
-  background:#fff;
-}
-
-.qtype{
-  display:inline-block;
-  font-size:11px;
-  background:#f1f0ff;
-  color:#5148e8;
-  padding:5px 8px;
-  border-radius:999px;
-  font-weight:800;
-}
-
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.secondary{
-  border:2px solid #e7e3f6;
-  background:#fff;
-  color:#5148e8;
-  border-radius:16px;
-  padding:13px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.saved{
-  background:#e8f8f0;
-  color:#28704d;
-  padding:13px;
-  border-radius:15px;
-  margin-top:15px;
-  font-weight:700;
-}
-
-.empty{
-  text-align:center;
-  color:var(--muted);
-  padding:30px;
+  100%{
+    transform:translateX(350%);
+  }
 }
 
 @media(max-width:650px){
@@ -409,37 +581,17 @@ button.primary:disabled{
     padding:17px;
   }
 
+  .header{
+    padding-top:16px;
+  }
+
   .actions{
     grid-template-columns:1fr;
   }
 
 }
 
-@media print{
-
-  body{
-    background:#fff;
-  }
-
-  .header,
-  .hero,
-  #builder,
-  #loading,
-  #error,
-  .actions,
-  .tabs{
-    display:none !important;
-  }
-
-  .card{
-    box-shadow:none;
-    border:0;
-  }
-
-}
-
 </style>
-
 </head>
 
 <body>
@@ -448,7 +600,12 @@ button.primary:disabled{
 
 <header class="header">
 
-  <div class="version">
+  <div class="brand">
+    <div class="logo">📚</div>
+    Teacher Pack
+  </div>
+
+  <div class="badge">
     V1.5
   </div>
 
@@ -457,69 +614,65 @@ button.primary:disabled{
 
 <section class="hero">
 
-  <h1>
-    สร้างชุดการสอน
-  </h1>
+  <h1>เตรียมการสอน ✨</h1>
 
   <p>
-    กรอกหัวข้อและรายละเอียด แล้วสร้างเอกสารการเรียนการสอนได้ทันที
+    พิมพ์หัวข้อที่ต้องการ แล้วสร้างชุดการสอนได้ทันที
   </p>
 
 </section>
 
 
-<!-- ========================================================= -->
-<!-- BUILDER -->
-<!-- ========================================================= -->
+<!-- =====================================================
+     BUILDER
+===================================================== -->
 
-<section
-  id="builder"
-  class="card"
->
+<section id="builder" class="card">
 
-  <div class="field-group">
+  <label class="label">
+    👋 วันนี้คุณอยากสอนอะไร?
+  </label>
 
-    <label class="label">
-      👋 วันนี้คุณอยากสอนอะไร?
-    </label>
+  <textarea
+    id="prompt"
+    class="prompt"
+    placeholder="เช่น เศษส่วน ป.4 1 ชั่วโมง"
+  ></textarea>
 
-    <textarea
-      id="prompt"
-      class="prompt"
-      placeholder="เช่น เศษส่วน ป.4 1 ชั่วโมง"
-    ></textarea>
 
-    <div class="examples">
+  <div class="examples">
 
-      <button
-        class="example"
-        onclick="fillExample('เศษส่วน ป.4 1 ชั่วโมง')"
-      >
-        🧮 เศษส่วน ป.4
-      </button>
+    <button
+      class="example"
+      onclick="fillExample('เศษส่วน ป.4 1 ชั่วโมง')"
+    >
+      🧮 เศษส่วน ป.4
+    </button>
 
-      <button
-        class="example"
-        onclick="fillExample('ระบบสุริยะ ป.5 1 ชั่วโมง')"
-      >
-        🌎 ระบบสุริยะ ป.5
-      </button>
+    <button
+      class="example"
+      onclick="fillExample('ระบบสุริยะ ป.5 1 ชั่วโมง')"
+    >
+      🌎 ระบบสุริยะ ป.5
+    </button>
 
-      <button
-        class="example"
-        onclick="fillExample('Animals ป.3 30 นาที')"
-      >
-        🇬🇧 Animals ป.3
-      </button>
-
-    </div>
+    <button
+      class="example"
+      onclick="fillExample('Animals ป.3 30 นาที')"
+    >
+      🇬🇧 Animals ป.3
+    </button>
 
   </div>
 
+</section>
 
-  <!-- TEACHER NAME -->
 
-  <div class="field-group">
+<section class="card">
+
+  <!-- ชื่อครู -->
+
+  <div class="field">
 
     <label class="label">
       👨‍🏫 ชื่อครูผู้สอน
@@ -527,18 +680,17 @@ button.primary:disabled{
 
     <input
       id="teacherName"
-      class="input"
       type="text"
-      maxlength="100"
       placeholder="เช่น สมปอง เข้ามา"
     >
 
   </div>
 
 
-  <!-- SETTINGS -->
-
-  <div class="grid">
+  <div
+    class="grid"
+    style="margin-top:14px"
+  >
 
     <div class="field">
 
@@ -592,7 +744,9 @@ button.primary:disabled{
           ปานกลาง
         </option>
 
-        <option value="hard">
+        <option
+          value="hard"
+        >
           ยาก
         </option>
 
@@ -610,14 +764,10 @@ button.primary:disabled{
   </div>
 
 
-  <!-- QUESTION TYPES -->
-
   <div style="margin-top:18px">
 
     <label class="label">
-
       🧠 รูปแบบข้อสอบ
-
       <span
         style="
           color:#6f7890;
@@ -626,7 +776,6 @@ button.primary:disabled{
       >
         (เลือกได้หลายแบบ)
       </span>
-
     </label>
 
 
@@ -640,9 +789,7 @@ button.primary:disabled{
           checked
         >
 
-        <label
-          for="multiple_choice"
-        >
+        <label for="multiple_choice">
           ☑️ ปรนัย
         </label>
 
@@ -656,9 +803,7 @@ button.primary:disabled{
           id="fill_blank"
         >
 
-        <label
-          for="fill_blank"
-        >
+        <label for="fill_blank">
           ✏️ เติมคำ
         </label>
 
@@ -672,9 +817,7 @@ button.primary:disabled{
           id="calculation"
         >
 
-        <label
-          for="calculation"
-        >
+        <label for="calculation">
           🔢 คำนวณ
         </label>
 
@@ -688,9 +831,7 @@ button.primary:disabled{
           id="application"
         >
 
-        <label
-          for="application"
-        >
+        <label for="application">
           💡 ประยุกต์ใช้
         </label>
 
@@ -701,9 +842,7 @@ button.primary:disabled{
   </div>
 
 
-  <!-- GENERATE -->
-
-  <div style="margin-top:20px">
+  <div style="margin-top:18px">
 
     <button
       id="generateBtn"
@@ -714,7 +853,7 @@ button.primary:disabled{
     </button>
 
     <div class="note">
-      แผนการสอน + ใบงาน + แบบทดสอบ + เฉลย
+      แผนการสอน + ใบงาน + แบบทดสอบ + เฉลย + PDF
     </div>
 
   </div>
@@ -722,16 +861,16 @@ button.primary:disabled{
 </section>
 
 
-<!-- ========================================================= -->
-<!-- LOADING -->
-<!-- ========================================================= -->
+<!-- =====================================================
+     LOADING
+===================================================== -->
 
 <section
   id="loading"
   class="card loading hidden"
 >
 
-  <div class="loading-icon">
+  <div class="spinner">
     ✨
   </div>
 
@@ -739,37 +878,31 @@ button.primary:disabled{
     กำลังสร้างชุดการสอน...
   </h3>
 
-  <div
-    id="loadingText"
-    class="loading-text"
-  >
-    กำลังเตรียมข้อมูล
-  </div>
-
-  <div class="progress">
-
-    <div
-      id="progressBar"
-      class="progress-bar"
-    ></div>
-
-  </div>
-
   <p
-    style="
-      color:#6f7890;
-      margin-top:12px
-    "
+    id="loadingText"
+    style="color:#6f7890"
   >
-    กรุณารอสักครู่ ระบบกำลังจัดเรียงเนื้อหาและตรวจคำตอบ
+    AI กำลังเตรียมเนื้อหาและตรวจสอบข้อสอบ
   </p>
+
+  <div class="progress-box">
+
+    <div>
+      กรุณารอสักครู่ ระบบกำลังจัดทำเอกสาร
+    </div>
+
+    <div class="progress-bar">
+      <span></span>
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- ========================================================= -->
-<!-- ERROR -->
-<!-- ========================================================= -->
+<!-- =====================================================
+     ERROR
+===================================================== -->
 
 <section
   id="error"
@@ -777,42 +910,54 @@ button.primary:disabled{
 >
 
   <div
-    id="errorText"
     class="error"
+    id="errorText"
   ></div>
 
 </section>
 
 
-<!-- ========================================================= -->
-<!-- RESULT -->
-<!-- ========================================================= -->
+<!-- =====================================================
+     RESULT
+===================================================== -->
 
 <section
   id="result"
   class="card hidden"
 >
 
-  <div class="result-title">
-    🎉 ชุดการสอนพร้อมแล้ว
+  <div class="result-head">
+
+    <div>
+
+      <h2>
+        🎉 ชุดการสอนพร้อมแล้ว
+      </h2>
+
+      <div
+        id="summary"
+        class="chips"
+        style="margin-top:8px"
+      ></div>
+
+    </div>
+
   </div>
-
-
-  <div
-    id="summary"
-    class="chips"
-  ></div>
 
 
   <div
     id="savedMessage"
     class="saved hidden"
   >
-    💾 ชุดการสอนนี้ถูกบันทึกไว้ในเครื่องแล้ว
+    💾 ชุดการสอนนี้ยังคงอยู่บนหน้านี้
+    สามารถกดบันทึก PDF ได้โดยไม่ทำให้ข้อมูลหาย
   </div>
 
 
-  <div class="tabs">
+  <div
+    class="tabs"
+    style="margin-top:18px"
+  >
 
     <button
       class="tab active"
@@ -871,10 +1016,11 @@ button.primary:disabled{
 
   <div
     class="actions"
-    style="margin-top:20px"
+    style="margin-top:18px"
   >
 
     <button
+      id="pdfBtn"
       class="secondary"
       onclick="savePDF()"
     >
@@ -899,84 +1045,19 @@ button.primary:disabled{
 
 let currentData = null;
 
+
 const typeNames = {
+
   multiple_choice:"ปรนัย",
+
   fill_blank:"เติมคำ",
+
   calculation:"คำนวณ",
+
   application:"ประยุกต์ใช้"
+
 };
 
-
-// ============================================================
-// INITIAL LOAD
-// ============================================================
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    const teacher =
-      localStorage.getItem(
-        "teacher_name"
-      );
-
-    if(teacher){
-
-      document.getElementById(
-        "teacherName"
-      ).value = teacher;
-
-    }
-
-    const saved =
-      localStorage.getItem(
-        "teacher_pack_v15"
-      );
-
-    if(saved){
-
-      try{
-
-        const data =
-          JSON.parse(saved);
-
-        if(
-          data &&
-          data.summary
-        ){
-
-          currentData = data;
-
-          render(
-            data,
-            false
-          );
-
-          document.getElementById(
-            "savedMessage"
-          ).classList.remove(
-            "hidden"
-          );
-
-        }
-
-      }catch(e){
-
-        localStorage.removeItem(
-          "teacher_pack_v15"
-        );
-
-      }
-
-    }
-
-  }
-);
-
-
-// ============================================================
-// EXAMPLE
-// ============================================================
 
 function fillExample(value){
 
@@ -987,57 +1068,49 @@ function fillExample(value){
 }
 
 
-// ============================================================
-// TABS
-// ============================================================
-
-document.querySelectorAll(
-  ".tab"
-).forEach(
-  btn => {
+document
+  .querySelectorAll(".tab")
+  .forEach(btn => {
 
     btn.addEventListener(
       "click",
       () => {
 
-        document.querySelectorAll(
-          ".tab"
-        ).forEach(
-          b =>
-            b.classList.remove(
-              "active"
-            )
-        );
+        document
+          .querySelectorAll(".tab")
+          .forEach(
+            b =>
+              b.classList.remove(
+                "active"
+              )
+          );
 
-        document.querySelectorAll(
-          ".panel"
-        ).forEach(
-          p =>
-            p.classList.add(
-              "hidden"
-            )
-        );
+        document
+          .querySelectorAll(".panel")
+          .forEach(
+            p =>
+              p.classList.add(
+                "hidden"
+              )
+          );
 
         btn.classList.add(
           "active"
         );
 
-        document.getElementById(
-          btn.dataset.tab
-        ).classList.remove(
-          "hidden"
-        );
+        document
+          .getElementById(
+            btn.dataset.tab
+          )
+          .classList.remove(
+            "hidden"
+          );
 
       }
     );
 
-  }
-);
+  });
 
-
-// ============================================================
-// ESCAPE
-// ============================================================
 
 function esc(value){
 
@@ -1057,54 +1130,130 @@ function esc(value){
 }
 
 
-// ============================================================
-// GENERATE
-// ============================================================
+function showError(message){
+
+  const error =
+    document.getElementById(
+      "error"
+    );
+
+  const errorText =
+    document.getElementById(
+      "errorText"
+    );
+
+  error.classList.remove(
+    "hidden"
+  );
+
+  errorText.textContent =
+    message || "เกิดข้อผิดพลาด";
+
+}
+
+
+function hideError(){
+
+  document
+    .getElementById(
+      "error"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+}
+
+
+function setLoading(value){
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  const button =
+    document.getElementById(
+      "generateBtn"
+    );
+
+  loading.classList.toggle(
+    "hidden",
+    !value
+  );
+
+  button.disabled =
+    value;
+
+}
+
+
+function scrollToLoading(){
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  setTimeout(
+    () => {
+
+      loading.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
+    },
+    100
+  );
+
+}
+
 
 async function generate(){
 
+  hideError();
+
   const prompt =
-    document.getElementById(
-      "prompt"
-    ).value.trim();
+    document
+      .getElementById(
+        "prompt"
+      )
+      .value
+      .trim();
 
   const teacherName =
-    document.getElementById(
-      "teacherName"
-    ).value.trim();
+    document
+      .getElementById(
+        "teacherName"
+      )
+      .value
+      .trim();
 
-  const selected = [
-    ...document.querySelectorAll(
-      ".check input:checked"
-    )
-  ].map(
-    x => x.id
-  );
+
+  const selected =
+    [
+      ...document.querySelectorAll(
+        ".check input:checked"
+      )
+    ].map(
+      x => x.id
+    );
 
 
   if(!prompt){
 
     showError(
-      "พิมพ์หัวข้อที่อยากสอนก่อนนะครับ 😊"
+      "พิมพ์หัวข้อที่อยากสอนก่อนนะครับ"
     );
 
-    return;
-
-  }
-
-
-  if(!teacherName){
-
-    showError(
-      "กรุณากรอกชื่อครูผู้สอนก่อนสร้างชุดการสอน"
-    );
-
-    document.getElementById(
-      "teacherName"
-    ).focus();
+    document
+      .getElementById(
+        "prompt"
+      )
+      .focus();
 
     return;
-
   }
 
 
@@ -1115,45 +1264,33 @@ async function generate(){
     );
 
     return;
-
   }
 
 
-  // จำชื่อครู
-  localStorage.setItem(
-    "teacher_name",
-    teacherName
-  );
+  // ซ่อนผลเก่าก่อนเริ่ม
+  document
+    .getElementById(
+      "result"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 
-  // แสดง Loading
-  setLoading(
-    true
-  );
+  setLoading(true);
+
+  scrollToLoading();
 
 
-  // สำคัญ:
-  // เลื่อนหน้าจอลงไปทันที
-  // ให้ผู้ใช้เห็นว่ากำลังสร้างไฟล์
-
-  setTimeout(
-    () => {
-
-      document.getElementById(
-        "loading"
-      ).scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
-
-    },
-    50
-  );
+  document.getElementById(
+    "loadingText"
+  ).textContent =
+    "กำลังวิเคราะห์หัวข้อและระดับชั้น";
 
 
   try{
 
-    const res =
+    const response =
       await fetch(
         "/api/generate",
         {
@@ -1173,18 +1310,22 @@ async function generate(){
 
             question_count:
               Number(
-                document.getElementById(
-                  "count"
-                ).value
+                document
+                  .getElementById(
+                    "count"
+                  )
+                  .value
               ),
 
             question_types:
               selected,
 
             difficulty:
-              document.getElementById(
-                "difficulty"
-              ).value
+              document
+                .getElementById(
+                  "difficulty"
+                )
+                .value
 
           })
 
@@ -1193,245 +1334,99 @@ async function generate(){
 
 
     const data =
-      await res.json();
+      await response.json();
 
 
-    if(!res.ok){
+    if(!response.ok){
 
       throw new Error(
         data.detail ||
-        "เกิดข้อผิดพลาด"
+        "เกิดข้อผิดพลาดจากเซิร์ฟเวอร์"
       );
 
     }
 
 
-    currentData = data;
+    document.getElementById(
+      "loadingText"
+    ).textContent =
+      "จัดรูปแบบชุดการสอนเรียบร้อยแล้ว";
 
 
-    // บันทึกข้อมูลทันที
-    // เพื่อไม่ให้กลับหน้าแล้วหาย
-
-    localStorage.setItem(
-      "teacher_pack_v15",
-      JSON.stringify(
-        data
-      )
-    );
+    currentData =
+      data;
 
 
-    render(
-      data,
-      true
+    render(data);
+
+
+    // เลื่อนไปยังผลลัพธ์
+    setTimeout(
+      () => {
+
+        document
+          .getElementById(
+            "result"
+          )
+          .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+      },
+      250
     );
 
 
   }catch(error){
 
     showError(
-      error.message ||
-      "เกิดข้อผิดพลาด"
+      error.message
     );
+
+    document
+      .getElementById(
+        "error"
+      )
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
 
   }finally{
 
-    setLoading(
-      false
-    );
+    setLoading(false);
 
   }
 
 }
 
 
-// ============================================================
-// LOADING
-// ============================================================
+function render(data){
 
-let loadingTimer = null;
+  hideError();
 
-function setLoading(value){
 
-  const loading =
+  const result =
     document.getElementById(
-      "loading"
+      "result"
     );
 
-  const button =
-    document.getElementById(
-      "generateBtn"
-    );
-
-
-  loading.classList.toggle(
-    "hidden",
-    !value
-  );
-
-  button.disabled =
-    value;
-
-
-  if(value){
-
-    const messages = [
-
-      [
-        "กำลังวิเคราะห์หัวข้อ...",
-        15
-      ],
-
-      [
-        "กำลังจัดทำเนื้อหา...",
-        35
-      ],
-
-      [
-        "กำลังสร้างใบงาน...",
-        55
-      ],
-
-      [
-        "กำลังสร้างแบบทดสอบ...",
-        72
-      ],
-
-      [
-        "กำลังตรวจคำตอบ...",
-        88
-      ],
-
-      [
-        "กำลังจัดรูปแบบเอกสาร...",
-        96
-      ]
-
-    ];
-
-
-    let index = 0;
-
-
-    document.getElementById(
-      "progressBar"
-    ).style.width =
-      "5%";
-
-
-    document.getElementById(
-      "loadingText"
-    ).textContent =
-      messages[0][0];
-
-
-    loadingTimer =
-      setInterval(
-        () => {
-
-          if(index <
-             messages.length - 1){
-
-            index++;
-
-            document.getElementById(
-              "loadingText"
-            ).textContent =
-              messages[index][0];
-
-            document.getElementById(
-              "progressBar"
-            ).style.width =
-              messages[index][1] +
-              "%";
-
-          }
-
-        },
-        1000
-      );
-
-
-  }else{
-
-    if(loadingTimer){
-
-      clearInterval(
-        loadingTimer
-      );
-
-      loadingTimer =
-        null;
-
-    }
-
-    document.getElementById(
-      "progressBar"
-    ).style.width =
-      "100%";
-
-  }
-
-}
-
-
-// ============================================================
-// ERROR
-// ============================================================
-
-function showError(message){
-
-  const error =
-    document.getElementById(
-      "error"
-    );
-
-  const text =
-    document.getElementById(
-      "errorText"
-    );
-
-
-  text.textContent =
-    message;
-
-
-  error.classList.remove(
+  result.classList.remove(
     "hidden"
   );
 
 
-  error.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-}
-
-
-// ============================================================
-// RENDER
-// ============================================================
-
-function render(
-  data,
-  scrollToResult = true
-){
-
-  document.getElementById(
-    "error"
-  ).classList.add(
-    "hidden"
-  );
+  document
+    .getElementById(
+      "savedMessage"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 
-  document.getElementById(
-    "result"
-  ).classList.remove(
-    "hidden"
-  );
-
-
-  const s =
+  const summary =
     data.summary || {};
 
 
@@ -1440,72 +1435,149 @@ function render(
   ).innerHTML = `
 
     <span class="chip">
-      🎒 ${esc(s.grade)}
+      🎒 ${esc(summary.grade)}
     </span>
 
     <span class="chip">
-      📖 ${esc(s.subject)}
+      📖 ${esc(summary.subject)}
     </span>
 
     <span class="chip">
-      ✏️ ${esc(s.topic)}
+      ✏️ ${esc(summary.topic)}
     </span>
 
     <span class="chip">
-      ⏱️ ${esc(s.duration)}
+      ⏱️ ${esc(summary.duration)}
     </span>
 
     <span class="chip">
-      👨‍🏫 ${esc(data.teacher_name)}
+      👨‍🏫 ${esc(data.teacher_name || "ไม่ระบุ")}
     </span>
 
   `;
 
 
-  // ==========================================================
-  // LESSON
-  // ==========================================================
+  renderLesson(data);
+
+  renderWorksheet(data);
+
+  renderQuiz(data);
+
+  renderAnswer(data);
+
+
+  // กลับไปแท็บแผนการสอน
+  document
+    .querySelectorAll(".tab")
+    .forEach(
+      b =>
+        b.classList.remove(
+          "active"
+        )
+    );
+
+  document
+    .querySelector(
+      '.tab[data-tab="lesson"]'
+    )
+    .classList.add(
+      "active"
+    );
+
+
+  document
+    .querySelectorAll(".panel")
+    .forEach(
+      p =>
+        p.classList.add(
+          "hidden"
+        )
+    );
+
+
+  document
+    .getElementById(
+      "lesson"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+function renderLesson(data){
 
   const lesson =
     data.lesson_plan || {};
 
 
-  let lessonHTML = "";
+  let html = "";
 
 
-  lessonHTML += `
-    <h3>
-      1. จุดประสงค์การเรียนรู้
-    </h3>
+  html += `
+    <h3>1. จุดประสงค์การเรียนรู้</h3>
   `;
 
 
-  (
-    lesson.objective || []
-  ).forEach(
-    item => {
-
-      lessonHTML += `
-        <div class="item">
-          - ${esc(item)}
-        </div>
-      `;
-
-    }
-  );
+  html += "<ul>";
 
 
-  lessonHTML += `
-    <h3>
-      2. เนื้อหาที่ใช้สอน
-    </h3>
+  (lesson.objective || [])
+    .forEach(
+      item => {
 
-    <div class="item">
-      ${formatText(
-        lesson.content
-      )}
-    </div>
+        html += `
+          <li>
+            ${esc(item)}
+          </li>
+        `;
+
+      }
+    );
+
+
+  html += "</ul>";
+
+
+  html += `
+    <h3>2. เนื้อหาที่ใช้สอน</h3>
   `;
+
+
+  if(lesson.content){
+
+    html += `
+      <div class="item">
+        ${esc(lesson.content)}
+      </div>
+    `;
+
+  }
+
+
+  if(
+    lesson.key_points &&
+    lesson.key_points.length
+  ){
+
+    html += `
+      <h3>สาระสำคัญ</h3>
+    `;
+
+    lesson.key_points.forEach(
+      item => {
+
+        html += `
+          <div class="item">
+            ${esc(item)}
+          </div>
+        `;
+
+      }
+    );
+
+  }
 
 
   if(
@@ -1513,18 +1585,18 @@ function render(
     lesson.examples.length
   ){
 
-    lessonHTML += `
+    html += `
       <h3>
-        สาระสำคัญ
+        ตัวอย่างสำหรับใช้สอน
       </h3>
     `;
 
     lesson.examples.forEach(
       item => {
 
-        lessonHTML += `
+        html += `
           <div class="item">
-            ${formatText(item)}
+            ${esc(item)}
           </div>
         `;
 
@@ -1535,22 +1607,32 @@ function render(
 
 
   if(
-    lesson.thinking_questions &&
-    lesson.thinking_questions.length
+    lesson.steps &&
+    lesson.steps.length
   ){
 
-    lessonHTML += `
+    html += `
       <h3>
-        คำถามชวนคิด
+        3. ขั้นตอนการจัดการเรียนรู้
       </h3>
     `;
 
-    lesson.thinking_questions.forEach(
-      item => {
 
-        lessonHTML += `
+    lesson.steps.forEach(
+      step => {
+
+        html += `
           <div class="item">
-            - ${esc(item)}
+
+            <b>
+              ${esc(step.time || "")}
+              ${esc(step.title || "")}
+            </b>
+
+            <div style="margin-top:7px">
+              ${esc(step.detail || "")}
+            </div>
+
           </div>
         `;
 
@@ -1560,80 +1642,17 @@ function render(
   }
 
 
-  lessonHTML += `
-    <h3>
-      3. ขั้นตอนการจัดการเรียนรู้
-    </h3>
-  `;
+  if(lesson.assessment){
 
-
-  (
-    lesson.steps || []
-  ).forEach(
-    (step,index) => {
-
-      lessonHTML += `
-
-        <div class="item">
-
-          <b>
-            ${index + 1}.
-            ${esc(step.title)}
-          </b>
-
-          <div
-            style="
-              margin-top:6px;
-              color:#4e566b
-            "
-          >
-            ${esc(step.time)}
-            ${formatText(step.detail)}
-          </div>
-
-        </div>
-
-      `;
-
-    }
-  );
-
-
-  lessonHTML += `
-    <h3>
-      4. การประเมินผล
-    </h3>
-
-    <div class="item">
-      ${formatText(
-        lesson.assessment
-      )}
-    </div>
-  `;
-
-
-  if(
-    lesson.teacher_notes &&
-    lesson.teacher_notes.length
-  ){
-
-    lessonHTML += `
+    html += `
       <h3>
-        5. ข้อเสนอแนะสำหรับครู
+        4. การประเมินผล
       </h3>
+
+      <div class="item">
+        ${esc(lesson.assessment)}
+      </div>
     `;
-
-    lesson.teacher_notes.forEach(
-      item => {
-
-        lessonHTML += `
-          <div class="item">
-            - ${esc(item)}
-          </div>
-        `;
-
-      }
-    );
 
   }
 
@@ -1641,86 +1660,60 @@ function render(
   document.getElementById(
     "lesson"
   ).innerHTML =
-    lessonHTML;
+    html;
+
+}
 
 
-  // ==========================================================
-  // WORKSHEET
-  // ==========================================================
+function renderWorksheet(data){
 
-  let worksheetHTML =
-    "<h3>ใบงาน</h3>";
+  const worksheet =
+    data.worksheet || [];
 
 
-  (
-    data.worksheet || []
-  ).forEach(
+  let html = `
+    <h3>
+      ใบงาน
+    </h3>
+
+    <div
+      class="item"
+      style="line-height:2"
+    >
+      <b>ชื่อ-สกุล</b>
+      ...............................................................
+      <br>
+
+      <b>ชั้น</b>
+      ....................
+      <b>เลขที่</b>
+      ....................
+      <b>วันที่</b>
+      ....................
+    </div>
+  `;
+
+
+  worksheet.forEach(
     item => {
 
-      worksheetHTML += `
-
+      html += `
         <div class="item">
 
           <div>
             <b>
-              ข้อ ${item.no}
+              ข้อ ${esc(item.no)}
             </b>
-            &nbsp;
-            ${esc(
-              removeQuestionNumber(
-                item.question
-              )
-            )}
+
+            ${esc(item.question)}
           </div>
-      `;
 
-
-      if(
-        item.options &&
-        item.options.length
-      ){
-
-        const letters =
-          ["ก.","ข.","ค.","ง."];
-
-        item.options.forEach(
-          (option,index) => {
-
-            worksheetHTML += `
-
-              <div
-                style="
-                  margin-left:25px;
-                  margin-top:5px
-                "
-              >
-                ${
-                  letters[index] || ""
-                }
-                ${esc(option)}
-              </div>
-
-            `;
-
-          }
-        );
-
-      }
-
-
-      worksheetHTML += `
-
-          <div
-            style="
-              margin-top:12px
-            "
-          >
+          <div style="margin-top:12px">
             คำตอบ
-            ..............................................................
+            ................................................................................
           </div>
 
         </div>
-
       `;
 
     }
@@ -1730,58 +1723,51 @@ function render(
   document.getElementById(
     "worksheet"
   ).innerHTML =
-    worksheetHTML;
+    html;
+
+}
 
 
-  // ==========================================================
-  // QUIZ
-  // ==========================================================
+function renderQuiz(data){
 
-  let quizHTML =
-    `<h3>
-      แบบทดสอบ ${
-        (data.quiz || []).length
-      } ข้อ
-    </h3>`;
+  const quiz =
+    data.quiz || [];
 
 
-  (
-    data.quiz || []
-  ).forEach(
+  let html = `
+    <h3>
+      แบบทดสอบ ${quiz.length} ข้อ
+    </h3>
+  `;
+
+
+  quiz.forEach(
     item => {
 
-      quizHTML += `
+      const type =
+        typeNames[
+          item.type
+        ] || item.type;
 
+
+      html += `
         <div class="item">
 
           <span class="qtype">
-            ${
-              esc(
-                typeNames[
-                  item.type
-                ] ||
-                item.type ||
-                ""
-              )
-            }
+            ${esc(type)}
           </span>
 
           <div
-            style="
-              margin-top:8px
-            "
+            style="margin-top:8px"
           >
-            <b>
-              ข้อ ${item.no}
-            </b>
-            &nbsp;
-            ${esc(
-              removeQuestionNumber(
-                item.question
-              )
-            )}
-          </div>
 
+            <b>
+              ข้อ ${esc(item.no)}
+            </b>
+
+            ${esc(item.question)}
+
+          </div>
       `;
 
 
@@ -1790,39 +1776,33 @@ function render(
         item.options.length
       ){
 
-        const letters =
-          ["ก.","ข.","ค.","ง."];
+        html += `
+          <ol
+            type="A"
+            style="line-height:1.8"
+          >
+        `;
+
 
         item.options.forEach(
-          (option,index) => {
+          option => {
 
-            quizHTML += `
-
-              <div
-                style="
-                  margin-left:25px;
-                  margin-top:5px
-                "
-              >
-                ${
-                  letters[index] || ""
-                }
+            html += `
+              <li>
                 ${esc(option)}
-              </div>
-
+              </li>
             `;
 
           }
         );
 
+
+        html += "</ol>";
+
       }
 
 
-      quizHTML += `
-
-        </div>
-
-      `;
+      html += "</div>";
 
     }
   );
@@ -1831,87 +1811,83 @@ function render(
   document.getElementById(
     "quiz"
   ).innerHTML =
-    quizHTML;
+    html;
+
+}
 
 
-  // ==========================================================
-  // ANSWER
-  // ==========================================================
+function renderAnswer(data){
 
-  let answerHTML =
-    "<h3>เฉลยใบงาน</h3>";
+  const worksheet =
+    data.worksheet || [];
+
+  const quiz =
+    data.quiz || [];
 
 
-  (
-    data.worksheet || []
-  ).forEach(
+  let html = `
+    <h3>
+      เฉลยใบงาน
+    </h3>
+  `;
+
+
+  worksheet.forEach(
     item => {
 
-      answerHTML += `
-
+      html += `
         <div class="item">
 
           <b>
-            ข้อ ${item.no}
+            ข้อ ${esc(item.no)}
           </b>
 
-          <div
-            style="
-              margin-top:6px
-            "
-          >
-            ${formatText(
-              item.answer
-            )}
-          </div>
+          — ${esc(item.answer)}
 
         </div>
-
       `;
 
     }
   );
 
 
-  answerHTML +=
-    "<h3>เฉลยแบบทดสอบ</h3>";
+  html += `
+    <h3>
+      เฉลยแบบทดสอบ
+    </h3>
+  `;
 
 
-  (
-    data.quiz || []
-  ).forEach(
+  quiz.forEach(
     item => {
 
-      answerHTML += `
-
+      html += `
         <div class="item">
 
           <b>
-            ข้อ ${item.no}
+            ข้อ ${esc(item.no)}
           </b>
 
-          <div
-            style="
-              margin-top:6px
-            "
-          >
-            คำตอบ:
-            ${esc(item.answer)}
-          </div>
+          — ${esc(item.answer)}
 
-          <div
-            style="
-              margin-top:5px;
-              color:#6f7890
-            "
-          >
-            ${formatText(
-              item.explanation
-            )}
-          </div>
+          ${
+            item.explanation
+            ? `
+              <div
+                style="
+                  color:#6f7890;
+                  margin-top:4px
+                "
+              >
+                ${esc(
+                  item.explanation
+                )}
+              </div>
+            `
+            : ""
+          }
 
         </div>
-
       `;
 
     }
@@ -1921,72 +1897,10 @@ function render(
   document.getElementById(
     "answer"
   ).innerHTML =
-    answerHTML;
-
-
-  if(scrollToResult){
-
-    setTimeout(
-      () => {
-
-        document.getElementById(
-          "result"
-        ).scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
-
-      },
-      100
-    );
-
-  }
+    html;
 
 }
 
-
-// ============================================================
-// FORMAT TEXT
-// ============================================================
-
-function formatText(value){
-
-  return esc(
-    value || ""
-  )
-  .replace(
-    /\n\n/g,
-    "<br><br>"
-  )
-  .replace(
-    /\n/g,
-    "<br>"
-  );
-
-}
-
-
-// ============================================================
-// REMOVE QUESTION NUMBER
-// ============================================================
-
-function removeQuestionNumber(
-  value
-){
-
-  return String(
-    value || ""
-  ).replace(
-    /^\s*(ข้อ\s*)?\d+[\.\):\-]?\s*/i,
-    ""
-  );
-
-}
-
-
-// ============================================================
-// SAVE PDF
-// ============================================================
 
 async function savePDF(){
 
@@ -2001,21 +1915,27 @@ async function savePDF(){
   }
 
 
+  const button =
+    document.getElementById(
+      "pdfBtn"
+    );
+
+
+  const oldText =
+    button.textContent;
+
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "⏳ กำลังสร้าง PDF...";
+
+
+  hideError();
+
+
   try{
-
-    const button =
-      event?.currentTarget;
-
-
-    if(button){
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "กำลังสร้าง PDF...";
-    }
-
 
     const response =
       await fetch(
@@ -2028,9 +1948,9 @@ async function savePDF(){
               "application/json"
           },
 
-          body:JSON.stringify(
-            currentData
-          )
+          body:JSON.stringify({
+            data:currentData
+          })
 
         }
       );
@@ -2043,14 +1963,14 @@ async function savePDF(){
 
       try{
 
-        const data =
+        const error =
           await response.json();
 
         message =
-          data.detail ||
+          error.detail ||
           message;
 
-      }catch(e){}
+      }catch(_){}
 
       throw new Error(
         message
@@ -2069,81 +1989,73 @@ async function savePDF(){
       );
 
 
-    const a =
+    const anchor =
       document.createElement(
         "a"
       );
 
-    a.href =
+    anchor.href =
       url;
 
-    a.download =
-      "ชุดการสอน.pdf";
+    anchor.download =
+      "teacher_pack.pdf";
 
     document.body.appendChild(
-      a
+      anchor
     );
 
-    a.click();
+    anchor.click();
 
-    a.remove();
+    anchor.remove();
 
-    window.URL.revokeObjectURL(
-      url
+
+    setTimeout(
+      () => {
+        window.URL.revokeObjectURL(
+          url
+        );
+      },
+      5000
     );
 
 
-    // เก็บข้อมูลไว้เหมือนเดิม
-    localStorage.setItem(
-      "teacher_pack_v15",
-      JSON.stringify(
-        currentData
+    document
+      .getElementById(
+        "savedMessage"
       )
-    );
+      .classList.remove(
+        "hidden"
+      );
 
 
   }catch(error){
 
     showError(
+      "สร้าง PDF ไม่สำเร็จ: " +
       error.message
     );
 
+    document
+      .getElementById(
+        "error"
+      )
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
   }finally{
 
-    const buttons =
-      document.querySelectorAll(
-        ".secondary"
-      );
+    button.disabled =
+      false;
 
-    buttons.forEach(
-      button => {
-
-        if(
-          button.textContent
-            .includes(
-              "กำลังสร้าง PDF"
-            )
-        ){
-
-          button.disabled =
-            false;
-
-          button.textContent =
-            "📄 บันทึก PDF";
-
-        }
-
-      }
-    );
+    button.textContent =
+      oldText;
 
   }
 
 }
 
-
-// ============================================================
-// NEW PACK
-// ============================================================
 
 function newPack(){
 
@@ -2151,28 +2063,22 @@ function newPack(){
     null;
 
 
-  localStorage.removeItem(
-    "teacher_pack_v15"
-  );
+  document
+    .getElementById(
+      "result"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 
-  document.getElementById(
-    "result"
-  ).classList.add(
-    "hidden"
-  );
-
-
-  document.getElementById(
-    "savedMessage"
-  )?.classList.add(
-    "hidden"
-  );
-
-
-  document.getElementById(
-    "prompt"
-  ).focus();
+  document
+    .getElementById(
+      "savedMessage"
+    )
+    .classList.add(
+      "hidden"
+    );
 
 
   window.scrollTo({
@@ -2185,5 +2091,4 @@ function newPack(){
 </script>
 
 </body>
-
 </html>
