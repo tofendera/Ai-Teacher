@@ -6,302 +6,746 @@
 <meta charset="utf-8">
 
 <meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,viewport-fit=cover"
+name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover"
 >
 
-<title>ชุดการสอน V1.5</title>
+<meta
+name="theme-color"
+content="#fff8ed"
+>
+
+<title>Teacher Pack</title>
+
 
 <style>
+
+:root{
+
+  --bg:#fff8ed;
+  --card:#ffffff;
+  --ink:#27324a;
+  --muted:#6f7890;
+
+  --primary:#6c63ff;
+  --primary2:#5148e8;
+
+  --mint:#dff8ee;
+  --blue:#e3f0ff;
+
+  --line:#e8e4dc;
+
+  --shadow:
+  0 12px 30px rgba(49,55,85,.09);
+}
+
 
 *{
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
 
 body{
+
   margin:0;
-  background:#f8f7f2;
-  color:#27304a;
+
+  background:
+  linear-gradient(
+    180deg,
+    #fff8ed 0%,
+    #f7f5ff 100%
+  );
+
+  color:var(--ink);
+
   font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "Noto Sans Thai",
-    sans-serif;
+  -apple-system,
+  BlinkMacSystemFont,
+  "Noto Sans Thai",
+  sans-serif;
 }
 
-.wrap{
-  width:100%;
-  max-width:760px;
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+
+.container{
+
+  width:min(
+    900px,
+    92%
+  );
+
   margin:auto;
-  padding:24px 18px 60px;
 }
 
-.hero{
-  text-align:center;
-  padding:12px 8px 26px;
+
+.header{
+
+  padding:
+  22px 0 10px;
+
+  display:flex;
+
+  justify-content:
+  space-between;
+
+  align-items:center;
+
+  gap:12px;
 }
+
 
 .brand{
+
   display:flex;
+
   align-items:center;
-  justify-content:space-between;
-  margin-bottom:25px;
-}
 
-.brand-title{
-  font-size:25px;
+  gap:10px;
+
+  font-size:20px;
+
   font-weight:800;
 }
 
-.version{
-  background:#dff6ee;
-  color:#27304a;
-  padding:9px 16px;
-  border-radius:30px;
-  font-size:16px;
+
+.logo{
+
+  width:44px;
+  height:44px;
+
+  border-radius:14px;
+
+  background:#fff;
+
+  display:grid;
+
+  place-items:center;
+
+  box-shadow:var(--shadow);
+
+  font-size:23px;
+}
+
+
+.badge{
+
+  background:var(--mint);
+
+  padding:
+  7px 11px;
+
+  border-radius:999px;
+
+  font-size:12px;
+
   font-weight:800;
 }
 
-h1{
-  margin:10px 0 12px;
-  font-size:42px;
-  line-height:1.2;
+
+.hero{
+
+  text-align:center;
+
+  padding:
+  28px 0 20px;
+}
+
+
+.hero h1{
+
+  margin:0 0 10px;
+
+  font-size:
+  clamp(30px,7vw,48px);
+
   letter-spacing:-1px;
 }
 
-.hero-text{
-  margin:0 auto;
-  max-width:650px;
-  font-size:21px;
-  line-height:1.65;
-  color:#73788c;
+
+.hero p{
+
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:16px;
 }
+
 
 .card{
-  background:#fff;
-  border:1px solid #ebe8e2;
-  border-radius:28px;
-  padding:25px;
-  margin:18px 0;
-  box-shadow:
-    0 8px 28px rgba(0,0,0,.05);
+
+  background:var(--card);
+
+  border:
+  1px solid var(--line);
+
+  border-radius:24px;
+
+  padding:22px;
+
+  box-shadow:var(--shadow);
+
+  margin:16px 0;
 }
 
-label{
+
+.label{
+
   display:block;
-  font-size:20px;
+
   font-weight:800;
-  margin-bottom:10px;
+
+  margin-bottom:9px;
 }
 
-textarea,
-input,
-select{
+
+.prompt{
+
   width:100%;
-  border:2px solid #e8e5f3;
-  border-radius:20px;
+
+  min-height:110px;
+
+  resize:vertical;
+
+  padding:16px;
+
+  border:
+  2px solid #e8e4f8;
+
+  border-radius:18px;
+
   background:#fcfbff;
-  color:#27304a;
-  font-size:20px;
-  padding:17px 18px;
+
   outline:none;
 }
 
-textarea{
-  min-height:145px;
-  resize:vertical;
-  line-height:1.5;
+
+.prompt:focus{
+
+  border-color:
+  var(--primary);
 }
 
-textarea:focus,
-input:focus,
-select:focus{
-  border-color:#6554d0;
-}
 
-.quick{
+.examples{
+
   display:flex;
+
   flex-wrap:wrap;
-  gap:10px;
-  margin-top:14px;
+
+  gap:8px;
+
+  margin-top:10px;
 }
 
-.quick button{
-  width:auto;
-  margin:0;
-  background:#f3f0ff;
-  color:#5143bd;
-  border:0;
-  padding:12px 16px;
-  font-size:17px;
-}
 
-button{
-  width:100%;
+.example{
+
   border:0;
-  border-radius:20px;
-  padding:17px 20px;
-  margin-top:15px;
-  font-size:21px;
-  font-weight:800;
+
+  background:#f2f0ff;
+
+  color:#5148e8;
+
+  border-radius:999px;
+
+  padding:8px 12px;
+
   cursor:pointer;
-  transition:.15s;
 }
 
-button:active{
-  transform:scale(.98);
+
+.teacher-input{
+
+  width:100%;
+
+  border:
+  2px solid #e8e4f8;
+
+  border-radius:16px;
+
+  padding:14px;
+
+  outline:none;
+
+  background:#fcfbff;
+
+  margin-bottom:14px;
 }
+
+
+.teacher-input:focus{
+
+  border-color:
+  var(--primary);
+}
+
+
+.grid{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:14px;
+}
+
+
+.field{
+
+  background:#faf9f5;
+
+  border:
+  1px solid var(--line);
+
+  padding:15px;
+
+  border-radius:18px;
+}
+
+
+select{
+
+  width:100%;
+
+  border:0;
+
+  background:transparent;
+
+  outline:none;
+
+  color:var(--ink);
+
+  font-weight:700;
+}
+
+
+.types{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:10px;
+}
+
+
+.check{
+
+  position:relative;
+}
+
+
+.check input{
+
+  position:absolute;
+
+  opacity:0;
+}
+
+
+.check label{
+
+  display:block;
+
+  padding:14px;
+
+  border:
+  2px solid var(--line);
+
+  border-radius:16px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  font-weight:700;
+}
+
+
+.check input:checked+label{
+
+  border-color:
+  var(--primary);
+
+  background:#f0efff;
+
+  color:#5148e8;
+}
+
 
 .primary{
-  background:#594bc5;
+
+  width:100%;
+
+  border:0;
+
+  border-radius:18px;
+
+  padding:17px;
+
+  background:
+  linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary2)
+  );
+
   color:#fff;
-}
 
-.secondary{
-  background:#fff;
-  color:#594bc5;
-  border:2px solid #e2def5;
-}
-
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.status{
-  display:none;
-}
-
-.status.show{
-  display:block;
-}
-
-.status-title{
-  font-size:25px;
   font-weight:800;
-  margin-bottom:10px;
+
+  font-size:18px;
+
+  cursor:pointer;
+
+  box-shadow:
+  0 9px 18px
+  rgba(108,99,255,.25);
 }
 
-.status-text{
-  font-size:19px;
-  color:#6f7487;
-  line-height:1.6;
+
+.primary:disabled{
+
+  opacity:.6;
+
+  cursor:wait;
 }
 
-.progress{
-  height:13px;
-  background:#eceaf3;
-  border-radius:99px;
-  overflow:hidden;
-  margin-top:16px;
-}
-
-.progress-bar{
-  height:100%;
-  width:0;
-  background:#594bc5;
-  border-radius:99px;
-  transition:.4s;
-}
-
-.result{
-  display:none;
-}
-
-.result.show{
-  display:block;
-}
-
-.result-title{
-  font-size:27px;
-  font-weight:800;
-  margin-bottom:15px;
-}
-
-.download{
-  background:#594bc5;
-  color:#fff;
-  font-size:23px;
-  padding:20px;
-}
-
-.new-set{
-  background:#fff;
-  color:#594bc5;
-  border:2px solid #ddd8f2;
-  font-size:21px;
-}
 
 .note{
-  font-size:17px;
-  color:#777c8d;
-  line-height:1.6;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-top:12px;
 }
+
+
+.hidden{
+
+  display:none!important;
+}
+
+
+.loading{
+
+  text-align:center;
+
+  padding:35px;
+}
+
+
+.spinner{
+
+  font-size:38px;
+
+  animation:
+  bounce 1s infinite alternate;
+}
+
+
+@keyframes bounce{
+
+  to{
+    transform:translateY(-8px);
+  }
+
+}
+
+
+.result-head{
+
+  display:flex;
+
+  justify-content:
+  space-between;
+
+  align-items:center;
+
+  gap:12px;
+
+  flex-wrap:wrap;
+}
+
+
+.result-head h2{
+
+  margin:0;
+}
+
+
+.chips{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:8px;
+}
+
+
+.chip{
+
+  padding:
+  7px 10px;
+
+  border-radius:999px;
+
+  background:var(--blue);
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+
+.tabs{
+
+  display:flex;
+
+  gap:8px;
+
+  overflow:auto;
+
+  padding-bottom:4px;
+
+  margin-top:18px;
+}
+
+
+.tab{
+
+  white-space:nowrap;
+
+  border:0;
+
+  background:#f2f1ee;
+
+  color:var(--muted);
+
+  border-radius:12px;
+
+  padding:10px 13px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+.tab.active{
+
+  background:#5148e8;
+
+  color:#fff;
+}
+
+
+.panel{
+
+  line-height:1.8;
+
+  margin-top:20px;
+}
+
+
+.panel h3{
+
+  margin-top:24px;
+}
+
+
+.item{
+
+  padding:15px;
+
+  border:
+  1px solid var(--line);
+
+  border-radius:16px;
+
+  margin:10px 0;
+
+  background:#fff;
+}
+
+
+.qtype{
+
+  display:inline-block;
+
+  font-size:11px;
+
+  background:#f1f0ff;
+
+  color:#5148e8;
+
+  padding:5px 8px;
+
+  border-radius:999px;
+
+  font-weight:800;
+}
+
+
+.options{
+
+  margin-top:10px;
+
+  padding-left:25px;
+}
+
+
+.answer{
+
+  color:#6f7890;
+
+  margin-top:7px;
+}
+
+
+.actions{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:10px;
+
+  margin-top:20px;
+}
+
+
+.secondary{
+
+  border:
+  2px solid #e7e3f6;
+
+  background:#fff;
+
+  color:#5148e8;
+
+  border-radius:16px;
+
+  padding:13px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
 
 .error{
-  display:none;
-  background:#fff0f0;
-  border:2px solid #f1cccc;
-  color:#a33c3c;
-  padding:17px;
-  border-radius:18px;
-  font-size:18px;
-  line-height:1.5;
+
+  background:#ffe7e7;
+
+  color:#9d2929;
+
+  padding:14px;
+
+  border-radius:16px;
 }
 
-.error.show{
-  display:block;
+
+.saved{
+
+  background:#e9f8f0;
+
+  color:#23724d;
+
+  padding:12px 14px;
+
+  border-radius:14px;
+
+  margin-top:10px;
+
+  font-size:13px;
+
+  font-weight:700;
 }
 
-@media(max-width:600px){
 
-  .wrap{
-    padding:
-      18px
-      14px
-      45px;
-  }
+@media(max-width:650px){
 
-  h1{
-    font-size:36px;
-  }
+  .grid{
 
-  .hero-text{
-    font-size:19px;
-  }
-
-  .card{
-    padding:20px;
-    border-radius:24px;
-  }
-
-  label{
-    font-size:19px;
-  }
-
-  textarea,
-  input,
-  select{
-    font-size:18px;
-  }
-
-  .row{
     grid-template-columns:1fr;
   }
 
-  button{
-    font-size:19px;
+
+  .types{
+
+    grid-template-columns:1fr;
+  }
+
+
+  .actions{
+
+    grid-template-columns:1fr;
+  }
+
+
+  .card{
+
+    padding:17px;
+  }
+
+
+  .header{
+
+    padding-top:16px;
+  }
+
+}
+
+
+@media print{
+
+  body{
+
+    background:#fff;
+  }
+
+
+  .header,
+  .hero,
+  #builder,
+  .actions,
+  .tabs{
+
+    display:none!important;
+  }
+
+
+  .card{
+
+    box-shadow:none;
+
+    border:0;
+
+    padding:0;
+  }
+
+
+  .panel{
+
+    display:block!important;
   }
 
 }
@@ -310,139 +754,154 @@ button:disabled{
 
 </head>
 
+
 <body>
 
-<div class="wrap">
 
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
+<div class="container">
 
-  <section class="hero">
 
-    <div class="brand">
+<header class="header">
 
-      <div class="brand-title">
-        📚 ชุดการสอน
-      </div>
+  <div class="brand">
 
-      <div class="version">
-        V1.5
-      </div>
+    <div class="logo">
+      📚
+    </div>
+
+    Teacher Pack
+
+  </div>
+
+
+  <div class="badge">
+    V1.5
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <h1>
+    สอนอะไรวันนี้? ✨
+  </h1>
+
+  <p>
+    พิมพ์คำสั่ง แล้วสร้างเอกสารการสอนพร้อมใช้
+  </p>
+
+</section>
+
+
+<!-- =====================================================
+     BUILDER
+===================================================== -->
+
+<section
+id="builder"
+class="card"
+>
+
+
+  <label class="label">
+    👨‍🏫 ชื่อครู
+  </label>
+
+
+  <input
+  id="teacherName"
+  class="teacher-input"
+  type="text"
+  placeholder="เช่น นายสมชาย ใจดี"
+  maxlength="100"
+  >
+
+
+  <label class="label">
+    👋 วันนี้คุณอยากสอนอะไร?
+  </label>
+
+
+  <textarea
+  id="prompt"
+  class="prompt"
+  placeholder="เช่น ระบบสุริยะ ป.5 1 ชั่วโมง"
+  ></textarea>
+
+
+  <div class="examples">
+
+    <button
+    class="example"
+    onclick="fillExample('เศษส่วน ป.4 1 ชั่วโมง')"
+    >
+      🧮 เศษส่วน ป.4
+    </button>
+
+
+    <button
+    class="example"
+    onclick="fillExample('ระบบสุริยะ ป.5 1 ชั่วโมง')"
+    >
+      🌎 ระบบสุริยะ ป.5
+    </button>
+
+
+    <button
+    class="example"
+    onclick="fillExample('Animals ป.3 30 นาที')"
+    >
+      🇬🇧 Animals ป.3
+    </button>
+
+  </div>
+
+</section>
+
+
+<section class="card">
+
+
+  <div class="grid">
+
+
+    <div class="field">
+
+      <label class="label">
+        🔢 จำนวนข้อสอบ
+      </label>
+
+      <select id="count">
+
+        <option value="5">
+          5 ข้อ
+        </option>
+
+        <option value="10" selected>
+          10 ข้อ
+        </option>
+
+        <option value="15">
+          15 ข้อ
+        </option>
+
+        <option value="20">
+          20 ข้อ
+        </option>
+
+        <option value="30">
+          30 ข้อ
+        </option>
+
+      </select>
 
     </div>
 
-    <h1>
-      สอนอะไรกันวันนี้? ✨
-    </h1>
 
-    <p class="hero-text">
-      พิมพ์หัวข้อ แล้วสร้างแผนการสอน
-      ใบงาน แบบทดสอบ และเฉลย
-    </p>
+    <div class="field">
 
-  </section>
-
-
-  <!-- =====================================================
-       FORM
-  ====================================================== -->
-
-  <section class="card">
-
-    <label>
-      👋 วันนี้คุณอยากสอนอะไร?
-    </label>
-
-    <textarea
-      id="topic"
-      placeholder="เช่น เศษส่วน ป.4 1 ชั่วโมง"
-    ></textarea>
-
-    <div class="quick">
-
-      <button
-        type="button"
-        onclick="quickTopic('เศษส่วน ป.4')"
-      >
-        🧮 เศษส่วน ป.4
-      </button>
-
-      <button
-        type="button"
-        onclick="quickTopic('ระบบสุริยะ ป.5')"
-      >
-        🌎 ระบบสุริยะ ป.5
-      </button>
-
-      <button
-        type="button"
-        onclick="quickTopic('Animals ป.3')"
-      >
-        🇬🇧 Animals ป.3
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================================
-       SETTINGS
-  ====================================================== -->
-
-  <section class="card">
-
-    <div class="row">
-
-      <div>
-
-        <label>
-          👨‍🏫 ชื่อครู
-        </label>
-
-        <input
-          id="teacher"
-          type="text"
-          placeholder="เช่น สมปอง เข้ามา"
-        >
-
-      </div>
-
-      <div>
-
-        <label>
-          🔢 จำนวนข้อสอบ
-        </label>
-
-        <select id="questionCount">
-
-          <option value="5">
-            5
-          </option>
-
-          <option value="10" selected>
-            10
-          </option>
-
-          <option value="15">
-            15
-          </option>
-
-          <option value="20">
-            20
-          </option>
-
-        </select>
-
-      </div>
-
-    </div>
-
-
-    <div style="margin-top:18px">
-
-      <label>
+      <label class="label">
         🎯 ระดับความยาก
       </label>
 
@@ -452,12 +911,16 @@ button:disabled{
           ง่าย
         </option>
 
-        <option value="mixed" selected>
-          ผสม
+        <option value="medium">
+          ปานกลาง
         </option>
 
         <option value="hard">
           ยาก
+        </option>
+
+        <option value="mixed" selected>
+          ผสม
         </option>
 
       </select>
@@ -465,536 +928,1380 @@ button:disabled{
     </div>
 
 
+  </div>
+
+
+  <div style="margin-top:18px">
+
+
+    <label class="label">
+
+      🧠 รูปแบบข้อสอบ
+
+      <span
+      style="
+      color:#6f7890;
+      font-weight:500
+      "
+      >
+        (เลือกได้หลายแบบ)
+      </span>
+
+    </label>
+
+
+    <div class="types">
+
+
+      <div class="check">
+
+        <input
+        type="checkbox"
+        id="multiple_choice"
+        checked
+        >
+
+        <label for="multiple_choice">
+          ☑️ ปรนัย
+        </label>
+
+      </div>
+
+
+      <div class="check">
+
+        <input
+        type="checkbox"
+        id="fill_blank"
+        >
+
+        <label for="fill_blank">
+          ✏️ เติมคำ
+        </label>
+
+      </div>
+
+
+      <div class="check">
+
+        <input
+        type="checkbox"
+        id="calculation"
+        >
+
+        <label for="calculation">
+          🔢 คำนวณ
+        </label>
+
+      </div>
+
+
+      <div class="check">
+
+        <input
+        type="checkbox"
+        id="application"
+        >
+
+        <label for="application">
+          💡 ประยุกต์ใช้
+        </label>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div style="margin-top:18px">
+
+
     <button
-      id="generateBtn"
-      class="primary"
-      onclick="generateLesson()"
+    id="generateBtn"
+    class="primary"
+    onclick="generate()"
     >
       ✨ สร้างชุดการสอน
     </button>
 
-  </section>
+
+    <div class="note">
+
+      แผนการสอน + ใบงาน + แบบทดสอบ + เฉลย
+
+    </div>
 
 
-  <!-- =====================================================
-       ERROR
-  ====================================================== -->
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<section
+id="loading"
+class="card loading hidden"
+>
+
+  <div class="spinner">
+    ✨
+  </div>
+
+  <h3>
+    กำลังเตรียมชุดการสอน...
+  </h3>
+
+  <p style="color:#6f7890">
+    AI กำลังจัดเนื้อหาและตรวจคำตอบ
+  </p>
+
+</section>
+
+
+<!-- =====================================================
+     ERROR
+===================================================== -->
+
+<section
+id="error"
+class="card hidden"
+>
 
   <div
-    id="error"
-    class="error"
+  class="error"
+  id="errorText"
   ></div>
 
+</section>
 
-  <!-- =====================================================
-       STATUS
-  ====================================================== -->
 
-  <section
-    id="statusCard"
-    class="card status"
-  >
+<!-- =====================================================
+     RESULT
+===================================================== -->
 
-    <div class="status-title">
-      ⏳ กำลังสร้างชุดการสอน
-    </div>
+<section
+id="result"
+class="card hidden"
+>
 
-    <div
-      id="statusText"
-      class="status-text"
-    >
-      กำลังเตรียมข้อมูล...
-    </div>
 
-    <div class="progress">
+  <div class="result-head">
+
+    <div>
+
+      <h2>
+        🎉 ชุดการสอนพร้อมแล้ว
+      </h2>
 
       <div
-        id="progressBar"
-        class="progress-bar"
+      id="summary"
+      class="chips"
       ></div>
 
     </div>
 
-  </section>
+  </div>
 
 
-  <!-- =====================================================
-       RESULT
-  ====================================================== -->
-
-  <section
-    id="resultCard"
-    class="card result"
+  <div
+  id="savedMessage"
+  class="saved hidden"
   >
-
-    <div class="result-title">
-      🎉 สร้างชุดการสอนเสร็จแล้ว
-    </div>
-
-    <p class="note">
-      ระบบสร้าง PDF รวมทั้งหมดให้แล้ว
-      กดปุ่มด้านล่างเพื่อเปิด PDF
-      จากนั้นสามารถกดดาวน์โหลดจากตัวแสดง PDF ได้
-    </p>
+    💾 ชุดการสอนนี้ถูกบันทึกไว้ในเครื่องแล้ว
+  </div>
 
 
-    <!-- มีปุ่มดาวน์โหลดเพียงปุ่มเดียว -->
+  <div class="tabs">
 
     <button
-      id="downloadBtn"
-      class="download"
-      onclick="openPDF()"
+    class="tab active"
+    data-tab="lesson"
+    >
+      📚 แผนการสอน
+    </button>
+
+
+    <button
+    class="tab"
+    data-tab="worksheet"
+    >
+      📝 ใบงาน
+    </button>
+
+
+    <button
+    class="tab"
+    data-tab="quiz"
+    >
+      🧠 แบบทดสอบ
+    </button>
+
+
+    <button
+    class="tab"
+    data-tab="answer"
+    >
+      ✅ เฉลย
+    </button>
+
+  </div>
+
+
+  <div
+  id="lesson"
+  class="panel"
+  ></div>
+
+
+  <div
+  id="worksheet"
+  class="panel hidden"
+  ></div>
+
+
+  <div
+  id="quiz"
+  class="panel hidden"
+  ></div>
+
+
+  <div
+  id="answer"
+  class="panel hidden"
+  ></div>
+
+
+  <div class="actions">
+
+
+    <button
+    class="secondary"
+    onclick="downloadPDF()"
     >
       📄 ดาวน์โหลด PDF
     </button>
 
 
-    <!-- มีปุ่มสร้างใหม่เพียงปุ่มเดียว -->
+    <button
+    class="secondary"
+    onclick="window.print()"
+    >
+      🖨️ พิมพ์
+    </button>
+
 
     <button
-      class="new-set"
-      onclick="newSet()"
+    class="secondary"
+    onclick="newPack()"
     >
       🔄 สร้างชุดใหม่
     </button>
 
-  </section>
+
+    <button
+    class="secondary"
+    onclick="clearSaved()"
+    >
+      🗑️ ล้างชุดที่บันทึก
+    </button>
+
+
+  </div>
+
+
+</section>
+
 
 </div>
 
 
 <script>
 
-let pdfUrl = null;
+
+// ========================================================
+// GLOBAL
+// ========================================================
+
+let currentData = null;
 
 
-/* =========================================================
-   QUICK TOPIC
-========================================================= */
+const STORAGE_KEY =
+  "teacher_pack_current_v15";
 
-function quickTopic(text){
+
+const typeNames = {
+
+  multiple_choice:"ปรนัย",
+
+  fill_blank:"เติมคำ",
+
+  calculation:"คำนวณ",
+
+  application:"ประยุกต์ใช้"
+
+};
+
+
+// ========================================================
+// ESCAPE
+// ========================================================
+
+function esc(s){
+
+  return String(
+    s ?? ""
+  ).replace(
+    /[&<>"']/g,
+    function(m){
+
+      return {
+
+        "&":"&amp;",
+
+        "<":"&lt;",
+
+        ">":"&gt;",
+
+        '"':"&quot;",
+
+        "'":"&#039;"
+
+      }[m];
+
+    }
+  );
+
+}
+
+
+// ========================================================
+// EXAMPLE
+// ========================================================
+
+function fillExample(value){
 
   document.getElementById(
-    "topic"
-  ).value = text;
+    "prompt"
+  ).value = value;
 
 }
 
 
-/* =========================================================
-   SCROLL STATUS
-========================================================= */
+// ========================================================
+// TABS
+// ========================================================
 
-function scrollToStatus(){
+document
+.querySelectorAll(".tab")
+.forEach(function(btn){
 
-  const card =
-    document.getElementById(
-      "statusCard"
-    );
+  btn.addEventListener(
+    "click",
+    function(){
 
-  card.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
+      document
+      .querySelectorAll(".tab")
+      .forEach(function(b){
 
-}
+        b.classList.remove(
+          "active"
+        );
 
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-function showStatus(){
-
-  const card =
-    document.getElementById(
-      "statusCard"
-    );
-
-  card.classList.add("show");
-
-}
+      });
 
 
-function setStatus(text, progress){
+      document
+      .querySelectorAll(".panel")
+      .forEach(function(p){
 
-  document.getElementById(
-    "statusText"
-  ).textContent = text;
+        p.classList.add(
+          "hidden"
+        );
 
-  document.getElementById(
-    "progressBar"
-  ).style.width = progress + "%";
-
-}
+      });
 
 
-/* =========================================================
-   ERROR
-========================================================= */
-
-function showError(message){
-
-  const error =
-    document.getElementById(
-      "error"
-    );
-
-  error.textContent = message;
-
-  error.classList.add("show");
-
-}
+      btn.classList.add(
+        "active"
+      );
 
 
-function hideError(){
+      document
+      .getElementById(
+        btn.dataset.tab
+      )
+      .classList.remove(
+        "hidden"
+      );
 
-  document
-    .getElementById("error")
-    .classList.remove("show");
+    }
+  );
 
-}
-
-
-/* =========================================================
-   GENERATE
-========================================================= */
-
-async function generateLesson(){
-
-  hideError();
-
-  const topic =
-    document.getElementById(
-      "topic"
-    ).value.trim();
-
-  const teacher =
-    document.getElementById(
-      "teacher"
-    ).value.trim();
-
-  const questionCount =
-    Number(
-      document.getElementById(
-        "questionCount"
-      ).value
-    );
-
-  const difficulty =
-    document.getElementById(
-      "difficulty"
-    ).value;
+});
 
 
-  if(!topic){
+// ========================================================
+// SAVE
+// ========================================================
 
-    showError(
-      "กรุณาพิมพ์หัวข้อที่ต้องการสอนก่อน"
-    );
-
-    document
-      .getElementById("topic")
-      .focus();
-
-    return;
-  }
-
-
-  const generateBtn =
-    document.getElementById(
-      "generateBtn"
-    );
-
-  generateBtn.disabled = true;
-
-
-  document
-    .getElementById("resultCard")
-    .classList.remove("show");
-
-
-  showStatus();
-
-  scrollToStatus();
-
+function saveData(data){
 
   try{
 
-    setStatus(
-      "กำลังเตรียมคำสั่งสำหรับ AI...",
-      10
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
+    );
+
+  }catch(e){
+
+    console.log(
+      "localStorage error",
+      e
+    );
+
+  }
+
+}
+
+
+// ========================================================
+// LOAD
+// ========================================================
+
+function loadData(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+
+    if(!raw){
+
+      return null;
+
+    }
+
+
+    return JSON.parse(raw);
+
+  }catch(e){
+
+    console.log(
+      "load error",
+      e
+    );
+
+    return null;
+
+  }
+
+}
+
+
+// ========================================================
+// GENERATE
+// ========================================================
+
+async function generate(){
+
+  const prompt =
+    document
+    .getElementById("prompt")
+    .value
+    .trim();
+
+
+  const teacherName =
+    document
+    .getElementById("teacherName")
+    .value
+    .trim();
+
+
+  const selected =
+    [
+      ...document
+      .querySelectorAll(
+        ".check input:checked"
+      )
+    ]
+    .map(
+      x => x.id
     );
 
 
-    await wait(400);
+  if(!teacherName){
 
-
-    setStatus(
-      "กำลังสร้างแผนการจัดการเรียนรู้...",
-      25
+    showError(
+      "กรุณากรอกชื่อครูก่อนสร้างเอกสารครับ"
     );
+
+    return;
+
+  }
+
+
+  if(!prompt){
+
+    showError(
+      "พิมพ์หัวข้อที่อยากสอนก่อนนะครับ 😊"
+    );
+
+    return;
+
+  }
+
+
+  if(!selected.length){
+
+    showError(
+      "เลือกอย่างน้อย 1 รูปแบบข้อสอบครับ"
+    );
+
+    return;
+
+  }
+
+
+  setLoading(true);
+
+
+  try{
 
 
     const response =
       await fetch(
         "/api/generate",
         {
+
           method:"POST",
 
           headers:{
             "Content-Type":
-              "application/json"
+            "application/json"
           },
 
-          body:JSON.stringify({
-            prompt:topic,
-            teacher_name:teacher,
-            question_count:questionCount,
-            difficulty:difficulty
+          body:
+          JSON.stringify({
+
+            prompt,
+
+            teacher_name:
+            teacherName,
+
+            question_count:
+            Number(
+              document
+              .getElementById(
+                "count"
+              )
+              .value
+            ),
+
+            question_types:
+            selected,
+
+            difficulty:
+            document
+            .getElementById(
+              "difficulty"
+            )
+            .value
+
           })
-        }
-      );
-
-
-    setStatus(
-      "กำลังสร้างเนื้อหา ใบงาน และแบบทดสอบ...",
-      55
-    );
-
-
-    if(!response.ok){
-
-      let message =
-        "เกิดข้อผิดพลาดในการสร้างชุดการสอน";
-
-      try{
-
-        const errorData =
-          await response.json();
-
-        if(errorData.detail){
-
-          message =
-            errorData.detail;
 
         }
-
-      }catch(e){}
-
-      throw new Error(
-        message
       );
-    }
 
 
     const data =
       await response.json();
 
 
-    setStatus(
-      "กำลังสร้าง PDF...",
-      80
-    );
-
-
-    await wait(500);
-
-
-    if(
-      !data ||
-      !data.pdf_url
-    ){
+    if(!response.ok){
 
       throw new Error(
-        "ระบบไม่พบไฟล์ PDF"
+        data.detail ||
+        "เกิดข้อผิดพลาด"
       );
+
     }
 
 
-    pdfUrl =
-      data.pdf_url;
+    currentData = data;
 
 
-    setStatus(
-      "สร้างชุดการสอนเสร็จแล้ว",
-      100
+    saveData(
+      data
     );
 
 
-    await wait(500);
-
-
-    document
-      .getElementById(
-        "resultCard"
-      )
-      .classList.add("show");
-
-
-    document
-      .getElementById(
-        "resultCard"
-      )
-      .scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
+    render(
+      data
+    );
 
 
   }catch(error){
 
-    console.error(error);
-
     showError(
-      error.message ||
-      "เกิดข้อผิดพลาด"
+      error.message
     );
 
   }finally{
 
-    generateBtn.disabled = false;
+    setLoading(false);
 
   }
 
 }
 
 
-/* =========================================================
-   OPEN PDF
-========================================================= */
+// ========================================================
+// LOADING
+// ========================================================
 
-function openPDF(){
+function setLoading(value){
 
-  if(!pdfUrl){
+  document
+  .getElementById("loading")
+  .classList
+  .toggle(
+    "hidden",
+    !value
+  );
 
-    showError(
-      "ยังไม่พบไฟล์ PDF"
-    );
 
-    return;
-  }
-
-
-  /*
-    สำคัญ:
-    เปิดหน้า PDF โดยตรง
-
-    Backend ใช้ Content-Disposition: inline
-    ดังนั้น Safari จะเปิด PDF ให้ดู
-    ไม่ใช่ส่ง JSON หรือ ZIP
-  */
-
-  window.location.href =
-    pdfUrl;
+  document
+  .getElementById("generateBtn")
+  .disabled = value;
 
 }
 
 
-/* =========================================================
-   NEW SET
-========================================================= */
+// ========================================================
+// ERROR
+// ========================================================
 
-function newSet(){
+function showError(message){
 
-  /*
-    ไม่ใช้ localStorage
-    ไม่ใช้ sessionStorage
-
-    จึงเริ่มชุดใหม่แบบสะอาด
-  */
-
-  pdfUrl = null;
-
-
-  document.getElementById(
-    "topic"
-  ).value = "";
-
-
-  document.getElementById(
-    "teacher"
-  ).value = "";
-
-
-  document.getElementById(
-    "questionCount"
-  ).value = "10";
-
-
-  document.getElementById(
-    "difficulty"
-  ).value = "mixed";
+  document
+  .getElementById("error")
+  .classList
+  .remove("hidden");
 
 
   document
-    .getElementById("resultCard")
-    .classList.remove("show");
+  .getElementById("errorText")
+  .textContent =
+    message;
+
+}
+
+
+// ========================================================
+// RENDER
+// ========================================================
+
+function render(data){
+
+  document
+  .getElementById("error")
+  .classList
+  .add("hidden");
 
 
   document
-    .getElementById("statusCard")
-    .classList.remove("show");
+  .getElementById("result")
+  .classList
+  .remove("hidden");
+
+
+  const s =
+    data.summary;
 
 
   document
-    .getElementById("progressBar")
-    .style.width = "0%";
+  .getElementById("summary")
+  .innerHTML = `
+
+    <span class="chip">
+      👨‍🏫 ${esc(s.teacher_name)}
+    </span>
+
+    <span class="chip">
+      🎒 ${esc(s.grade)}
+    </span>
+
+    <span class="chip">
+      📖 ${esc(s.subject)}
+    </span>
+
+    <span class="chip">
+      ✏️ ${esc(s.topic)}
+    </span>
+
+    <span class="chip">
+      ⏱️ ${esc(s.duration)}
+    </span>
+
+  `;
+
+
+  // ======================================================
+  // LESSON
+  // ======================================================
+
+  document
+  .getElementById("lesson")
+  .innerHTML = `
+
+    <h3>
+      จุดประสงค์การเรียนรู้
+    </h3>
+
+    <ul>
+
+      ${data.lesson_plan.objective
+        .map(
+          x =>
+          `<li>${esc(x)}</li>`
+        )
+        .join("")
+      }
+
+    </ul>
+
+
+    <h3>
+      เนื้อหาที่ใช้สอน
+    </h3>
+
+    <div class="item">
+
+      ${esc(
+        data.teaching_content.intro
+      )}
+
+    </div>
+
+
+    <h3>
+      สาระสำคัญ
+    </h3>
+
+    ${data.teaching_content.concepts
+      .map(
+        x =>
+        `<div class="item">${esc(x)}</div>`
+      )
+      .join("")
+    }
+
+
+    <h3>
+      ตัวอย่างสำหรับใช้สอน
+    </h3>
+
+    ${data.teaching_content.examples
+      .map(
+        x => `
+
+          <div class="item">
+
+            <b>
+              ${esc(x.title)}
+            </b>
+
+            <div style="margin-top:8px">
+
+              ${esc(x.explanation)}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("")
+    }
+
+
+    <h3>
+      คำถามชวนคิด
+    </h3>
+
+    <ul>
+
+      ${data.teaching_content.thinking_questions
+        .map(
+          x =>
+          `<li>${esc(x)}</li>`
+        )
+        .join("")
+      }
+
+    </ul>
+
+
+    <h3>
+      ขั้นตอนการจัดการเรียนรู้
+    </h3>
+
+    ${data.lesson_plan.steps
+      .map(
+        (x,i) => `
+
+          <div class="item">
+
+            <b>
+              ${i+1}.
+              ${esc(x.title)}
+            </b>
+
+            <div>
+              เวลา:
+              ${esc(x.time)}
+            </div>
+
+            <div style="margin-top:6px">
+
+              ${esc(x.detail)}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("")
+    }
+
+
+    <h3>
+      เคล็ดลับสำหรับครู
+    </h3>
+
+    <ul>
+
+      ${data.teaching_content.teacher_tips
+        .map(
+          x =>
+          `<li>${esc(x)}</li>`
+        )
+        .join("")
+      }
+
+    </ul>
+
+
+    <h3>
+      การประเมินผล
+    </h3>
+
+    <div class="item">
+
+      ${esc(
+        data.lesson_plan.assessment
+      )}
+
+    </div>
+
+  `;
+
+
+  // ======================================================
+  // WORKSHEET
+  // ======================================================
+
+  document
+  .getElementById("worksheet")
+  .innerHTML = `
+
+    <h3>
+      ใบงาน
+    </h3>
+
+    <div class="item">
+
+      <b>
+        ชื่อ-สกุล
+      </b>
+
+      ..................................................................
+
+      <br><br>
+
+      <b>
+        ชั้น
+      </b>
+
+      ....................
+
+      <b>
+        เลขที่
+      </b>
+
+      ....................
+
+    </div>
+
+
+    ${data.worksheet
+      .map(
+        x => `
+
+          <div class="item">
+
+            <div>
+
+              <b>
+                ข้อ ${x.no}
+              </b>
+
+              &nbsp;&nbsp;
+
+              ${esc(x.question)}
+
+            </div>
+
+
+            <div
+            style="
+            margin-top:14px;
+            "
+            >
+
+              คำตอบ............................................................................
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("")
+    }
+
+  `;
+
+
+  // ======================================================
+  // QUIZ
+  // ======================================================
+
+  document
+  .getElementById("quiz")
+  .innerHTML = `
+
+    <h3>
+      แบบทดสอบ ${data.quiz.length} ข้อ
+    </h3>
+
+
+    ${data.quiz
+      .map(
+        x => `
+
+          <div class="item">
+
+            <span class="qtype">
+
+              ${esc(
+                typeNames[x.type] ||
+                x.type
+              )}
+
+            </span>
+
+
+            <div
+            style="
+            margin-top:10px;
+            "
+            >
+
+              <b>
+                ข้อ ${x.no}
+              </b>
+
+              &nbsp;&nbsp;
+
+              ${esc(x.question)}
+
+            </div>
+
+
+            ${
+              x.options &&
+              x.options.length
+              ?
+
+              `
+
+              <div class="options">
+
+                ${x.options
+                  .map(
+                    (o,i) =>
+                    `
+
+                    <div>
+
+                      ${
+                        [
+                          "ก.",
+                          "ข.",
+                          "ค.",
+                          "ง."
+                        ][i] ||
+                        (i+1)+"."
+                      }
+
+                      &nbsp;
+
+                      ${esc(o)}
+
+                    </div>
+
+                    `
+                  )
+                  .join("")
+                }
+
+              </div>
+
+              `
+
+              :
+
+              `
+
+              <div class="answer">
+
+                คำตอบ..............................................
+
+              </div>
+
+              `
+            }
+
+          </div>
+
+        `
+      )
+      .join("")
+    }
+
+  `;
+
+
+  // ======================================================
+  // ANSWER
+  // ======================================================
+
+  document
+  .getElementById("answer")
+  .innerHTML = `
+
+    <h3>
+      เฉลยใบงาน
+    </h3>
+
+
+    ${data.worksheet
+      .map(
+        x => `
+
+          <div class="item">
+
+            <b>
+              ข้อ ${x.no}
+            </b>
+
+            <div style="margin-top:6px">
+
+              ${esc(x.answer)}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("")
+    }
+
+
+    <h3>
+      เฉลยแบบทดสอบ
+    </h3>
+
+
+    ${data.quiz
+      .map(
+        x => `
+
+          <div class="item">
+
+            <b>
+              ข้อ ${x.no}
+              —
+              ${esc(x.answer)}
+            </b>
+
+            <div class="answer">
+
+              ${esc(x.explanation)}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("")
+    }
+
+  `;
 
 
   document
-    .getElementById("statusText")
-    .textContent =
-      "กำลังเตรียมข้อมูล...";
-
-
-  hideError();
+  .getElementById(
+    "savedMessage"
+  )
+  .classList
+  .remove("hidden");
 
 
   window.scrollTo({
-    top:0,
+
+    top:
+    document
+    .getElementById(
+      "result"
+    )
+    .offsetTop - 15,
+
     behavior:"smooth"
+
   });
 
 }
 
 
-/* =========================================================
-   WAIT
-========================================================= */
+// ========================================================
+// DOWNLOAD PDF
+// ========================================================
 
-function wait(ms){
+async function downloadPDF(){
 
-  return new Promise(
-    resolve =>
-      setTimeout(
-        resolve,
-        ms
-      )
+  if(!currentData){
+
+    showError(
+      "ยังไม่มีชุดการสอน"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/pdf?section=all",
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+            "application/json"
+          },
+
+          body:
+          JSON.stringify(
+            currentData
+          )
+
+        }
+      );
+
+
+    if(!response.ok){
+
+      const error =
+        await response.json();
+
+      throw new Error(
+        error.detail ||
+        "สร้าง PDF ไม่สำเร็จ"
+      );
+
+    }
+
+
+    const blob =
+      await response.blob();
+
+
+    const url =
+      window.URL.createObjectURL(
+        blob
+      );
+
+
+    const a =
+      document.createElement(
+        "a"
+      );
+
+
+    a.href = url;
+
+
+    a.download =
+      "teacher-pack.pdf";
+
+
+    document
+    .body
+    .appendChild(a);
+
+
+    a.click();
+
+
+    a.remove();
+
+
+    window.URL.revokeObjectURL(
+      url
+    );
+
+
+  }catch(error){
+
+    showError(
+      error.message
+    );
+
+  }
+
+}
+
+
+// ========================================================
+// NEW PACK
+// ========================================================
+
+function newPack(){
+
+  document
+  .getElementById("result")
+  .classList
+  .add("hidden");
+
+
+  document
+  .getElementById("prompt")
+  .value = "";
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+// ========================================================
+// CLEAR SAVED
+// ========================================================
+
+function clearSaved(){
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+
+  currentData = null;
+
+
+  document
+  .getElementById("result")
+  .classList
+  .add("hidden");
+
+
+  alert(
+    "ลบชุดการสอนที่บันทึกไว้แล้ว"
   );
 
 }
 
 
-/* =========================================================
-   IMPORTANT:
-   ไม่โหลดข้อมูลเดิมตอน Refresh
-
-   ไม่มี localStorage
-   ไม่มี sessionStorage
-   ไม่มี fetch ประวัติ
-========================================================= */
+// ========================================================
+// RESTORE ON LOAD
+// ========================================================
 
 window.addEventListener(
-  "pageshow",
+  "load",
   function(){
-    /*
-      intentionally empty
-    */
+
+    const saved =
+      loadData();
+
+
+    if(saved){
+
+      currentData =
+        saved;
+
+
+      render(
+        saved
+      );
+
+
+      const teacher =
+        saved
+        .summary
+        ?.teacher_name ||
+        "";
+
+
+      document
+      .getElementById(
+        "teacherName"
+      )
+      .value =
+        teacher;
+
+    }
+
   }
 );
 
 </script>
 
+
 </body>
+
 </html>
