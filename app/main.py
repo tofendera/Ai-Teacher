@@ -38,6 +38,7 @@ STATIC_DIR = BASE_DIR / "static"
 INDEX_FILE = STATIC_DIR / "index.html"
 
 FONT_FILE = APP_DIR / "THSarabun.ttf"
+FONT_BOLD_FILE = APP_DIR / "THSarabunBold.ttf"
 
 
 # =========================================================
@@ -46,7 +47,7 @@ FONT_FILE = APP_DIR / "THSarabun.ttf"
 
 app = FastAPI(
     title="Teacher Pack",
-    version="1.6.0"
+    version="1.6.1"
 )
 
 
@@ -153,7 +154,13 @@ SYSTEM_PROMPT = """
 - ห้ามใช้สัญลักษณ์ตกแต่งที่ไม่จำเป็น
 - ใช้ตัวเลขอารบิก
 - เลขข้อเรียงจาก 1 เป็นต้นไป
-- ตัวเลือกใช้ ก. ข. ค. ง.
+
+ตัวเลือกข้อสอบปรนัย (options):
+
+- ห้ามใส่ตัวอักษร ก. ข. ค. ง. หรือหมายเลขนำหน้าข้อความ options เอง
+  ให้ส่งเฉพาะเนื้อหาของตัวเลือกล้วนๆ เท่านั้น
+  เพราะระบบ (PDF และหน้าเว็บ) จะใส่ ก. ข. ค. ง. ให้เองอัตโนมัติ
+  ถ้าใส่ซ้ำจะทำให้ตัวอักษรซ้อนกันสองชั้น
 
 กติกาเรื่องคำศัพท์/สูตร/โครงสร้างสำคัญ:
 
@@ -166,6 +173,26 @@ SYSTEM_PROMPT = """
   วิชาคณิตศาสตร์เน้นสูตรและตัวอย่างการคำนวณ
   วิชาวิทยาศาสตร์เน้นนิยามและขั้นตอนการทดลอง
   วิชาสังคม/ประวัติศาสตร์เน้นเหตุการณ์และลำดับเวลา
+
+ความละเอียดของเนื้อหา (สำคัญมาก):
+
+เนื้อหาที่สร้างต้องนำไปใช้สอนได้จริงทันที ไม่ใช่แค่หัวข้อ
+หรือแนวทางกว้างๆ แบบไกด์ไลน์ ให้ยึดตามนี้:
+
+- intro: คำนำเข้าสู่เนื้อหา เขียนอย่างน้อย 4-6 ประโยค
+  อธิบายว่าเรื่องนี้คืออะไร เกี่ยวข้องกับชีวิตนักเรียนอย่างไร
+- concepts (สาระสำคัญ): อย่างน้อย 4 ข้อ แต่ละข้อเขียนอธิบาย
+  อย่างน้อย 3-5 ประโยค ไม่ใช่แค่หัวข้อคำเดียวหรือประโยคเดียว
+- examples (ตัวอย่างสำหรับใช้สอน): อย่างน้อย 2 ตัวอย่าง
+  แต่ละตัวอย่างอธิบายเป็นขั้นตอนที่ครูอ่านแล้วสอนตามได้ทันที
+  ความยาวอย่างน้อย 4-6 ประโยค รวมบทสนทนาหรือคำถาม-คำตอบ
+  ตัวอย่างที่ครูใช้พูดในห้องเรียนจริง
+- thinking_questions: อย่างน้อย 3 ข้อ
+- teacher_tips: อย่างน้อย 3 ข้อ เป็นเคล็ดลับที่นำไปใช้ได้จริง
+- steps (ขั้นตอนการจัดการเรียนรู้): แต่ละขั้นตอนอธิบายกิจกรรม
+  ที่ครูทำและนักเรียนทำอย่างละเอียด อย่างน้อย 3-4 ประโยค
+  ระบุคำถามหรือประโยคตัวอย่างที่ใช้จริงในชั้นเรียนถ้าเกี่ยวข้อง
+- assessment: อธิบายวิธีประเมินผลอย่างละเอียด อย่างน้อย 3 ประโยค
 
 ใบงาน:
 
@@ -509,11 +536,15 @@ def health():
 
         "app": "Teacher Pack",
 
-        "version": "1.6.0",
+        "version": "1.6.1",
 
         "font": FONT_FILE.name,
 
-        "font_exists": FONT_FILE.exists()
+        "font_exists": FONT_FILE.exists(),
+
+        "font_bold": FONT_BOLD_FILE.name,
+
+        "font_bold_exists": FONT_BOLD_FILE.exists()
 
     }
 
@@ -680,7 +711,8 @@ def generate(req: GenerateRequest):
 ระดับความยาก:
 {req.difficulty}
 
-สร้างเอกสารให้พร้อมใช้จริง
+สร้างเอกสารให้พร้อมใช้จริง เนื้อหาต้องละเอียดครบถ้วน
+ไม่ใช่แค่หัวข้อหรือแนวทางกว้างๆ
 
 ตรวจสอบเลขข้อ
 
@@ -689,6 +721,8 @@ def generate(req: GenerateRequest):
 ตรวจสอบคำตอบ
 
 ห้ามใส่ Emoji
+
+ห้ามใส่ ก. ข. ค. ง. นำหน้า options เอง
 
 """
 
@@ -759,6 +793,43 @@ def generate(req: GenerateRequest):
             ] = req.subject.strip()
 
 
+        # ---------------------------------------------------
+        # กันเหนียว: ถ้า AI ยังใส่ ก./ข./ค./ง. หรือหมายเลข
+        # นำหน้า option มาเอง ให้ตัดออกก่อนส่งกลับ
+        # ป้องกันตัวอักษรซ้อนกันตอนแสดงผล
+        # ---------------------------------------------------
+
+        prefix_pattern = re.compile(
+
+            r"^\s*"
+            r"(?:[ก-ฮ]\.|[A-Da-d]\.|\d+[\.\)])"
+            r"\s*"
+
+        )
+
+
+        for item in data.get(
+            "quiz",
+            []
+        ):
+
+            options = item.get(
+                "options",
+                []
+            )
+
+            item["options"] = [
+
+                prefix_pattern.sub(
+                    "",
+                    opt
+                ).strip()
+
+                for opt in options
+
+            ]
+
+
         return data
 
 
@@ -802,6 +873,15 @@ def register_thai_font():
         )
 
 
+    if not FONT_BOLD_FILE.exists():
+
+        raise FileNotFoundError(
+
+            f"ไม่พบไฟล์ Font ตัวหนา: {FONT_BOLD_FILE}"
+
+        )
+
+
     pdfmetrics.registerFont(
 
         TTFont(
@@ -812,21 +892,17 @@ def register_thai_font():
     )
 
 
-    # สำคัญ:
-    # ป้องกัน <b> แล้ว ReportLab
-    # ไปใช้ Helvetica ซึ่งเป็น latin-1
-
     pdfmetrics.registerFont(
 
         TTFont(
             "THSarabun-Bold",
-            str(FONT_FILE)
+            str(FONT_BOLD_FILE)
         )
 
     )
 
 
-    return "THSarabun"
+    return "THSarabun", "THSarabun-Bold"
 
 
 # =========================================================
@@ -977,7 +1053,7 @@ def build_pdf(
     section="all"
 ):
 
-    font = register_thai_font()
+    font, font_bold = register_thai_font()
 
 
     buffer = BytesIO()
@@ -1024,6 +1100,8 @@ def build_pdf(
 
     # =====================================================
     # STYLES
+    # หัวข้อ (title / heading / subheading) ใช้ฟอนต์ตัวหนา
+    # เนื้อหาที่เหลือใช้ฟอนต์ปกติ
     # =====================================================
 
     title_style = ParagraphStyle(
@@ -1032,7 +1110,7 @@ def build_pdf(
 
         parent=styles["Title"],
 
-        fontName=font,
+        fontName=font_bold,
 
         fontSize=22,
 
@@ -1059,7 +1137,30 @@ def build_pdf(
 
         alignment=TA_CENTER,
 
-        spaceAfter=7 * mm
+        spaceAfter=5 * mm
+
+    )
+
+
+    info_line_style = ParagraphStyle(
+
+        "InfoLine",
+
+        parent=styles["Normal"],
+
+        fontName=font,
+
+        fontSize=13,
+
+        leading=18,
+
+        alignment=TA_CENTER,
+
+        textColor=colors.HexColor(
+            "#555555"
+        ),
+
+        spaceAfter=6 * mm
 
     )
 
@@ -1070,7 +1171,7 @@ def build_pdf(
 
         parent=styles["Heading1"],
 
-        fontName=font,
+        fontName=font_bold,
 
         fontSize=17,
 
@@ -1091,7 +1192,7 @@ def build_pdf(
 
         parent=styles["Heading2"],
 
-        fontName=font,
+        fontName=font_bold,
 
         fontSize=15,
 
@@ -1202,6 +1303,7 @@ def build_pdf(
 
     # =====================================================
     # HEADER
+    # วิชา / ระดับชั้น / เวลา / ครูผู้สอน อยู่บรรทัดเดียวกัน
     # =====================================================
 
     def add_header(title):
@@ -1233,36 +1335,34 @@ def build_pdf(
         )
 
 
-        story.append(
+        info_line = (
 
-            Paragraph(
+            "วิชา " +
+            esc(summary.get(
+                "subject",
+                ""
+            )) +
 
-                "วิชา " +
-                esc(summary.get(
-                    "subject",
-                    ""
-                )),
+            "&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;" +
 
-                body_no_indent
+            "ระดับชั้น " +
+            esc(summary.get(
+                "grade",
+                ""
+            )) +
 
-            )
+            "&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;" +
 
-        )
+            "เวลา " +
+            esc(summary.get(
+                "duration",
+                ""
+            )) +
 
+            "&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;" +
 
-        story.append(
-
-            Paragraph(
-
-                "ระดับชั้น " +
-                esc(summary.get(
-                    "grade",
-                    ""
-                )),
-
-                body_no_indent
-
-            )
+            "ครูผู้สอน " +
+            esc(teacher_name)
 
         )
 
@@ -1271,13 +1371,9 @@ def build_pdf(
 
             Paragraph(
 
-                "เวลา " +
-                esc(summary.get(
-                    "duration",
-                    ""
-                )),
+                info_line,
 
-                body_no_indent
+                info_line_style
 
             )
 
@@ -1285,21 +1381,7 @@ def build_pdf(
 
 
         story.append(
-
-            Paragraph(
-
-                "ครูผู้สอน " +
-                esc(teacher_name),
-
-                body_no_indent
-
-            )
-
-        )
-
-
-        story.append(
-            Spacer(1, 5 * mm)
+            Spacer(1, 4 * mm)
         )
 
 
@@ -1685,7 +1767,7 @@ def build_pdf(
 
             question_block = Paragraph(
 
-                f"<font name='THSarabun-Bold'>"
+                f"<font name='{font_bold}'>"
                 f"ข้อ {no}"
                 f"</font>"
                 f"&nbsp;&nbsp;"
@@ -1814,7 +1896,7 @@ def build_pdf(
 
                 Paragraph(
 
-                    f"<font name='THSarabun-Bold'>"
+                    f"<font name='{font_bold}'>"
                     f"ข้อ {no}"
                     f"</font>"
                     f"&nbsp;&nbsp;"
@@ -1940,7 +2022,7 @@ def build_pdf(
 
                 Paragraph(
 
-                    f"<font name='THSarabun-Bold'>"
+                    f"<font name='{font_bold}'>"
                     f"ข้อ {item['no']}"
                     f"</font>",
 
@@ -1985,7 +2067,7 @@ def build_pdf(
 
                 Paragraph(
 
-                    f"<font name='THSarabun-Bold'>"
+                    f"<font name='{font_bold}'>"
                     f"ข้อ {item['no']}"
                     f"</font>"
                     f"&nbsp;&nbsp;"
