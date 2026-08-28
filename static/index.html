@@ -288,6 +288,99 @@ textarea{
 }
 
 
+/* ==================================================
+   OPTIONAL DETAILS SECTION (subject specifics)
+================================================== */
+
+.optional{
+
+  margin-top:8px;
+
+  margin-bottom:14px;
+
+  border:
+  1px dashed var(--line);
+
+  border-radius:18px;
+
+  padding:4px 16px;
+
+  background:#fbfaf7;
+}
+
+
+.optional summary{
+
+  cursor:pointer;
+
+  font-weight:800;
+
+  padding:12px 0;
+
+  list-style:none;
+
+  color:#5148e8;
+}
+
+
+.optional summary::-webkit-details-marker{
+
+  display:none;
+}
+
+
+.optional summary::before{
+
+  content:"▸ ";
+}
+
+
+.optional[open] summary::before{
+
+  content:"▾ ";
+}
+
+
+.hint{
+
+  color:var(--muted);
+
+  font-size:12.5px;
+
+  margin:0 0 8px;
+}
+
+
+.textarea-small{
+
+  width:100%;
+
+  min-height:80px;
+
+  resize:vertical;
+
+  padding:14px;
+
+  border:
+  2px solid #e8e4f8;
+
+  border-radius:16px;
+
+  background:#fcfbff;
+
+  outline:none;
+
+  margin-bottom:14px;
+}
+
+
+.textarea-small:focus{
+
+  border-color:
+  var(--primary);
+}
+
+
 .grid{
 
   display:grid;
@@ -775,7 +868,7 @@ select{
 
 
   <div class="badge">
-    V1.5
+    V1.6
   </div>
 
 </header>
@@ -819,6 +912,35 @@ class="card"
 
 
   <label class="label">
+    📘 วิชา
+  </label>
+
+
+  <input
+  id="subject"
+  class="teacher-input"
+  type="text"
+  placeholder="เช่น ภาษาอังกฤษ, คณิตศาสตร์, วิทยาศาสตร์"
+  maxlength="100"
+  list="subjectList"
+  >
+
+
+  <datalist id="subjectList">
+
+    <option value="ภาษาไทย">
+    <option value="ภาษาอังกฤษ">
+    <option value="คณิตศาสตร์">
+    <option value="วิทยาศาสตร์">
+    <option value="สังคมศึกษา">
+    <option value="ประวัติศาสตร์">
+    <option value="ศิลปะ">
+    <option value="สุขศึกษาและพลศึกษา">
+
+  </datalist>
+
+
+  <label class="label">
     👋 วันนี้คุณอยากสอนอะไร?
   </label>
 
@@ -834,7 +956,7 @@ class="card"
 
     <button
     class="example"
-    onclick="fillExample('เศษส่วน ป.4 1 ชั่วโมง')"
+    onclick="fillExample('เศษส่วน ป.4 1 ชั่วโมง','คณิตศาสตร์')"
     >
       🧮 เศษส่วน ป.4
     </button>
@@ -842,7 +964,7 @@ class="card"
 
     <button
     class="example"
-    onclick="fillExample('ระบบสุริยะ ป.5 1 ชั่วโมง')"
+    onclick="fillExample('ระบบสุริยะ ป.5 1 ชั่วโมง','วิทยาศาสตร์')"
     >
       🌎 ระบบสุริยะ ป.5
     </button>
@@ -850,12 +972,64 @@ class="card"
 
     <button
     class="example"
-    onclick="fillExample('Animals ป.3 30 นาที')"
+    onclick="fillExample('Animals ป.3 30 นาที','ภาษาอังกฤษ')"
     >
       🇬🇧 Animals ป.3
     </button>
 
   </div>
+
+
+  <details class="optional">
+
+    <summary>
+      รายละเอียดเพิ่มเติม (ไม่บังคับ แต่ช่วยให้เนื้อหาแม่นยำขึ้น)
+    </summary>
+
+
+    <label class="label">
+      🔑 คำศัพท์ / มโนทัศน์สำคัญ
+    </label>
+
+    <div class="hint">
+      พิมพ์แต่ละคำขึ้นบรรทัดใหม่ เช่น dog / cat / bird หรือ หลักหน่วย / หลักสิบ
+    </div>
+
+    <textarea
+    id="keyTerms"
+    class="textarea-small"
+    placeholder="dog&#10;cat&#10;bird"
+    ></textarea>
+
+
+    <label class="label">
+      🧩 โครงสร้าง / สูตร / รูปแบบสำคัญ
+    </label>
+
+    <div class="hint">
+      พิมพ์แต่ละอย่างขึ้นบรรทัดใหม่ เช่น What is it? It is a ___. หรือ 25 + 13 = 38
+    </div>
+
+    <textarea
+    id="keyPatterns"
+    class="textarea-small"
+    placeholder="What is it?&#10;It is a ___."
+    ></textarea>
+
+
+    <label class="label">
+      🎯 จุดเน้นการเรียนรู้เพิ่มเติม
+    </label>
+
+    <input
+    id="learningFocus"
+    class="teacher-input"
+    type="text"
+    placeholder="เช่น เน้นฟัง-พูด, เน้นการคำนวณ, เน้นทดลอง"
+    maxlength="300"
+    >
+
+  </details>
 
 </section>
 
@@ -1284,11 +1458,40 @@ function esc(s){
 // EXAMPLE
 // ========================================================
 
-function fillExample(value){
+function fillExample(value, subjectValue){
 
   document.getElementById(
     "prompt"
   ).value = value;
+
+
+  if(subjectValue){
+
+    document.getElementById(
+      "subject"
+    ).value = subjectValue;
+
+  }
+
+}
+
+
+// ========================================================
+// MULTILINE -> ARRAY
+// ========================================================
+
+function linesToArray(value){
+
+  return String(
+    value ?? ""
+  )
+  .split("\n")
+  .map(
+    x => x.trim()
+  )
+  .filter(
+    x => x.length > 0
+  );
 
 }
 
@@ -1428,6 +1631,36 @@ async function generate(){
     .trim();
 
 
+  const subject =
+    document
+    .getElementById("subject")
+    .value
+    .trim();
+
+
+  const keyTerms =
+    linesToArray(
+      document
+      .getElementById("keyTerms")
+      .value
+    );
+
+
+  const keyPatterns =
+    linesToArray(
+      document
+      .getElementById("keyPatterns")
+      .value
+    );
+
+
+  const learningFocus =
+    document
+    .getElementById("learningFocus")
+    .value
+    .trim();
+
+
   const selected =
     [
       ...document
@@ -1498,6 +1731,17 @@ async function generate(){
 
             teacher_name:
             teacherName,
+
+            subject,
+
+            key_terms:
+            keyTerms,
+
+            key_patterns:
+            keyPatterns,
+
+            learning_focus:
+            learningFocus,
 
             question_count:
             Number(
@@ -2293,6 +2537,21 @@ window.addEventListener(
       )
       .value =
         teacher;
+
+
+      const subj =
+        saved
+        .summary
+        ?.subject ||
+        "";
+
+
+      document
+      .getElementById(
+        "subject"
+      )
+      .value =
+        subj;
 
     }
 
