@@ -46,7 +46,7 @@ FONT_FILE = APP_DIR / "THSarabun.ttf"
 
 app = FastAPI(
     title="Teacher Pack",
-    version="1.5.1"
+    version="1.6.0"
 )
 
 
@@ -79,9 +79,34 @@ class GenerateRequest(BaseModel):
         max_length=500
     )
 
+    subject: str = Field(
+        default="",
+        max_length=100,
+        description="ชื่อวิชา เช่น ภาษาอังกฤษ, คณิตศาสตร์, วิทยาศาสตร์"
+    )
+
     teacher_name: str = Field(
         default="",
         max_length=100
+    )
+
+    # คำศัพท์ / มโนทัศน์ / นิยามสำคัญ
+    # ใช้ได้ทุกวิชา ไม่ใช่แค่วิชาภาษา
+    key_terms: list[str] = Field(
+        default_factory=list,
+        description="คำศัพท์ / มโนทัศน์ / นิยามสำคัญที่ต้องใช้ในเนื้อหา"
+    )
+
+    # โครงสร้างประโยค / สูตร / ขั้นตอน / กฎสำคัญ
+    key_patterns: list[str] = Field(
+        default_factory=list,
+        description="โครงสร้างประโยค / สูตร / ขั้นตอน / กฎสำคัญที่ต้องใช้"
+    )
+
+    learning_focus: str = Field(
+        default="",
+        max_length=300,
+        description="จุดเน้นเพิ่มเติม เช่น เน้นฟัง-พูด, เน้นคำนวณ, เน้นทดลอง"
     )
 
     question_count: int = Field(
@@ -106,6 +131,7 @@ class GenerateRequest(BaseModel):
 SYSTEM_PROMPT = """
 
 คุณคือผู้ช่วยจัดทำเอกสารการเรียนการสอนสำหรับครูไทย
+ใช้ได้กับทุกวิชา ไม่จำกัดเฉพาะวิชาใดวิชาหนึ่ง
 
 สร้างเอกสารดังนี้:
 
@@ -128,6 +154,18 @@ SYSTEM_PROMPT = """
 - ใช้ตัวเลขอารบิก
 - เลขข้อเรียงจาก 1 เป็นต้นไป
 - ตัวเลือกใช้ ก. ข. ค. ง.
+
+กติกาเรื่องคำศัพท์/สูตร/โครงสร้างสำคัญ:
+
+- หากผู้ใช้ระบุ "เนื้อหา/คำศัพท์/มโนทัศน์สำคัญ" หรือ
+  "โครงสร้าง/สูตร/รูปแบบสำคัญ" มาให้ ต้องใช้สิ่งเหล่านั้น
+  เป็นแกนหลักของเนื้อหาทั้งหมด ห้ามแต่งเนื้อหาอื่นที่ไม่เกี่ยวข้อง
+- หากไม่ได้ระบุมา ให้พิจารณาความเหมาะสมกับวิชาและระดับชั้นเอง
+- ปรับรูปแบบการอธิบายให้เข้ากับธรรมชาติของแต่ละวิชา เช่น
+  วิชาภาษาเน้นคำศัพท์และประโยค
+  วิชาคณิตศาสตร์เน้นสูตรและตัวอย่างการคำนวณ
+  วิชาวิทยาศาสตร์เน้นนิยามและขั้นตอนการทดลอง
+  วิชาสังคม/ประวัติศาสตร์เน้นเหตุการณ์และลำดับเวลา
 
 ใบงาน:
 
@@ -471,7 +509,7 @@ def health():
 
         "app": "Teacher Pack",
 
-        "version": "1.5.1",
+        "version": "1.6.0",
 
         "font": FONT_FILE.name,
 
@@ -502,8 +540,11 @@ def generate(req: GenerateRequest):
     allowed_types = {
 
         "multiple_choice",
+
         "fill_blank",
+
         "calculation",
+
         "application"
 
     }
@@ -538,6 +579,12 @@ def generate(req: GenerateRequest):
     )
 
 
+    subject = (
+        req.subject.strip()
+        or "ไม่ระบุ (ให้พิจารณาจากคำสั่ง)"
+    )
+
+
     type_names = {
 
         "multiple_choice": "ปรนัย",
@@ -560,13 +607,69 @@ def generate(req: GenerateRequest):
     )
 
 
+    # ---------------------------------------------------
+    # แปลง key_terms / key_patterns (list) เป็นข้อความ bullet
+    # ---------------------------------------------------
+
+    key_terms_text = (
+
+        "\n".join(
+
+            f"- {t.strip()}"
+
+            for t in req.key_terms
+
+            if t.strip()
+
+        )
+
+        or "ไม่ได้ระบุ (ให้ AI พิจารณาความเหมาะสมเอง)"
+
+    )
+
+
+    key_patterns_text = (
+
+        "\n".join(
+
+            f"- {p.strip()}"
+
+            for p in req.key_patterns
+
+            if p.strip()
+
+        )
+
+        or "ไม่ได้ระบุ"
+
+    )
+
+
+    learning_focus_text = (
+        req.learning_focus.strip()
+        or "ไม่ระบุ"
+    )
+
+
     user_prompt = f"""
+
+วิชา:
+{subject}
 
 ชื่อครู:
 {teacher}
 
 คำสั่ง:
 {req.prompt}
+
+เนื้อหา/คำศัพท์/มโนทัศน์สำคัญที่ต้องใช้เป็นแกนหลัก:
+{key_terms_text}
+
+โครงสร้าง/สูตร/รูปแบบสำคัญที่ต้องใช้:
+{key_patterns_text}
+
+จุดเน้นการเรียนรู้เพิ่มเติม:
+{learning_focus_text}
 
 จำนวนข้อสอบ:
 {req.question_count}
@@ -641,6 +744,19 @@ def generate(req: GenerateRequest):
         ][
             "teacher_name"
         ] = teacher
+
+
+        # หากผู้ใช้ระบุวิชามาชัดเจน
+        # ให้ยึดตามที่ผู้ใช้กรอกเสมอ
+        # แทนที่ AI จะเดาเอง
+
+        if req.subject.strip():
+
+            data[
+                "summary"
+            ][
+                "subject"
+            ] = req.subject.strip()
 
 
         return data
