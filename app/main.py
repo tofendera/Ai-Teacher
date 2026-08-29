@@ -40,6 +40,8 @@ INDEX_FILE = STATIC_DIR / "index.html"
 FONT_FILE = APP_DIR / "THSarabun.ttf"
 FONT_BOLD_FILE = APP_DIR / "THSarabunBold.ttf"
 
+VISIT_FILE = APP_DIR / "visit_count.txt"
+
 
 # =========================================================
 # APP
@@ -563,6 +565,55 @@ def health():
 
         "font_bold_exists": FONT_BOLD_FILE.exists()
 
+    }
+
+
+# =========================================================
+# VISITS
+# นับจำนวนครั้งที่มีคนเข้าเว็บ (เก็บลงไฟล์ ไม่ต้องใช้ DB)
+# =========================================================
+
+@app.get("/api/visits")
+def visits():
+
+    count = 0
+
+
+    if VISIT_FILE.exists():
+
+        try:
+
+            count = int(
+                VISIT_FILE
+                .read_text()
+                .strip()
+                or "0"
+            )
+
+        except ValueError:
+
+            count = 0
+
+
+    count += 1
+
+
+    try:
+
+        VISIT_FILE.write_text(
+            str(count)
+        )
+
+    except Exception:
+
+        # ถ้าเขียนไฟล์ไม่ได้ (เช่น เขียนพร้อมกันหลาย request)
+        # ให้ยังคืนเลขล่าสุดที่คำนวณได้ ไม่ทำให้ endpoint พัง
+
+        pass
+
+
+    return {
+        "count": count
     }
 
 
